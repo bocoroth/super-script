@@ -1,6 +1,9 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const url = require('url')
 const path = require('path')
+const SystemFonts = require('system-font-families').default
+
+const systemFonts = new SystemFonts()
 
 let mainWindow
 
@@ -36,6 +39,15 @@ app.on('window-all-closed', function() {
 
 app.on('activate', function() {
   if (mainWindow === null) createWindow()
+})
+
+ipcMain.on('getFonts', (event, arg) => {
+  const fonts = systemFonts.getFonts().then(
+    res => {
+      mainWindow.webContents.send('getFontsResponse', res)
+    },
+    err => console.warn('Error loading system fonts')
+  )
 })
 
 // OSX fixes
