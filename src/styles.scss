@@ -1,12 +1,27 @@
 #ht-tabs .nav-link {
-  padding: 0 1rem;
+  padding: 0.1rem 1rem;
   margin: 0.2rem 0 0 0.2rem;
   border: 1px solid #454d55;
   font-size: 0.75rem;
-  width: 7rem;
+  width: 9rem;
   text-align: center;
   font-weight: bold;
   color: #99b;
+
+  span {
+    display: inline-flex;
+
+    span {
+      padding-top: 3px;
+    }
+    fa {
+      padding-right: 5px;
+
+      i.fa-inverse {
+        color: #99b;
+      }
+    }
+  }
 }
 
 .ae-font.ae-expanded .ae-picker-options {
