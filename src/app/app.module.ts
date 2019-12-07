@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { HttpClientModule } from '@angular/common/http'
 import { AngularFontAwesomeModule } from 'angular-font-awesome'
 import { AngularEditorModule } from '@kolkov/angular-editor'
+import { DataTablesModule } from 'angular-datatables'
 
 import { AppComponent } from './app.component'
 import { ViewComponent } from './view/view.component'
@@ -14,6 +15,7 @@ import { RehearsalComponent } from './view/rehearsal/rehearsal.component'
 import { PerformanceComponent } from './view/performance/performance.component'
 import { EditBoxComponent } from './panel/edit-box/edit-box.component'
 import { SettingsComponent } from './view/settings/settings.component'
+import { LineListComponent } from './panel/line-list/line-list.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { SettingsComponent } from './view/settings/settings.component'
     RehearsalComponent,
     PerformanceComponent,
     EditBoxComponent,
-    SettingsComponent
+    SettingsComponent,
+    LineListComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { SettingsComponent } from './view/settings/settings.component'
     NgbModule,
     HttpClientModule,
     AngularFontAwesomeModule,
-    AngularEditorModule
+    AngularEditorModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

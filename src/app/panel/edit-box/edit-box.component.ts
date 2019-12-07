@@ -16,7 +16,6 @@ export class EditBoxComponent implements OnInit {
 
   private async loadFonts() {
     const fonts = await this.fontService.getFonts()
-    console.log(fonts)
     this.editorConfig.fonts = fonts
   }
 
@@ -31,7 +30,6 @@ export class EditBoxComponent implements OnInit {
     translate: 'yes',
     enableToolbar: true,
     showToolbar: true,
-    placeholder: 'Enter text here...',
     defaultParagraphSeparator: '',
     defaultFontName: '',
     defaultFontSize: '',
@@ -40,20 +38,11 @@ export class EditBoxComponent implements OnInit {
       {
         name: 'quote',
         class: 'quote'
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1'
       }
     ],
     uploadUrl: 'v1/image',
     sanitize: true,
     toolbarPosition: 'top',
-    toolbarHiddenButtons: [['bold', 'italic'], ['fontSize']]
+    toolbarHiddenButtons: [['insertVideo', 'link', 'unlink']]
   }
 }
