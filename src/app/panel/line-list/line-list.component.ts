@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { Http, Response } from '@angular/http'
+import { HttpClient } from '@angular/common/http'
 import { Subject } from 'rxjs'
 import { ScriptLine } from '../../script-line.interface'
 
@@ -15,7 +15,7 @@ export class LineListComponent implements OnDestroy, OnInit {
   lines: ScriptLine[] = []
   dtTrigger: Subject<any> = new Subject()
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.dtOptions = {
@@ -29,10 +29,13 @@ export class LineListComponent implements OnDestroy, OnInit {
       }
     }
     this.http
-      .get('data/data.json') // TODO: set correct link to data
-      .map(this.extractData)
-      .subscribe(lines => {
-        this.lines = lines
+      .get('assets/default.json') // TODO: set correct link to data
+      .subscribe(scriptSrc => {
+        const script: any = scriptSrc
+        console.log(script)
+        if (typeof script.text !== 'undefined') {
+          for (const line of script.text) this.lines.push(line)
+        }
         // Calling the DT trigger to manually render the table
         this.dtTrigger.next()
       })
@@ -40,11 +43,5 @@ export class LineListComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe()
-  }
-
-  private extractData(res: Response) {
-    // TODO: set to return correct values from json data
-    const body = res.json()
-    return body.data || {}
   }
 }

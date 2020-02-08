@@ -1,12 +1,7 @@
 import { ScriptLine } from './script-line.interface'
+import { ScriptMeta } from './script-meta.interface'
 
 export interface Script {
-  workTitle?: string
-  authorName?: string
-  composerName?: string
-  editorName?: string
-  dateCreated?: string
-  dateModified?: string
-  performanceNotes?: string
+  meta: ScriptMeta
   text: ScriptLine[]
 }

@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core'
 import { IpcRenderer } from 'electron'
-
-interface Font {
-  class: string
-  name: string
-}
+import { Font } from './font.interface'
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +35,7 @@ export class FontService {
 
     for (const font of rawFonts) {
       const fn: Font = {
-        class: font.replace(/\s/g, '-').toLowerCase(),
+        class: font.toLowerCase().replace(/\s/g, '-'),
         name: font
       }
       formatted.push(fn)
