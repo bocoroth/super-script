@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { AngularEditorConfig } from '@kolkov/angular-editor'
 import { FontService } from '../../font.service'
+import { LineBrokerService } from '../../line-broker.service'
 
 @Component({
   selector: 'app-edit-box',
@@ -8,10 +9,13 @@ import { FontService } from '../../font.service'
   styleUrls: ['./edit-box.component.scss']
 })
 export class EditBoxComponent implements OnInit {
-  constructor(private fontService: FontService) {}
+  entryContent: String
+
+  constructor(private fontService: FontService, private lineBroker: LineBrokerService) {}
 
   ngOnInit() {
     this.loadFonts()
+    this.lineBroker.currentEntry.subscribe(entry => (this.entryContent = entry))
   }
 
   private async loadFonts() {
@@ -19,7 +23,7 @@ export class EditBoxComponent implements OnInit {
     this.editorConfig.fonts = fonts
   }
 
-  private editorConfig: AngularEditorConfig = {
+  public editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
     height: 'auto',

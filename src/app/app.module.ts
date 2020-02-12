@@ -4,6 +4,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip'
 import { AppRoutingModule } from './app-routing.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { HttpClientModule } from '@angular/common/http'
+import { FormsModule } from '@angular/forms'
 import { AngularFontAwesomeModule } from 'angular-font-awesome'
 import { AngularEditorModule } from '@kolkov/angular-editor'
 import { DataTablesModule } from 'angular-datatables'
@@ -16,6 +17,9 @@ import { PerformanceComponent } from './view/performance/performance.component'
 import { EditBoxComponent } from './panel/edit-box/edit-box.component'
 import { SettingsComponent } from './view/settings/settings.component'
 import { LineListComponent } from './panel/line-list/line-list.component'
+
+import { DatatableService } from './datatable.service'
+import { ScriptService } from './script.service'
 
 @NgModule({
   declarations: [
@@ -34,11 +38,12 @@ import { LineListComponent } from './panel/line-list/line-list.component'
     TooltipModule.forRoot(),
     NgbModule,
     HttpClientModule,
+    FormsModule,
     AngularFontAwesomeModule,
     AngularEditorModule,
     DataTablesModule
   ],
-  providers: [],
+  providers: [DatatableService, ScriptService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

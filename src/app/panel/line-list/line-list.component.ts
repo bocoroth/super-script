@@ -1,7 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core'
+import { DataTableDirective } from 'angular-datatables'
 import { HttpClient } from '@angular/common/http'
 import { Subject } from 'rxjs'
 import { ScriptLine } from '../../script-line.interface'
+import { LineBrokerService } from '../../line-broker.service'
 
 import 'rxjs/add/operator/map'
 
@@ -11,16 +13,26 @@ import 'rxjs/add/operator/map'
   styleUrls: ['./line-list.component.scss']
 })
 export class LineListComponent implements OnDestroy, OnInit {
-  dtOptions: DataTables.Settings = {}
+  @ViewChild(DataTableDirective, { static: false })
+  private datatableElement: DataTableDirective
+  dtOptions: any = {}
   lines: ScriptLine[] = []
   dtTrigger: Subject<any> = new Subject()
+  dtInstance: any = null // required to be 'any' to work with angular-datatables
+  entry: String
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private lineBrokerService: LineBrokerService) {}
 
   ngOnInit() {
-    this.dtOptions = {
+    const self = this
+    self.lineBrokerService.currentEntry.subscribe(entry => (this.entry = entry))
+
+    self.dtOptions = {
       paging: false,
+      ordering: false,
+      select: 'single',
       scrollY: '50vh',
+      columnDefs: [{ width: '100%', targets: 4 }], // lines column max width
       createdRow: function() {
         // TODO: tunnel to edit-box to set up next row entry?
       },
@@ -28,20 +40,53 @@ export class LineListComponent implements OnDestroy, OnInit {
         // TODO: tunnel to edit-box to set up first row entry
       }
     }
-    this.http
+    self.http
       .get('assets/default.json') // TODO: set correct link to data
       .subscribe(scriptSrc => {
         const script: any = scriptSrc
-        console.log(script)
         if (typeof script.text !== 'undefined') {
-          for (const line of script.text) this.lines.push(line)
+          let lineCount = 0
+          for (const line of script.text) {
+            if (typeof line.startTime === 'undefined') {
+              line.startTime = ''
+            }
+            if (typeof line.endTime === 'undefined') {
+              line.endTime = ''
+            }
+            if (typeof line.cssClass === 'undefined') {
+              line.cssClass = ''
+            }
+            if (typeof line.text === 'undefined') {
+              line.text = ''
+            }
+            this.lines.push(line)
+            lineCount++
+          }
+
+          // blank line for editing
+          const lastLine: ScriptLine = {
+            id: lineCount,
+            startTime: '',
+            endTime: '',
+            cssClass: '',
+            text: ''
+          }
+
+          self.lines.push(lastLine)
         }
         // Calling the DT trigger to manually render the table
-        this.dtTrigger.next()
+        self.dtTrigger.next()
+
+        self.datatableElement.dtInstance.then(function(dtInstance: DataTables.Api) {
+          self.dtInstance = dtInstance
+          self.lineBrokerService.setDatatableInstance(dtInstance)
+          self.dtInstance.rows(':last-child').select()
+        })
       })
   }
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe()
+    this.lineBrokerService.destroyDatatableInstance()
   }
 }

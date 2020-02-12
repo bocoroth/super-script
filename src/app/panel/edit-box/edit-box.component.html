@@ -1,1 +1,2 @@
-<angular-editor formControlName="htmlContent" [config]="editorConfig"></angular-editor>
+<angular-editor [(ngModel)]="entryContent" [config]="editorConfig">{{ entryContent }}</angular-editor>
+<input type="hidden" id="entryContent" name="entryContent" value="{{ entryContent }}" />

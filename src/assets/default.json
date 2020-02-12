@@ -1,4 +1,28 @@
 {
-  "meta": {},
-  "text": []
+  "meta": {
+    "workTitle": "Default Hypertitles script",
+    "authorName": "John Q. Author",
+    "composerName": "George F. Composer",
+    "editorName": "Matt Lisiak",
+    "dateCreated": "2020-01-01T00:00:00.000Z",
+    "dateModified": "2020-02-02T00:00:00.000Z",
+    "performanceNotes": "This is the default Hypertitles script file."
+  },
+  "text": [
+    {
+      "id": 0,
+      "text": "test"
+    },
+    {
+      "id": 1,
+      "startTime": "00:00:00.000",
+      "endTime": "00:00:01.500",
+      "cssClass": "test-2",
+      "text": "test 2"
+    },
+    {
+      "id": 2,
+      "text": "test 3"
+    }
+  ]
 }

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, Menu } = require('electron')
 const url = require('url')
 const path = require('path')
 const SystemFonts = require('system-font-families').default
@@ -54,7 +54,7 @@ ipcMain.on('getFonts', (event, arg) => {
 if (process.platform === 'darwin') {
   const template = [
     {
-      label: 'FromScratch',
+      label: 'Hypertitles',
       submenu: [
         {
           label: 'Quit',
@@ -105,6 +105,84 @@ if (process.platform === 'darwin') {
     }
   ]
 
-  const osxMenu = menu.buildFromTemplate(template)
-  menu.setApplicationMenu(osxMenu)
-}
+  const osxMenu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(osxMenu)
+} /* else {
+  const template = [
+    {
+      label: 'Hypertitles',
+      submenu: [
+        {
+          label: 'Quit',
+          accelerator: 'CmdOrCtrl+Q',
+          click: function() {
+            app.quit()
+          }
+        }
+      ]
+    },
+    {
+      label: 'Edit',
+      submenu: [
+        {
+          label: 'Undo',
+          accelerator: 'CmdOrCtrl+Z',
+          selector: 'undo:'
+        },
+        {
+          label: 'Redo',
+          accelerator: 'Shift+CmdOrCtrl+Z',
+          selector: 'redo:'
+        },
+        {
+          type: 'separator'
+        },
+        {
+          label: 'Cut',
+          accelerator: 'CmdOrCtrl+X',
+          selector: 'cut:'
+        },
+        {
+          label: 'Copy',
+          accelerator: 'CmdOrCtrl+C',
+          selector: 'copy:'
+        },
+        {
+          label: 'Paste',
+          accelerator: 'CmdOrCtrl+V',
+          selector: 'paste:'
+        },
+        {
+          label: 'Select All',
+          accelerator: 'CmdOrCtrl+A',
+          selector: 'selectAll:'
+        }
+      ]
+    },
+    {
+      label: 'View',
+      submenu: [
+        {
+          label: 'Show/Hide External Display'
+        },
+        {
+          label: 'Resize External Display'
+        }
+      ]
+    },
+    {
+      label: 'Help',
+      submenu: [
+        {
+          label: 'Documentation'
+        },
+        {
+          label: 'About'
+        }
+      ]
+    }
+  ]
+
+  const wlMenu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(wlMenu)
+}*/
