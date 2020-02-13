@@ -32,7 +32,7 @@ export class LineListComponent implements OnDestroy, OnInit {
       ordering: false,
       select: 'single',
       scrollY: '50vh',
-      columnDefs: [{ width: '100%', targets: 4 }], // lines column max width
+      columnDefs: [{ width: '100%', targets: 5 }], // lines column max width
       createdRow: function() {
         // TODO: tunnel to edit-box to set up next row entry?
       },
@@ -53,6 +53,9 @@ export class LineListComponent implements OnDestroy, OnInit {
             if (typeof line.endTime === 'undefined') {
               line.endTime = ''
             }
+            if (typeof line.durationMS === 'undefined') {
+              line.durationMS = 0
+            }
             if (typeof line.cssClass === 'undefined') {
               line.cssClass = ''
             }
@@ -68,11 +71,13 @@ export class LineListComponent implements OnDestroy, OnInit {
             id: lineCount,
             startTime: '',
             endTime: '',
+            durationMS: 0,
             cssClass: '',
             text: ''
           }
 
           self.lines.push(lastLine)
+          self.lineBrokerService.setScript(script)
         }
         // Calling the DT trigger to manually render the table
         self.dtTrigger.next()

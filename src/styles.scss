@@ -13,7 +13,7 @@ app-edit-box div.angular-editor > div.angular-editor-wrapper > div.angular-edito
   width: 9rem;
   text-align: center;
   font-weight: bold;
-  color: #99b;
+  color: #17a2b8;
 
   span {
     display: inline-flex;
@@ -25,7 +25,7 @@ app-edit-box div.angular-editor > div.angular-editor-wrapper > div.angular-edito
       padding-right: 5px;
 
       i.fa-inverse {
-        color: #99b;
+        color: #17a2b8;
       }
     }
   }
@@ -42,4 +42,24 @@ app-edit-box
   .angular-editor-textarea[_ngcontent-ltr-c6] {
   background-color: #ddd;
   color: black;
+}
+
+app-line-list table.dataTable tbody tr {
+  background-color: #303030;
+}
+app-line-list .dataTables_wrapper .dataTables_length,
+app-line-list .dataTables_wrapper .dataTables_filter,
+app-line-list .dataTables_wrapper .dataTables_info,
+app-line-list .dataTables_wrapper .dataTables_processing,
+app-line-list .dataTables_wrapper .dataTables_paginate {
+  color: #fff;
+  font-size: 0.75rem;
+}
+.dataTables_filter {
+  position: relative;
+  margin-bottom: -32px;
+  z-index: 2;
+}
+.dataTables_filter label input {
+  border-radius: 5px;
 }

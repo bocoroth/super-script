@@ -1,33 +1,28 @@
 import { Injectable } from '@angular/core'
-//import { Script } from './script.interface'
-//import { ScriptLine } from './script-line.interface'
-//import { ScriptMeta } from './script-meta.interface'
+import { Script } from './script.interface'
+import { ScriptLine } from './script-line.interface'
+import { ScriptMeta } from './script-meta.interface'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScriptService {
-  //private script: Script
+  private script: Script
 
-  constructor(/*script: Script = null*/) {
-    /*if (script === null) {
-      const newScript: Script = {
-        meta: {},
-        text: []
-      }
-      this.script = newScript
-    } else {
-      this.script = script
-      this.reNumberScript()
-    }*/
-  }
+  constructor() {}
 
-  /*public static JSONToScript(json: string): Script {
+  public static JSONToScript(json: string): Script {
     const script: Script = JSON.parse(json)
     return script
   }
 
   public getScript(): Script {
+    return this.script
+  }
+
+  public setScript(script: Script): Script {
+    this.script = script
+    this.reNumberScript()
     return this.script
   }
 
@@ -54,6 +49,7 @@ export class ScriptService {
         id: beforeID,
         startTime: '',
         endTime: '',
+        durationMS: 0,
         cssClass: '',
         text: ''
       }
@@ -65,6 +61,7 @@ export class ScriptService {
         id: insertID,
         startTime: '',
         endTime: '',
+        durationMS: 0,
         cssClass: '',
         text: ''
       }
@@ -93,5 +90,5 @@ export class ScriptService {
       line.id = i
       i++
     }
-  }*/
+  }
 }

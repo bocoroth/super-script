@@ -38,15 +38,22 @@ export class EditBoxComponent implements OnInit {
     defaultFontName: '',
     defaultFontSize: '',
     fonts: [{ class: 'select-font', name: 'Font...' }],
-    customClasses: [
-      {
-        name: 'quote',
-        class: 'quote'
-      }
-    ],
     uploadUrl: 'v1/image',
     sanitize: true,
     toolbarPosition: 'top',
-    toolbarHiddenButtons: [['insertVideo', 'link', 'unlink']]
+    toolbarHiddenButtons: [
+      [
+        'indent',
+        'outdent',
+        'insertUnorderedList',
+        'insertOrderedList',
+        'heading',
+        'customClasses',
+        'insertVideo',
+        'link',
+        'unlink',
+        'insertHorizontalRule'
+      ]
+    ]
   }
 }

@@ -1,23 +1,30 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
-//import { ScriptService } from './script.service'
+import { ScriptService } from './script.service'
 import { DatatableService } from './datatable.service'
+import { Script } from './script.interface'
 
 @Injectable({
   providedIn: 'root'
 })
 export class LineBrokerService {
   private entrySource = new BehaviorSubject<string>('')
-  currentEntry = this.entrySource.asObservable()
   private dt: any // required to be 'any' to work with angular-datatables
-  private dtLoaded: boolean
 
-  constructor(/*private scriptService: ScriptService, */ private datatableService: DatatableService) {
+  public dtLoaded: boolean
+
+  currentEntry = this.entrySource.asObservable()
+
+  constructor(private scriptService: ScriptService, private datatableService: DatatableService) {
     this.dtLoaded = false
   }
 
   changeEntry(entry: string) {
     this.entrySource.next(entry)
+  }
+
+  setScript(script: Script) {
+    this.scriptService.setScript(script)
   }
 
   setDatatableInstance(dt: any) {
@@ -27,7 +34,7 @@ export class LineBrokerService {
     this.dt.on('select', function(_e: object, _dt: DataTables.Api, type: string, indexes: number[]) {
       if (type === 'row') {
         const data = self.dt.rows(indexes).data()
-        self.changeEntry(data[0][4])
+        self.changeEntry(data[0][5])
       }
     })
 
