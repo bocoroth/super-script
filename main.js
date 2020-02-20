@@ -1,6 +1,7 @@
-const { app, BrowserWindow, ipcMain, Menu } = require('electron')
+const { app, BrowserWindow, ipcMain, IpcMessageEvent, Menu, dialog } = require('electron')
 const url = require('url')
 const path = require('path')
+const fs = require('fs')
 const SystemFonts = require('system-font-families').default
 
 const systemFonts = new SystemFonts()
@@ -26,7 +27,7 @@ function createWindow() {
 
   mainWindow.maximize()
 
-  //mainWindow.toggleDevTools() // for debugging
+  mainWindow.toggleDevTools() // for debugging
 
   mainWindow.on('closed', function() {
     mainWindow = null
@@ -50,6 +51,45 @@ ipcMain.on('getFonts', (event, arg) => {
     },
     err => console.warn('Error loading system fonts')
   )
+})
+
+ipcMain.handle('loadFilePath', async () => {
+  const result = await dialog.showOpenDialog(mainWindow, {
+    filters: [{ name: 'Hypertitles Scripts', extensions: ['json'] }],
+    properties: ['openFile']
+  })
+
+  if (result === undefined || result['canceled'] === true) {
+    console.info('No file selected')
+    return
+  } else {
+    if (typeof result['filePaths'] === 'undefined') {
+      console.warn(`Couldn't find filepath from dialog box.`)
+      return
+    }
+
+    const filePath = result['filePaths'][0]
+
+    return filePath
+  }
+})
+
+async function readLoadedFile(filePath) {
+  return fs.promises.readFile(filePath, 'utf-8')
+}
+
+ipcMain.handle('loadFile', async (e, filePath) => {
+  console.log(filePath)
+  const result = await readLoadedFile(filePath)
+  if (result === undefined) {
+    console.warn(`Error loading file ${filePath}`)
+    return
+  }
+  return result
+})
+
+ipcMain.on('ping', event => {
+  event.sender.send('pong')
 })
 
 // OSX fixes

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+import { FileService } from './file.service'
 import { ScriptService } from './script.service'
 import { DatatableService } from './datatable.service'
 import { Script } from './script.interface'
@@ -15,8 +16,20 @@ export class LineBrokerService {
 
   currentEntry = this.entrySource.asObservable()
 
-  constructor(private scriptService: ScriptService, private datatableService: DatatableService) {
+  constructor(
+    private fileService: FileService,
+    private scriptService: ScriptService,
+    private datatableService: DatatableService
+  ) {
     this.dtLoaded = false
+  }
+
+  async testLoadPath(): Promise<any> {
+    return this.fileService.loadFilePath()
+  }
+
+  async testLoadFile(filePath: string): Promise<any> {
+    return this.fileService.loadScript(filePath)
   }
 
   changeEntry(entry: string) {

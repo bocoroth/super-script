@@ -13,9 +13,17 @@ export class EditBoxComponent implements OnInit {
 
   constructor(private fontService: FontService, private lineBroker: LineBrokerService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loadFonts()
     this.lineBroker.currentEntry.subscribe(entry => (this.entryContent = entry))
+
+    // test file loading
+    /*await this.lineBroker.testLoadPath().then(async path => {
+      console.log(path)
+      await this.lineBroker.testLoadFile(path).then(script => {
+        console.log(script)
+      })
+    })*/
   }
 
   private async loadFonts() {
