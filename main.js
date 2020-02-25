@@ -79,11 +79,33 @@ async function readLoadedFile(filePath) {
 }
 
 ipcMain.handle('loadFile', async (e, filePath) => {
-  console.log(filePath)
   const result = await readLoadedFile(filePath)
   if (result === undefined) {
     console.warn(`Error loading file ${filePath}`)
     return
+  }
+  return result
+})
+
+ipcMain.handle('saveFile', async (e, script, filePath) => {
+  let result = 'File save failed.'
+
+  if (filePath.startsWith('assets')) {
+    filePath = 'dist' + path.sep + filePath
+  }
+
+  if (!path.isAbsolute(filePath)) {
+    filePath = __dirname + path.sep + filePath
+  }
+
+  console.log(script, filePath)
+
+  try {
+    result = fs.writeFileSync(filePath, JSON.stringify(script, null, 2), 'utf-8')
+    console.log(result)
+  } catch (e) {
+    console.log(e)
+    console.log('Failed to save the file!')
   }
   return result
 })

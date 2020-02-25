@@ -13,7 +13,7 @@
     id="cssClass"
     placeholder="example-class1, example-class2"
   />
-  <button type="button" name="btnSave" id="btnSave" class="col-1 offset-3 btn-sm btn-info">Save</button>
+  <button type="button" (click)="saveLine()" id="btnSaveLine" class="col-1 offset-3 btn-sm btn-info">Save Line</button>
 </div>
-<angular-editor [(ngModel)]="entryContent" [config]="editorConfig">{{ entryContent }}</angular-editor>
+<angular-editor id="line-editor" [(ngModel)]="entryContent" [config]="editorConfig">{{ entryContent }}</angular-editor>
 <input type="hidden" id="entryContent" name="entryContent" value="{{ entryContent }}" />

@@ -24,23 +24,37 @@ export class LineBrokerService {
     this.dtLoaded = false
   }
 
-  async testLoadPath(): Promise<any> {
+  async loadPath(): Promise<any> {
     return this.fileService.loadFilePath()
   }
 
-  async testLoadFile(filePath: string): Promise<any> {
+  async loadFile(filePath: string): Promise<any> {
     return this.fileService.loadScript(filePath)
   }
 
-  changeEntry(entry: string) {
+  async saveFile(): Promise<any> {
+    const filePath: string = this.fileService.getFilePath()
+    const script: Script = this.scriptService.getScript()
+    return this.fileService.saveScript(filePath, script)
+  }
+
+  public changeEntry(entry: string) {
     this.entrySource.next(entry)
   }
 
-  setScript(script: Script) {
+  public getScript(): Script {
+    return this.scriptService.getScript()
+  }
+
+  public setScript(script: Script) {
     this.scriptService.setScript(script)
   }
 
-  setDatatableInstance(dt: any) {
+  public setFilePath(filePath: string) {
+    this.fileService.setFilePath(filePath)
+  }
+
+  public setDatatableInstance(dt: any) {
     this.datatableService.setDatatableInstance(dt)
     this.dt = this.datatableService.getDatatableInstance()
     const self = this
@@ -54,7 +68,48 @@ export class LineBrokerService {
     this.dtLoaded = true
   }
 
-  destroyDatatableInstance() {
+  public loadDatatable() {
+    if (this.dtLoaded) {
+      this.dt.clear()
+
+      const script = this.getScript()
+
+      console.log(script)
+
+      if (typeof script.text !== 'undefined') {
+        let lineCount = 0
+        for (const line of script.text) {
+          if (typeof line.startTime === 'undefined') {
+            line.startTime = ''
+          }
+          if (typeof line.endTime === 'undefined') {
+            line.endTime = ''
+          }
+          if (typeof line.durationMS === 'undefined') {
+            line.durationMS = 0
+          }
+          if (typeof line.cssClass === 'undefined') {
+            line.cssClass = ''
+          }
+          if (typeof line.text === 'undefined') {
+            line.text = ''
+          }
+          const lineArray = [line.id, line.startTime, line.endTime, line.durationMS, line.cssClass, line.text]
+          this.dt.row.add(lineArray)
+          this.dt.draw()
+          lineCount++
+        }
+
+        // blank line for editing
+        const lastLine = [lineCount, '', '', 0, '', '']
+
+        this.dt.row.add(lastLine)
+        this.dt.draw()
+      }
+    }
+  }
+
+  public destroyDatatableInstance() {
     this.datatableService.destroyDatatableInstance()
   }
 }

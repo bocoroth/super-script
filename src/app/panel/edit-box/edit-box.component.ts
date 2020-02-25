@@ -18,9 +18,9 @@ export class EditBoxComponent implements OnInit {
     this.lineBroker.currentEntry.subscribe(entry => (this.entryContent = entry))
 
     // test file loading
-    /*await this.lineBroker.testLoadPath().then(async path => {
+    /*await this.lineBroker.loadPath().then(async path => {
       console.log(path)
-      await this.lineBroker.testLoadFile(path).then(script => {
+      await this.lineBroker.loadFile(path).then(script => {
         console.log(script)
       })
     })*/
@@ -63,5 +63,9 @@ export class EditBoxComponent implements OnInit {
         'insertHorizontalRule'
       ]
     ]
+  }
+
+  public saveLine() {
+    this.lineBroker.loadDatatable()
   }
 }

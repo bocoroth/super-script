@@ -7,27 +7,22 @@ import { Script } from './script.interface'
 })
 export class FileService {
   private fileDirectory: string
+  private fileName: string
+  private filePath: string
   private currentScript: Script
 
   constructor(private readonly _ipc: IpcService) {
-    /*this._ipc.on('pong', (_event: Electron.IpcMessageEvent) => {
+    // IPC test
+    this._ipc.on('pong', (_event: Electron.IpcMessageEvent) => {
       console.log('pong')
-    })*
-
-    /*this._ipc.on('fileLoaded', (_event: Electron.IpcMessageEvent, data: any, filePath: string) => {
-      console.log('data: ', JSON.parse(data))
-      console.log('filePath: ', filePath)
-
-      if (this.verifyFileStructure(data)) {
-        this.fileDirectory = filePath.substring(0, Math.max(filePath.lastIndexOf('/'), filePath.lastIndexOf('\\')))
-        this.currentScript = JSON.parse(data)
-      }
-    })*/
+    })
   }
 
   public async loadFilePath(): Promise<string> {
     const filePath: string = await this._ipc.invoke('loadFilePath')
+    this.filePath = filePath
     this.fileDirectory = filePath.substring(0, Math.max(filePath.lastIndexOf('/'), filePath.lastIndexOf('\\')))
+    this.fileName = filePath.substring(1, Math.max(filePath.lastIndexOf('/'), filePath.lastIndexOf('\\')))
     return filePath
   }
 
@@ -42,7 +37,38 @@ export class FileService {
     }
   }
 
-  public saveFile() {}
+  public async saveScript(filePath: string, script: Script): Promise<any> {
+    const response: any = await this._ipc.invoke('saveFile', script, filePath)
+    return response
+  }
+
+  public getScript(): Script {
+    return this.currentScript
+  }
+
+  public getFileDirectory(): string {
+    return this.fileDirectory
+  }
+
+  public setFileDirectory(dir: string): void {
+    this.fileDirectory = dir
+  }
+
+  public getFileName(): string {
+    return this.fileName
+  }
+
+  public setFileName(name: string): void {
+    this.fileName = name
+  }
+
+  public getFilePath(): string {
+    return this.filePath
+  }
+
+  public setFilePath(path: string): void {
+    this.filePath = path
+  }
 
   public testPing() {
     this._ipc.send('ping')

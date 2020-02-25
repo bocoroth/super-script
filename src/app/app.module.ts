@@ -25,7 +25,8 @@ import { FontService } from './font.service'
 import { IpcService } from './ipc.service'
 import { LineBrokerService } from './line-broker.service'
 import { ScriptService } from './script.service'
-import { SettingsService } from './settings.service'
+import { SettingsService } from './settings.service';
+import { ToolbarComponent } from './view/toolbar/toolbar.component'
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SettingsService } from './settings.service'
     PerformanceComponent,
     RehearsalComponent,
     SettingsComponent,
-    ViewComponent
+    ViewComponent,
+    ToolbarComponent
   ],
   imports: [
     AngularEditorModule,

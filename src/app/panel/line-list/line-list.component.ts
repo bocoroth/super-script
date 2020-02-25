@@ -20,74 +20,37 @@ export class LineListComponent implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject()
   dtInstance: any = null // required to be 'any' to work with angular-datatables
   entry: String
+  filePath = 'assets/default.json' // TODO: set up autoload last file with settings
 
   constructor(private http: HttpClient, private lineBrokerService: LineBrokerService) {}
 
   ngOnInit() {
     const self = this
     self.lineBrokerService.currentEntry.subscribe(entry => (this.entry = entry))
+    self.lineBrokerService.setFilePath(self.filePath)
 
     self.dtOptions = {
       paging: false,
       ordering: false,
       select: 'single',
       scrollY: '50vh',
-      columnDefs: [{ width: '100%', targets: 5 }], // lines column max width
-      createdRow: function() {
-        // TODO: tunnel to edit-box to set up next row entry?
-      },
-      initComplete: function() {
-        // TODO: tunnel to edit-box to set up first row entry
-      }
+      columnDefs: [{ width: '100%', targets: 5 }] // lines column max width
     }
-    self.http
-      .get('assets/default.json') // TODO: set correct link to data
-      .subscribe(scriptSrc => {
-        const script: any = scriptSrc
-        if (typeof script.text !== 'undefined') {
-          let lineCount = 0
-          for (const line of script.text) {
-            if (typeof line.startTime === 'undefined') {
-              line.startTime = ''
-            }
-            if (typeof line.endTime === 'undefined') {
-              line.endTime = ''
-            }
-            if (typeof line.durationMS === 'undefined') {
-              line.durationMS = 0
-            }
-            if (typeof line.cssClass === 'undefined') {
-              line.cssClass = ''
-            }
-            if (typeof line.text === 'undefined') {
-              line.text = ''
-            }
-            this.lines.push(line)
-            lineCount++
-          }
+    self.http.get(this.filePath).subscribe(scriptSrc => {
+      const script: any = scriptSrc
 
-          // blank line for editing
-          const lastLine: ScriptLine = {
-            id: lineCount,
-            startTime: '',
-            endTime: '',
-            durationMS: 0,
-            cssClass: '',
-            text: ''
-          }
+      self.lineBrokerService.setScript(script)
 
-          self.lines.push(lastLine)
-          self.lineBrokerService.setScript(script)
-        }
-        // Calling the DT trigger to manually render the table
-        self.dtTrigger.next()
+      // Call the DT trigger to render the table
+      self.dtTrigger.next()
 
-        self.datatableElement.dtInstance.then(function(dtInstance: DataTables.Api) {
-          self.dtInstance = dtInstance
-          self.lineBrokerService.setDatatableInstance(dtInstance)
-          self.dtInstance.rows(':last-child').select()
-        })
+      self.datatableElement.dtInstance.then(function(dtInstance: DataTables.Api) {
+        self.dtInstance = dtInstance
+        self.lineBrokerService.setDatatableInstance(dtInstance)
+        self.lineBrokerService.loadDatatable()
+        self.dtInstance.rows(':last-child').select()
       })
+    })
   }
 
   ngOnDestroy(): void {
