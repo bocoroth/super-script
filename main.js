@@ -90,7 +90,7 @@ ipcMain.handle('loadFile', async (e, filePath) => {
 ipcMain.handle('saveFile', async (e, script, filePath) => {
   let result = 'File save failed.'
 
-  if (filePath.startsWith('assets')) {
+  if (filePath.startsWith('assets' + path.sep + 'default.json')) {
     filePath = 'dist' + path.sep + filePath
   }
 

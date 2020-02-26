@@ -1,19 +1,29 @@
 <div class="row mr-0 mb-2">
-  <!-- TODO: convert these to real time pickers/spinners a la a/v editors (need to create?),
-      implement js-joda for durations -->
-  <label class="col-2 col-form-label col-form-label-sm text-right" for="durationMS">Duration (milliseconds)</label>
-  <!--[(ngModel)]="line.durationMS" -->
-  <input type="number" name="durationMS" class="col-1 form-control form-control-sm" id="durationMS" placeholder="0" />
-  <label class="col-2 col-form-label col-form-label-sm text-right" for="cssClass">CSS Class(es)</label>
-  <!--[(ngModel)]="line.cssClass" -->
+  <!-- TODO: convert these to real time pickers/spinners a la a/v editors (need to create?) -->
+  <label class="col-2 col-form-label col-form-label-sm text-right" for="durationMS">
+    Duration (milliseconds)
+  </label>
+  <input
+    type="number"
+    name="durationMS"
+    class="col-1 form-control form-control-sm"
+    id="durationMS"
+    placeholder="0"
+    value="{{ durationMS }}"
+  />
+  <label class="col-2 col-form-label col-form-label-sm text-right" for="cssClass">
+    CSS Class(es)
+  </label>
   <input
     type="text"
     name="cssClass"
     class="col-3 form-control form-control-sm"
     id="cssClass"
     placeholder="example-class1, example-class2"
+    value="{{ cssClass }}"
   />
   <button type="button" (click)="saveLine()" id="btnSaveLine" class="col-1 offset-3 btn-sm btn-info">Save Line</button>
 </div>
 <angular-editor id="line-editor" [(ngModel)]="entryContent" [config]="editorConfig">{{ entryContent }}</angular-editor>
 <input type="hidden" id="entryContent" name="entryContent" value="{{ entryContent }}" />
+<input type="hidden" id="lineID" name="lineID" value="{{ lineNumber }}" />

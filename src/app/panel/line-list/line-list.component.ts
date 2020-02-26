@@ -19,13 +19,21 @@ export class LineListComponent implements OnDestroy, OnInit {
   lines: ScriptLine[] = []
   dtTrigger: Subject<any> = new Subject()
   dtInstance: any = null // required to be 'any' to work with angular-datatables
-  entry: String
+
+  lineNumber: string
+  durationMS: string
+  cssClass: string
+  entry: string
+
   filePath = 'assets/default.json' // TODO: set up autoload last file with settings
 
   constructor(private http: HttpClient, private lineBrokerService: LineBrokerService) {}
 
   ngOnInit() {
     const self = this
+    self.lineBrokerService.lineNumber.subscribe(num => (this.lineNumber = num))
+    self.lineBrokerService.durationMS.subscribe(ms => (this.durationMS = ms))
+    self.lineBrokerService.cssClass.subscribe(css => (this.cssClass = css))
     self.lineBrokerService.currentEntry.subscribe(entry => (this.entry = entry))
     self.lineBrokerService.setFilePath(self.filePath)
 

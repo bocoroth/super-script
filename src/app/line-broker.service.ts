@@ -4,17 +4,24 @@ import { FileService } from './file.service'
 import { ScriptService } from './script.service'
 import { DatatableService } from './datatable.service'
 import { Script } from './script.interface'
+import { ScriptLine } from './script-line.interface'
 
 @Injectable({
   providedIn: 'root'
 })
 export class LineBrokerService {
   private entrySource = new BehaviorSubject<string>('')
+  private lineNumberSource = new BehaviorSubject<string>('')
+  private durationMSSource = new BehaviorSubject<string>('')
+  private cssClassSource = new BehaviorSubject<string>('')
   private dt: any // required to be 'any' to work with angular-datatables
 
   public dtLoaded: boolean
 
   currentEntry = this.entrySource.asObservable()
+  lineNumber = this.lineNumberSource.asObservable()
+  durationMS = this.durationMSSource.asObservable()
+  cssClass = this.cssClassSource.asObservable()
 
   constructor(
     private fileService: FileService,
@@ -24,6 +31,7 @@ export class LineBrokerService {
     this.dtLoaded = false
   }
 
+  /* FILE LOADING/SAVING ******************************************************/
   async loadPath(): Promise<any> {
     return this.fileService.loadFilePath()
   }
@@ -38,10 +46,38 @@ export class LineBrokerService {
     return this.fileService.saveScript(filePath, script)
   }
 
+  public setFilePath(filePath: string) {
+    this.fileService.setFilePath(filePath)
+  }
+
+  /* OBSERVABLE WRITING *******************************************************/
   public changeEntry(entry: string) {
     this.entrySource.next(entry)
   }
 
+  public changeLineNumber(lineNumber: string) {
+    this.lineNumberSource.next(lineNumber)
+  }
+
+  public changeDurationMS(durationMS: string) {
+    this.durationMSSource.next(durationMS)
+  }
+
+  public changeCssClass(cssClass: string) {
+    this.cssClassSource.next(cssClass)
+  }
+
+  /* EDIT BOX<->LINE LIST WIRING **********************************************/
+  public setEditBox(rowArray: string[]) {
+    this.changeLineNumber(rowArray[0])
+    this.changeDurationMS(rowArray[3])
+    $('#durationMS').val(rowArray[3])
+    this.changeCssClass(rowArray[4])
+    $('#cssClass').val(rowArray[4])
+    this.changeEntry(rowArray[5])
+  }
+
+  /* SCRIPT FUNCTIONS *********************************************************/
   public getScript(): Script {
     return this.scriptService.getScript()
   }
@@ -50,18 +86,31 @@ export class LineBrokerService {
     this.scriptService.setScript(script)
   }
 
-  public setFilePath(filePath: string) {
-    this.fileService.setFilePath(filePath)
+  public editLine(line: ScriptLine) {
+    this.scriptService.editLine(line)
   }
 
+  public addLine(line: ScriptLine) {
+    this.scriptService.addLine(line)
+  }
+
+  public deleteLine(line: ScriptLine) {
+    this.scriptService.deleteLine(line)
+  }
+
+  public insertBlankLine() {
+    this.scriptService.insertBlankLine()
+  }
+
+  /* DATATABLE FUNCTIONS ******************************************************/
   public setDatatableInstance(dt: any) {
     this.datatableService.setDatatableInstance(dt)
     this.dt = this.datatableService.getDatatableInstance()
     const self = this
     this.dt.on('select', function(_e: object, _dt: DataTables.Api, type: string, indexes: number[]) {
       if (type === 'row') {
-        const data = self.dt.rows(indexes).data()
-        self.changeEntry(data[0][5])
+        const data: string[][] = self.dt.rows(indexes).data()
+        self.setEditBox(data[0])
       }
     })
 
@@ -73,8 +122,6 @@ export class LineBrokerService {
       this.dt.clear()
 
       const script = this.getScript()
-
-      console.log(script)
 
       if (typeof script.text !== 'undefined') {
         let lineCount = 0
@@ -107,6 +154,12 @@ export class LineBrokerService {
         this.dt.draw()
       }
     }
+  }
+
+  public selectDatatableRow(rowID: number) {
+    this.dt.row(`:eq(${rowID})`).select()
+    const rowArray = this.dt.row(`:eq(${rowID})`).data()
+    this.setEditBox(rowArray)
   }
 
   public destroyDatatableInstance() {
