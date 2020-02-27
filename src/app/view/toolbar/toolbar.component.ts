@@ -27,15 +27,44 @@ export class ToolbarComponent implements OnInit {
     })
   }
 
-  public saveScript() {
-    this.statusService.changeStatus('saving...')
-    $.when(this.lineBroker.saveFile())
-      .then(() => {
-        this.statusService.changeStatus('Script saved!')
-      })
-      .fail(error => {
-        this.statusService.changeStatus('<span class="text-danger">Failed to save script.</span>')
-        console.warn(error)
-      })
+  public saveScript(saveAs = false) {
+    const currentPath = this.lineBroker.getFilePath()
+
+    if (!currentPath.match(/assets(\\|\/)default\.json/i) || !saveAs) {
+      // not default script
+      this.statusService.changeStatus('saving...')
+      $.when(this.lineBroker.saveFile())
+        .then(() => {
+          this.statusService.changeStatus('Script saved!')
+        })
+        .fail(error => {
+          this.statusService.changeStatus('<span class="text-danger">Failed to save script.</span>')
+          console.warn(error)
+        })
+    } else {
+      // new script, or Save As
+      $.when(this.lineBroker.getSaveFilePath())
+        .then(filePath => {
+          console.log(filePath)
+          if (filePath) {
+            this.lineBroker.setFilePath(filePath)
+            this.statusService.changeStatus('saving...')
+            $.when(this.lineBroker.saveFile())
+              .then(() => {
+                this.statusService.changeStatus('Script saved!')
+              })
+              .fail(error => {
+                this.statusService.changeStatus('<span class="text-danger">Failed to save script.</span>')
+                console.warn(error)
+              })
+          } else {
+            this.statusService.changeStatus('<span class="text-danger">Failed to save script.</span>')
+          }
+        })
+        .fail(error => {
+          this.statusService.changeStatus('<span class="text-danger">Failed to save script.</span>')
+          console.warn(error)
+        })
+    }
   }
 }

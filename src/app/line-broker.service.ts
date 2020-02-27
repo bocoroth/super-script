@@ -17,6 +17,7 @@ export class LineBrokerService {
   private dt: any // required to be 'any' to work with angular-datatables
 
   public dtLoaded: boolean
+  public currentTab: string
 
   currentEntry = this.entrySource.asObservable()
   lineNumber = this.lineNumberSource.asObservable()
@@ -36,18 +37,26 @@ export class LineBrokerService {
     return this.fileService.loadFilePath()
   }
 
+  async getSaveFilePath(): Promise<any> {
+    return this.fileService.getSaveFilePath()
+  }
+
   async loadFile(filePath: string): Promise<any> {
     return this.fileService.loadScript(filePath)
   }
 
-  async saveFile(): Promise<any> {
-    const filePath: string = this.fileService.getFilePath()
+  async saveFile(filePath: string = null): Promise<any> {
+    filePath = filePath === null ? this.fileService.getFilePath() : filePath
     const script: Script = this.scriptService.getScript()
     return this.fileService.saveScript(filePath, script)
   }
 
   public setFilePath(filePath: string) {
     this.fileService.setFilePath(filePath)
+  }
+
+  public getFilePath(): string {
+    return this.fileService.getFilePath()
   }
 
   /* OBSERVABLE WRITING *******************************************************/

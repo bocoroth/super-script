@@ -60,7 +60,7 @@ ipcMain.handle('loadFilePath', async () => {
   })
 
   if (result === undefined || result['canceled'] === true) {
-    console.info('No file selected')
+    console.info('No load file selected')
     return
   } else {
     if (typeof result['filePaths'] === 'undefined') {
@@ -69,6 +69,31 @@ ipcMain.handle('loadFilePath', async () => {
     }
 
     const filePath = result['filePaths'][0]
+
+    return filePath
+  }
+})
+
+ipcMain.handle('getSaveFilePath', async () => {
+  const result = await dialog.showSaveDialog(mainWindow, {
+    filters: [{ name: 'Hypertitles Scripts', extensions: ['json'] }],
+    properties: ['createDirectory', 'showOverwriteConfirmation']
+  })
+
+  if (result === undefined || result['canceled'] === true) {
+    console.info('No save file selected')
+    return
+  } else {
+    if (typeof result['filePath'] === 'undefined') {
+      console.warn(`Couldn't find filepath from dialog box.`)
+      return
+    }
+
+    let filePath = result['filePath']
+
+    if (!filePath.endsWith('.json')) {
+      filePath += '.json'
+    }
 
     return filePath
   }
@@ -87,25 +112,24 @@ ipcMain.handle('loadFile', async (e, filePath) => {
   return result
 })
 
-ipcMain.handle('saveFile', async (e, script, filePath) => {
+ipcMain.handle('saveFile', async (e, script, filePath = null) => {
   let result = 'File save failed.'
 
-  if (filePath.startsWith('assets' + path.sep + 'default.json')) {
-    filePath = 'dist' + path.sep + filePath
-  }
+  if (filePath) {
+    if (filePath.startsWith('assets' + path.sep + 'default.json')) {
+      filePath = 'dist' + path.sep + filePath
+    }
 
-  if (!path.isAbsolute(filePath)) {
-    filePath = __dirname + path.sep + filePath
-  }
+    if (!path.isAbsolute(filePath)) {
+      filePath = __dirname + path.sep + filePath
+    }
 
-  console.log(script, filePath)
-
-  try {
-    result = fs.writeFileSync(filePath, JSON.stringify(script, null, 2), 'utf-8')
-    console.log(result)
-  } catch (e) {
-    console.log(e)
-    console.log('Failed to save the file!')
+    try {
+      result = fs.writeFileSync(filePath, JSON.stringify(script, null, 2), 'utf-8')
+    } catch (e) {
+      console.log(e)
+      console.log('Failed to save the file!')
+    }
   }
   return result
 })

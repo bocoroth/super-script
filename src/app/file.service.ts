@@ -9,7 +9,6 @@ export class FileService {
   private fileDirectory: string
   private fileName: string
   private filePath: string
-  private currentScript: Script
 
   constructor(private readonly _ipc: IpcService) {
     // IPC test
@@ -29,7 +28,6 @@ export class FileService {
   public async loadScript(filePath: string): Promise<Script> {
     const script: string = await this._ipc.invoke('loadFile', filePath)
     if (this.verifyFileStructure(script)) {
-      this.currentScript = JSON.parse(script)
       return JSON.parse(script)
     } else {
       console.warn('Invalid script file.')
@@ -37,13 +35,18 @@ export class FileService {
     }
   }
 
-  public async saveScript(filePath: string, script: Script): Promise<any> {
-    const response: any = await this._ipc.invoke('saveFile', script, filePath)
-    return response
+  public async getSaveFilePath(): Promise<string> {
+    const filePath: string = await this._ipc.invoke('getSaveFilePath')
+    return filePath
   }
 
-  public getScript(): Script {
-    return this.currentScript
+  public async saveScript(filePath: string, script: Script): Promise<any> {
+    const response: any = await this._ipc.invoke('saveFile', script, filePath)
+    // ensure file service has correct file params if Save As
+    this.filePath = filePath
+    this.fileDirectory = filePath.substring(0, Math.max(filePath.lastIndexOf('/'), filePath.lastIndexOf('\\')))
+    this.fileName = filePath.substring(1, Math.max(filePath.lastIndexOf('/'), filePath.lastIndexOf('\\')))
+    return response
   }
 
   public getFileDirectory(): string {

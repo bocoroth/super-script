@@ -2,6 +2,7 @@ import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core'
 import { DataTableDirective } from 'angular-datatables'
 import { HttpClient } from '@angular/common/http'
 import { Subject } from 'rxjs'
+import { Script } from '../../script.interface'
 import { ScriptLine } from '../../script-line.interface'
 import { LineBrokerService } from '../../line-broker.service'
 
@@ -37,11 +38,18 @@ export class LineListComponent implements OnDestroy, OnInit {
     self.lineBrokerService.currentEntry.subscribe(entry => (this.entry = entry))
     self.lineBrokerService.setFilePath(self.filePath)
 
+    let scroll = '60vh'
+    switch (self.lineBrokerService.currentTab) {
+      case 'performance':
+        scroll = '80vh'
+    }
+
     self.dtOptions = {
       paging: false,
       ordering: false,
       select: 'single',
-      scrollY: '50vh',
+      scrollY: scroll,
+      info: false,
       columnDefs: [{ width: '100%', targets: 5 }] // lines column max width
     }
     self.http.get(this.filePath).subscribe(scriptSrc => {
@@ -55,6 +63,10 @@ export class LineListComponent implements OnDestroy, OnInit {
       self.datatableElement.dtInstance.then(function(dtInstance: DataTables.Api) {
         self.dtInstance = dtInstance
         self.lineBrokerService.setDatatableInstance(dtInstance)
+        if (localStorage.getItem('ht-script')) {
+          const lsScript: Script = JSON.parse(localStorage.getItem('ht-script'))
+          self.lineBrokerService.setScript(lsScript)
+        }
         self.lineBrokerService.loadDatatable()
         self.dtInstance.rows(':last-child').select()
       })
@@ -64,5 +76,6 @@ export class LineListComponent implements OnDestroy, OnInit {
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe()
     this.lineBrokerService.destroyDatatableInstance()
+    localStorage.setItem('ht-script', JSON.stringify(this.lineBrokerService.getScript()))
   }
 }

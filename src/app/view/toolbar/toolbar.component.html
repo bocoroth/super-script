@@ -6,8 +6,9 @@
     <button type="button" (click)="saveScript()" id="toolbar-save" title="Save Script">
       <i class="fa fa-sm fa-save"></i>
     </button>
-    <button type="button" id="toolbar-save-as" disabled title="Save Script As...">
-      <i class="fa fa-sm fa-files-o"></i>
+    <button type="button" (click)="saveScript(true)" id="toolbar-save-as" title="Save Script As...">
+      <i class="fa fa-sm fa-save"></i>
+      <i class="fa fa-sm fa-pencil" style="margin-left:-11px"></i>
     </button>
 
     <span class="toolbar-separator">&#8203;</span>
@@ -19,5 +20,5 @@
       <i class="fa fa-sm fa-cloud-download"></i>
     </button>
   </div>
-  <div id="statusbar" class="col-6 text-right pr-2 pt-1 text-muted">{{ statusContent }}</div>
+  <div id="statusbar" class="col-6 text-right pr-2 pt-1 text-muted" [innerHTML]="statusContent"></div>
 </div>

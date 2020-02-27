@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { LineBrokerService } from '../../line-broker.service'
 
 @Component({
   selector: 'app-editor',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./editor.component.scss']
 })
 export class EditorComponent implements OnInit {
-  constructor() {}
+  constructor(private lineBrokerService: LineBrokerService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.lineBrokerService.currentTab = 'editor'
+  }
 }
