@@ -17,6 +17,16 @@ export class ToolbarComponent implements OnInit {
     this.statusService.changeStatus('ready...')
   }
 
+  public async newScript() {
+    const path = 'assets/default.json'
+    await this.lineBroker.loadFile(path).then(script => {
+      this.lineBroker.setFilePath(path)
+      this.lineBroker.setScript(script)
+      this.lineBroker.loadDatatable()
+      this.lineBroker.selectDatatableRow(0)
+    })
+  }
+
   public async openScript() {
     await this.lineBroker.loadPath().then(async path => {
       await this.lineBroker.loadFile(path).then(script => {
@@ -30,28 +40,18 @@ export class ToolbarComponent implements OnInit {
   public saveScript(saveAs = false) {
     const currentPath = this.lineBroker.getFilePath()
 
-    if (!currentPath.match(/assets(\\|\/)default\.json/i) || !saveAs) {
-      // not default script
-      this.statusService.changeStatus('saving...')
-      $.when(this.lineBroker.saveFile())
-        .then(() => {
-          this.statusService.changeStatus('Script saved!')
-        })
-        .fail(error => {
-          this.statusService.changeStatus('<span class="text-danger">Failed to save script.</span>')
-          console.warn(error)
-        })
-    } else {
+    if (currentPath.match(/assets(\\|\/)default\.json$/i) || saveAs) {
       // new script, or Save As
       $.when(this.lineBroker.getSaveFilePath())
         .then(filePath => {
-          console.log(filePath)
           if (filePath) {
             this.lineBroker.setFilePath(filePath)
             this.statusService.changeStatus('saving...')
             $.when(this.lineBroker.saveFile())
               .then(() => {
-                this.statusService.changeStatus('Script saved!')
+                this.statusService.changeStatus(`Script saved as ${filePath}`)
+                localStorage.setItem('ht-script', JSON.stringify(this.lineBroker.getScript()))
+                localStorage.setItem('ht-path', this.lineBroker.getFilePath())
               })
               .fail(error => {
                 this.statusService.changeStatus('<span class="text-danger">Failed to save script.</span>')
@@ -60,6 +60,19 @@ export class ToolbarComponent implements OnInit {
           } else {
             this.statusService.changeStatus('<span class="text-danger">Failed to save script.</span>')
           }
+        })
+        .fail(error => {
+          this.statusService.changeStatus('<span class="text-danger">Failed to save script.</span>')
+          console.warn(error)
+        })
+    } else {
+      // not default script, regular save
+      this.statusService.changeStatus('saving...')
+      $.when(this.lineBroker.saveFile())
+        .then(() => {
+          this.statusService.changeStatus(`Script saved as ${this.lineBroker.getFilePath()}`)
+          localStorage.setItem('ht-script', JSON.stringify(this.lineBroker.getScript()))
+          localStorage.setItem('ht-path', this.lineBroker.getFilePath())
         })
         .fail(error => {
           this.statusService.changeStatus('<span class="text-danger">Failed to save script.</span>')

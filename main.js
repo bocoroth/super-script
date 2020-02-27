@@ -104,6 +104,11 @@ async function readLoadedFile(filePath) {
 }
 
 ipcMain.handle('loadFile', async (e, filePath) => {
+  if (filePath === 'assets/default.json') {
+    // handle os file pathing
+    filePath = `${__dirname}${path.sep}dist${path.sep}assets${path.sep}default.json`
+  }
+
   const result = await readLoadedFile(filePath)
   if (result === undefined) {
     console.warn(`Error loading file ${filePath}`)

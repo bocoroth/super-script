@@ -73,7 +73,6 @@ export class EditBoxComponent implements OnInit {
   }
 
   public saveLine() {
-    //this.lineBroker.changeLineNumber($('#lineNumber').val() as string)
     this.lineBroker.changeDurationMS($('#durationMS').val() as string)
     this.lineBroker.changeCssClass($('#cssClass').val() as string)
 
@@ -86,5 +85,11 @@ export class EditBoxComponent implements OnInit {
     this.lineBroker.editLine(line)
     this.lineBroker.loadDatatable()
     this.lineBroker.selectDatatableRow(parseInt(this.lineNumber + 1))
+  }
+
+  public deleteLine() {
+    this.lineBroker.deleteLine(parseInt(this.lineNumber))
+    this.lineBroker.loadDatatable()
+    this.lineBroker.selectDatatableRow(parseInt(this.lineNumber))
   }
 }

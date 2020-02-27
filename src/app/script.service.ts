@@ -78,9 +78,8 @@ export class ScriptService {
     this.reNumberScript()
   }
 
-  public deleteLine(line: ScriptLine) {
-    const id = line.id
-    this.script.text.splice(id, 1)
+  public deleteLine(lineNumber: number) {
+    this.script.text.splice(lineNumber, 1)
     this.reNumberScript()
   }
 

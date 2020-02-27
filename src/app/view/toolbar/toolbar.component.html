@@ -1,14 +1,17 @@
 <div class="row mr-0 mb-2">
   <div id="hypertitles-toolbar" class="col-6">
+    <button type="button" (click)="newScript()" id="toolbar-new" title="New Script">
+      <i class="fa fa-sm fa-file-o"></i>
+    </button>
     <button type="button" (click)="openScript()" id="toolbar-open" title="Open Script...">
-      <i class="fa fa-sm fa-folder-open"></i>
+      <i class="fa fa-sm fa-folder-open-o"></i>
     </button>
     <button type="button" (click)="saveScript()" id="toolbar-save" title="Save Script">
       <i class="fa fa-sm fa-save"></i>
     </button>
     <button type="button" (click)="saveScript(true)" id="toolbar-save-as" title="Save Script As...">
       <i class="fa fa-sm fa-save"></i>
-      <i class="fa fa-sm fa-pencil" style="margin-left:-11px"></i>
+      <i class="fa fa-sm fa-pencil-square-o" style="margin-left:-14px"></i>
     </button>
 
     <span class="toolbar-separator">&#8203;</span>
@@ -18,6 +21,15 @@
     </button>
     <button type="button" id="toolbar-import" disabled title="Import Script...">
       <i class="fa fa-sm fa-cloud-download"></i>
+    </button>
+
+    <span class="toolbar-separator">&#8203;</span>
+
+    <button type="button" disabled id="toolbar-save-as" title="Edit Script Metadata...">
+      <i class="fa fa-sm fa-list-alt"></i>
+    </button>
+    <button type="button" id="toolbar-export" disabled title="Show/hide commented lines">
+      <i class="fa fa-sm fa-commenting-o"></i>
     </button>
   </div>
   <div id="statusbar" class="col-6 text-right pr-2 pt-1 text-muted" [innerHTML]="statusContent"></div>

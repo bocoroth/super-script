@@ -53,6 +53,7 @@ export class LineBrokerService {
 
   public setFilePath(filePath: string) {
     this.fileService.setFilePath(filePath)
+    localStorage.setItem('ht-path', filePath)
   }
 
   public getFilePath(): string {
@@ -93,6 +94,7 @@ export class LineBrokerService {
 
   public setScript(script: Script) {
     this.scriptService.setScript(script)
+    localStorage.setItem('ht-script', JSON.stringify(this.getScript()))
   }
 
   public editLine(line: ScriptLine) {
@@ -103,8 +105,8 @@ export class LineBrokerService {
     this.scriptService.addLine(line)
   }
 
-  public deleteLine(line: ScriptLine) {
-    this.scriptService.deleteLine(line)
+  public deleteLine(lineNumber: number) {
+    this.scriptService.deleteLine(lineNumber)
   }
 
   public insertBlankLine() {
