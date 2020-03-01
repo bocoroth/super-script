@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core'
 import { IpcService } from './ipc.service'
 import { Script } from './script.interface'
+import { ScriptLine } from './script-line.interface'
+//import { ScriptMeta } from './script-meta.interface'
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +27,14 @@ export class FileService {
     return filePath
   }
 
+  public async importFilePath(): Promise<string> {
+    const filePath: string = await this._ipc.invoke('importFilePath')
+    this.filePath = null
+    this.fileDirectory = null
+    this.fileName = null
+    return filePath
+  }
+
   public async loadScript(filePath: string): Promise<Script> {
     const script: string = await this._ipc.invoke('loadFile', filePath)
     if (this.verifyFileStructure(script)) {
@@ -33,6 +43,42 @@ export class FileService {
       console.warn('Invalid script file.')
       return null
     }
+  }
+
+  public async importScript(filePath: string, fileType: string): Promise<Script> {
+    const file: string = await this._ipc.invoke('importFile', filePath)
+
+    const script: Script = {
+      meta: {
+        workTitle: '',
+        authorName: '',
+        composerName: '',
+        editorName: '',
+        dateCreated: '',
+        dateModified: '',
+        performanceNotes: '',
+        css: ''
+      },
+      text: []
+    }
+
+    if (fileType === 'sub') {
+      // TODO: more filetype imports
+    } else {
+      // Filetype text (default)
+      const lines = file.split('\n')
+      let id = 0
+      for (const line of lines) {
+        const newLine: ScriptLine = {
+          id: id,
+          text: line,
+          durationMS: 0
+        }
+        script.text.push(newLine)
+        id++
+      }
+    }
+    return script
   }
 
   public async getSaveFilePath(): Promise<string> {

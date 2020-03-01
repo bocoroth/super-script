@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { DataTablesModule } from 'angular-datatables'
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
+import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { TooltipModule } from 'ngx-bootstrap/tooltip'
 
@@ -17,6 +18,7 @@ import { LineListComponent } from './panel/line-list/line-list.component'
 import { PerformanceComponent } from './view/performance/performance.component'
 import { RehearsalComponent } from './view/rehearsal/rehearsal.component'
 import { SettingsComponent } from './view/settings/settings.component'
+import { ToolbarComponent } from './view/toolbar/toolbar.component'
 import { ViewComponent } from './view/view.component'
 
 import { DatatableService } from './datatable.service'
@@ -25,8 +27,7 @@ import { FontService } from './font.service'
 import { IpcService } from './ipc.service'
 import { LineBrokerService } from './line-broker.service'
 import { ScriptService } from './script.service'
-import { SettingsService } from './settings.service';
-import { ToolbarComponent } from './view/toolbar/toolbar.component'
+import { SettingsService } from './settings.service'
 
 @NgModule({
   declarations: [
@@ -37,8 +38,8 @@ import { ToolbarComponent } from './view/toolbar/toolbar.component'
     PerformanceComponent,
     RehearsalComponent,
     SettingsComponent,
-    ViewComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    ViewComponent
   ],
   imports: [
     AngularEditorModule,
@@ -48,6 +49,7 @@ import { ToolbarComponent } from './view/toolbar/toolbar.component'
     DataTablesModule,
     FormsModule,
     HttpClientModule,
+    KeyboardShortcutsModule.forRoot(),
     NgbModule,
     TooltipModule.forRoot()
   ],

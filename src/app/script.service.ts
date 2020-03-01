@@ -11,11 +11,6 @@ export class ScriptService {
 
   constructor() {}
 
-  public static JSONToScript(json: string): Script {
-    const script: Script = JSON.parse(json)
-    return script
-  }
-
   public getScript(): Script {
     return this.script
   }
@@ -38,16 +33,19 @@ export class ScriptService {
   public addLine(line: ScriptLine) {
     const id = this.script.text.length
     line.id = id
+    if (Number.isNaN(+line.durationMS)) {
+      line.durationMS = 0
+    }
     this.script.text.push(line)
     this.reNumberScript()
   }
 
-  public insertBlankLine(beforeID: number = null) {
-    if (beforeID === null) {
-      beforeID = this.script.text.length
+  public insertBlankLine(insertAtID: number = null, insertBefore = false) {
+    if (insertAtID === null) {
+      insertAtID = this.script.text.length
 
       const line: ScriptLine = {
-        id: beforeID,
+        id: insertAtID,
         startTime: '',
         endTime: '',
         durationMS: 0,
@@ -56,7 +54,16 @@ export class ScriptService {
       }
       this.script.text.push(line)
     } else {
-      const insertID = beforeID + 0.5 // increment 0.5 to preserve order during sort
+      let insertID: number
+      if (insertBefore === true) {
+        insertID = insertAtID - 0.5 // decrement 0.5 to preserve order during sort
+      } else {
+        insertID = insertAtID + 0.5 // increment 0.5 to preserve order during sort
+      }
+
+      if (insertID < 0) {
+        insertAtID = 0
+      }
 
       const line: ScriptLine = {
         id: insertID,
@@ -67,7 +74,11 @@ export class ScriptService {
         text: ''
       }
 
-      this.script.text.splice(beforeID, 0, line)
+      if (insertBefore === false) {
+        this.script.text.splice(insertAtID + 1, 0, line)
+      } else {
+        this.script.text.splice(insertAtID, 0, line)
+      }
     }
     this.reNumberScript()
   }
@@ -79,8 +90,9 @@ export class ScriptService {
   }
 
   public deleteLine(lineNumber: number) {
-    this.script.text.splice(lineNumber, 1)
+    const ret = this.script.text.splice(lineNumber, 1)
     this.reNumberScript()
+    return ret
   }
 
   private reNumberScript() {

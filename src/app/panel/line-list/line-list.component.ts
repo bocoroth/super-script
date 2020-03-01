@@ -47,7 +47,7 @@ export class LineListComponent implements OnDestroy, OnInit {
     self.dtOptions = {
       paging: false,
       ordering: false,
-      select: 'single',
+      select: 'os',
       scrollY: scroll,
       info: false,
       columnDefs: [{ width: '100%', targets: 5 }] // lines column max width

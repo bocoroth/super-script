@@ -1,3 +1,4 @@
+<ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>
 <div class="row mr-0 mb-2">
   <div id="hypertitles-toolbar" class="col-6">
     <button type="button" (click)="newScript()" id="toolbar-new" title="New Script">
@@ -17,10 +18,10 @@
     <span class="toolbar-separator">&#8203;</span>
 
     <button type="button" id="toolbar-export" disabled title="Export Script...">
-      <i class="fa fa-sm fa-cloud-upload"></i>
+      <i class="fa fa-sm fa-sign-out"></i>
     </button>
-    <button type="button" id="toolbar-import" disabled title="Import Script...">
-      <i class="fa fa-sm fa-cloud-download"></i>
+    <button type="button" (click)="importScript()" id="toolbar-import" title="Import Script...">
+      <i class="fa fa-sm fa-sign-in"></i>
     </button>
 
     <span class="toolbar-separator">&#8203;</span>

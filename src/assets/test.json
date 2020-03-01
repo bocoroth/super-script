@@ -6,7 +6,8 @@
     "editorName": "Matt Lisiak",
     "dateCreated": "2020-01-01T00:00:00.000Z",
     "dateModified": "2020-02-02T00:00:00.000Z",
-    "performanceNotes": "This is the default Hypertitles script file."
+    "performanceNotes": "This is the default Hypertitles script file.",
+    "css": ".tester { font-weight: bold; }"
   },
   "text": [
     {
@@ -19,7 +20,8 @@
     },
     {
       "id": 2,
-      "text": "just a test"
+      "text": "this is a bold test",
+      "cssClass": "tester"
     }
   ]
 }

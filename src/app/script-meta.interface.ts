@@ -6,4 +6,5 @@ export interface ScriptMeta {
   dateCreated?: string
   dateModified?: string
   performanceNotes?: string
+  css?: string
 }

@@ -37,12 +37,20 @@ export class LineBrokerService {
     return this.fileService.loadFilePath()
   }
 
+  async importPath(): Promise<any> {
+    return this.fileService.importFilePath()
+  }
+
   async getSaveFilePath(): Promise<any> {
     return this.fileService.getSaveFilePath()
   }
 
   async loadFile(filePath: string): Promise<any> {
     return this.fileService.loadScript(filePath)
+  }
+
+  async importFile(filePath: string, fileType: string): Promise<any> {
+    return this.fileService.importScript(filePath, fileType)
   }
 
   async saveFile(filePath: string = null): Promise<any> {
@@ -106,11 +114,12 @@ export class LineBrokerService {
   }
 
   public deleteLine(lineNumber: number) {
-    this.scriptService.deleteLine(lineNumber)
+    const ret = this.scriptService.deleteLine(lineNumber)
+    return ret
   }
 
-  public insertBlankLine() {
-    this.scriptService.insertBlankLine()
+  public insertBlankLine(insertAtID: number = null, insertBefore = false) {
+    this.scriptService.insertBlankLine(insertAtID, insertBefore)
   }
 
   /* DATATABLE FUNCTIONS ******************************************************/
@@ -126,6 +135,10 @@ export class LineBrokerService {
     })
 
     this.dtLoaded = true
+  }
+
+  public getDatatableInstance(): any {
+    return this.dt
   }
 
   public loadDatatable() {

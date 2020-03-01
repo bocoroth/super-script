@@ -32,6 +32,68 @@ function createWindow() {
   mainWindow.on('closed', function() {
     mainWindow = null
   })
+
+  // OSX menu
+  if (process.platform === 'darwin') {
+    const template = [
+      {
+        label: 'Hypertitles',
+        submenu: [
+          {
+            label: 'Quit',
+            accelerator: 'CmdOrCtrl+Q',
+            click: function() {
+              app.quit()
+            }
+          }
+        ]
+      },
+      {
+        label: 'Edit',
+        submenu: [
+          {
+            label: 'Undo',
+            accelerator: 'CmdOrCtrl+Z',
+            selector: 'undo:'
+          },
+          {
+            label: 'Redo',
+            accelerator: 'Shift+CmdOrCtrl+Z',
+            selector: 'redo:'
+          },
+          {
+            type: 'separator'
+          },
+          {
+            label: 'Cut',
+            accelerator: 'CmdOrCtrl+X',
+            selector: 'cut:'
+          },
+          {
+            label: 'Copy',
+            accelerator: 'CmdOrCtrl+C',
+            selector: 'copy:'
+          },
+          {
+            label: 'Paste',
+            accelerator: 'CmdOrCtrl+V',
+            selector: 'paste:'
+          },
+          {
+            label: 'Select All',
+            accelerator: 'CmdOrCtrl+A',
+            selector: 'selectAll:'
+          }
+        ]
+      }
+    ]
+
+    const osxMenu = Menu.buildFromTemplate(template)
+    Menu.setApplicationMenu(osxMenu)
+  }
+
+  // no menu for Win/Linux
+  mainWindow.removeMenu()
 }
 
 app.on('ready', createWindow)
@@ -42,6 +104,11 @@ app.on('window-all-closed', function() {
 
 app.on('activate', function() {
   if (mainWindow === null) createWindow()
+})
+
+ipcMain.on('hotkeyclose', function() {
+  mainWindow.close()
+  mainWindow = null
 })
 
 ipcMain.on('getFonts', (event, arg) => {
@@ -56,6 +123,28 @@ ipcMain.on('getFonts', (event, arg) => {
 ipcMain.handle('loadFilePath', async () => {
   const result = await dialog.showOpenDialog(mainWindow, {
     filters: [{ name: 'Hypertitles Scripts', extensions: ['json'] }],
+    title: 'Open Script',
+    properties: ['openFile']
+  })
+
+  if (result === undefined || result['canceled'] === true) {
+    console.info('No load file selected')
+    return
+  } else {
+    if (typeof result['filePaths'] === 'undefined') {
+      console.warn(`Couldn't find filepath from dialog box.`)
+      return
+    }
+
+    const filePath = result['filePaths'][0]
+
+    return filePath
+  }
+})
+
+ipcMain.handle('importFilePath', async () => {
+  const result = await dialog.showOpenDialog(mainWindow, {
+    title: 'Import Script',
     properties: ['openFile']
   })
 
@@ -77,6 +166,7 @@ ipcMain.handle('loadFilePath', async () => {
 ipcMain.handle('getSaveFilePath', async () => {
   const result = await dialog.showSaveDialog(mainWindow, {
     filters: [{ name: 'Hypertitles Scripts', extensions: ['json'] }],
+    title: 'Save Script As',
     properties: ['createDirectory', 'showOverwriteConfirmation']
   })
 
@@ -117,6 +207,15 @@ ipcMain.handle('loadFile', async (e, filePath) => {
   return result
 })
 
+ipcMain.handle('importFile', async (e, filePath) => {
+  const result = await readLoadedFile(filePath)
+  if (result === undefined) {
+    console.warn(`Error loading file ${filePath}`)
+    return
+  }
+  return result
+})
+
 ipcMain.handle('saveFile', async (e, script, filePath = null) => {
   let result = 'File save failed.'
 
@@ -142,140 +241,3 @@ ipcMain.handle('saveFile', async (e, script, filePath = null) => {
 ipcMain.on('ping', event => {
   event.sender.send('pong')
 })
-
-// OSX fixes
-if (process.platform === 'darwin') {
-  const template = [
-    {
-      label: 'Hypertitles',
-      submenu: [
-        {
-          label: 'Quit',
-          accelerator: 'CmdOrCtrl+Q',
-          click: function() {
-            app.quit()
-          }
-        }
-      ]
-    },
-    {
-      label: 'Edit',
-      submenu: [
-        {
-          label: 'Undo',
-          accelerator: 'CmdOrCtrl+Z',
-          selector: 'undo:'
-        },
-        {
-          label: 'Redo',
-          accelerator: 'Shift+CmdOrCtrl+Z',
-          selector: 'redo:'
-        },
-        {
-          type: 'separator'
-        },
-        {
-          label: 'Cut',
-          accelerator: 'CmdOrCtrl+X',
-          selector: 'cut:'
-        },
-        {
-          label: 'Copy',
-          accelerator: 'CmdOrCtrl+C',
-          selector: 'copy:'
-        },
-        {
-          label: 'Paste',
-          accelerator: 'CmdOrCtrl+V',
-          selector: 'paste:'
-        },
-        {
-          label: 'Select All',
-          accelerator: 'CmdOrCtrl+A',
-          selector: 'selectAll:'
-        }
-      ]
-    }
-  ]
-
-  const osxMenu = Menu.buildFromTemplate(template)
-  Menu.setApplicationMenu(osxMenu)
-} /* else {
-  const template = [
-    {
-      label: 'Hypertitles',
-      submenu: [
-        {
-          label: 'Quit',
-          accelerator: 'CmdOrCtrl+Q',
-          click: function() {
-            app.quit()
-          }
-        }
-      ]
-    },
-    {
-      label: 'Edit',
-      submenu: [
-        {
-          label: 'Undo',
-          accelerator: 'CmdOrCtrl+Z',
-          selector: 'undo:'
-        },
-        {
-          label: 'Redo',
-          accelerator: 'Shift+CmdOrCtrl+Z',
-          selector: 'redo:'
-        },
-        {
-          type: 'separator'
-        },
-        {
-          label: 'Cut',
-          accelerator: 'CmdOrCtrl+X',
-          selector: 'cut:'
-        },
-        {
-          label: 'Copy',
-          accelerator: 'CmdOrCtrl+C',
-          selector: 'copy:'
-        },
-        {
-          label: 'Paste',
-          accelerator: 'CmdOrCtrl+V',
-          selector: 'paste:'
-        },
-        {
-          label: 'Select All',
-          accelerator: 'CmdOrCtrl+A',
-          selector: 'selectAll:'
-        }
-      ]
-    },
-    {
-      label: 'View',
-      submenu: [
-        {
-          label: 'Show/Hide External Display'
-        },
-        {
-          label: 'Resize External Display'
-        }
-      ]
-    },
-    {
-      label: 'Help',
-      submenu: [
-        {
-          label: 'Documentation'
-        },
-        {
-          label: 'About'
-        }
-      ]
-    }
-  ]
-
-  const wlMenu = Menu.buildFromTemplate(template)
-  Menu.setApplicationMenu(wlMenu)
-}*/
