@@ -26,7 +26,7 @@ export class FontService {
         const fonts = this.formatFonts(arg)
         resolve(fonts)
       })
-      this.ipc.send('getFonts')
+      this.ipc.invoke('getFonts')
     })
   }
 

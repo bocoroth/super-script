@@ -9,6 +9,7 @@ import { IpcService } from '../ipc.service'
 })
 export class ViewComponent implements AfterViewInit {
   shortcuts: ShortcutInput[] = []
+  isExternal: boolean = true // default render the external panel
 
   constructor(private readonly _ipc: IpcService) {}
 
@@ -20,6 +21,14 @@ export class ViewComponent implements AfterViewInit {
         this._ipc.send('hotkeyclose')
       },
       preventDefault: true
+    })
+
+    this._ipc.on('loadExternal', () => {
+      this.isExternal = true
+    })
+
+    this._ipc.on('loadControl', () => {
+      this.isExternal = false
     })
   }
 }

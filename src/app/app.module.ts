@@ -14,6 +14,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip'
 
 import { EditBoxComponent } from './panel/edit-box/edit-box.component'
 import { EditorComponent } from './view/editor/editor.component'
+import { ExternalComponent } from './view/external/external.component'
 import { LineListComponent } from './panel/line-list/line-list.component'
 import { PerformanceComponent } from './view/performance/performance.component'
 import { RehearsalComponent } from './view/rehearsal/rehearsal.component'
@@ -22,6 +23,7 @@ import { ToolbarComponent } from './view/toolbar/toolbar.component'
 import { ViewComponent } from './view/view.component'
 
 import { DatatableService } from './datatable.service'
+import { ExternalService } from './external.service'
 import { FileService } from './file.service'
 import { FontService } from './font.service'
 import { IpcService } from './ipc.service'
@@ -34,6 +36,7 @@ import { SettingsService } from './settings.service'
     AppComponent,
     EditBoxComponent,
     EditorComponent,
+    ExternalComponent,
     LineListComponent,
     PerformanceComponent,
     RehearsalComponent,
@@ -55,6 +58,7 @@ import { SettingsService } from './settings.service'
   ],
   providers: [
     DatatableService,
+    ExternalService,
     FileService,
     FontService,
     IpcService,

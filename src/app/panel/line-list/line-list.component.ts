@@ -5,6 +5,8 @@ import { Subject } from 'rxjs'
 import { Script } from '../../script.interface'
 import { ScriptLine } from '../../script-line.interface'
 import { LineBrokerService } from '../../line-broker.service'
+import { StatusService } from '../../status.service'
+import { ExternalService } from '../../external.service'
 
 import 'rxjs/add/operator/map'
 
@@ -28,23 +30,27 @@ export class LineListComponent implements OnDestroy, OnInit {
 
   filePath = 'assets/default.json' // TODO: set up autoload last file with settings
 
-  constructor(private http: HttpClient, private lineBrokerService: LineBrokerService) {}
+  constructor(
+    private http: HttpClient,
+    private lineBrokerService: LineBrokerService,
+    private status: StatusService,
+    private external: ExternalService
+  ) {}
 
   ngOnInit() {
     const self = this
-    self.lineBrokerService.lineNumber.subscribe(num => (this.lineNumber = num))
-    self.lineBrokerService.durationMS.subscribe(ms => (this.durationMS = ms))
-    self.lineBrokerService.cssClass.subscribe(css => (this.cssClass = css))
-    self.lineBrokerService.currentEntry.subscribe(entry => (this.entry = entry))
-    self.lineBrokerService.setFilePath(self.filePath)
+    this.lineBrokerService.lineNumber.subscribe(num => (this.lineNumber = num))
+    this.lineBrokerService.durationMS.subscribe(ms => (this.durationMS = ms))
+    this.lineBrokerService.cssClass.subscribe(css => (this.cssClass = css))
+    this.lineBrokerService.currentEntry.subscribe(entry => (this.entry = entry))
+    this.lineBrokerService.setFilePath(self.filePath)
 
     let scroll = '60vh'
-    switch (self.lineBrokerService.currentTab) {
-      case 'performance':
-        scroll = '80vh'
+    if (this.status.getView() === 'performance') {
+      scroll = '80vh'
     }
 
-    self.dtOptions = {
+    this.dtOptions = {
       paging: false,
       ordering: false,
       select: 'os',
@@ -52,30 +58,34 @@ export class LineListComponent implements OnDestroy, OnInit {
       info: false,
       columnDefs: [{ width: '100%', targets: 5 }] // lines column max width
     }
-    self.http.get(this.filePath).subscribe(scriptSrc => {
+    this.http.get(this.filePath).subscribe(scriptSrc => {
       const script: any = scriptSrc
 
-      self.lineBrokerService.setScript(script)
+      this.lineBrokerService.setScript(script)
 
       // Call the DT trigger to render the table
-      self.dtTrigger.next()
+      this.dtTrigger.next()
 
-      self.datatableElement.dtInstance.then(function(dtInstance: DataTables.Api) {
-        self.dtInstance = dtInstance
-        self.lineBrokerService.setDatatableInstance(dtInstance)
+      this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        this.dtInstance = dtInstance
+        this.lineBrokerService.setDatatableInstance(dtInstance)
         if (localStorage.getItem('ht-script')) {
           const lsScript: Script = JSON.parse(localStorage.getItem('ht-script'))
-          self.lineBrokerService.setScript(lsScript)
+          this.lineBrokerService.setScript(lsScript)
         }
-        self.lineBrokerService.loadDatatable()
-        self.dtInstance.rows(':last-child').select()
+        this.lineBrokerService.loadDatatable()
+        this.dtInstance.rows(':first-child').select()
+        if (this.status.getView() === 'performance') {
+          $('#line-table tbody').on('dblclick', 'tr', function() {
+            const data = self.dtInstance.row(this).data()
+            self.external.setExternal(data[5], data[4], self.lineBrokerService.getMetaStyles())
+          })
+        }
       })
     })
   }
 
   ngOnDestroy(): void {
-    this.dtTrigger.unsubscribe()
-    this.lineBrokerService.destroyDatatableInstance()
     localStorage.setItem('ht-script', JSON.stringify(this.lineBrokerService.getScript()))
   }
 }

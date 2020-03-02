@@ -17,7 +17,6 @@ export class LineBrokerService {
   private dt: any // required to be 'any' to work with angular-datatables
 
   public dtLoaded: boolean
-  public currentTab: string
 
   currentEntry = this.entrySource.asObservable()
   lineNumber = this.lineNumberSource.asObservable()
@@ -100,9 +99,12 @@ export class LineBrokerService {
     return this.scriptService.getScript()
   }
 
+  public getMetaStyles(): string {
+    return this.scriptService.getMetaStyles()
+  }
+
   public setScript(script: Script) {
     this.scriptService.setScript(script)
-    localStorage.setItem('ht-script', JSON.stringify(this.getScript()))
   }
 
   public editLine(line: ScriptLine) {

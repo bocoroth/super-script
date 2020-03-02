@@ -1,36 +1,41 @@
 <ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>
-<app-toolbar></app-toolbar>
-<ngb-tabset id="ht-tabs">
-  <ngb-tab>
-    <ng-template ngbTabTitle>
-      <span class="tab-title"> <fa name="edit" size="2x" inverse="true"></fa> <span>Editor</span> </span>
-    </ng-template>
-    <ng-template ngbTabContent>
-      <app-editor></app-editor>
-    </ng-template>
-  </ngb-tab>
-  <!--<ngb-tab>
-    <ng-template ngbTabTitle>
-      <span class="tab-title"> <fa name="book" size="2x"></fa> <span>Rehearsal</span> </span>
-    </ng-template>
-    <ng-template ngbTabContent>
-      <app-rehearsal></app-rehearsal>
-    </ng-template>
-  </ngb-tab>-->
-  <ngb-tab>
-    <ng-template ngbTabTitle>
-      <span class="tab-title"> <fa name="ticket" size="2x"></fa> <span>Performance</span> </span>
-    </ng-template>
-    <ng-template ngbTabContent>
-      <app-performance></app-performance>
-    </ng-template>
-  </ngb-tab>
-  <!--<ngb-tab>
-    <ng-template ngbTabTitle>
-      <span class="tab-title"> <fa name="gear" size="2x" inverse="true"></fa> <span>Settings</span> </span>
-    </ng-template>
-    <ng-template ngbTabContent>
-      <app-settings></app-settings>
-    </ng-template>
-  </ngb-tab>-->
-</ngb-tabset>
+<div id="ht-control-panel" *ngIf="isExternal === false">
+  <app-toolbar></app-toolbar>
+  <ngb-tabset id="ht-tabs">
+    <ngb-tab id="editor">
+      <ng-template ngbTabTitle>
+        <span class="tab-title"> <fa name="edit" size="2x" inverse="true"></fa> <span>Editor</span> </span>
+      </ng-template>
+      <ng-template ngbTabContent>
+        <app-editor></app-editor>
+      </ng-template>
+    </ngb-tab>
+    <!--<ngb-tab id="rehearsal">
+      <ng-template ngbTabTitle>
+        <span class="tab-title"> <fa name="book" size="2x"></fa> <span>Rehearsal</span> </span>
+      </ng-template>
+      <ng-template ngbTabContent>
+        <app-rehearsal></app-rehearsal>
+      </ng-template>
+    </ngb-tab>-->
+    <ngb-tab id="performance">
+      <ng-template ngbTabTitle>
+        <span class="tab-title"> <fa name="ticket" size="2x"></fa> <span>Performance</span> </span>
+      </ng-template>
+      <ng-template ngbTabContent>
+        <app-performance></app-performance>
+      </ng-template>
+    </ngb-tab>
+    <!--<ngb-tab id="settings"">
+      <ng-template ngbTabTitle>
+        <span class="tab-title"> <fa name="gear" size="2x" inverse="true"></fa> <span>Settings</span> </span>
+      </ng-template>
+      <ng-template ngbTabContent>
+        <app-settings></app-settings>
+      </ng-template>
+    </ngb-tab>-->
+  </ngb-tabset>
+</div>
+<div id="ht-external-display" *ngIf="isExternal === true">
+  <app-external></app-external>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { StatusService } from '../../status.service'
 
 @Component({
   selector: 'app-rehearsal',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./rehearsal.component.scss']
 })
 export class RehearsalComponent implements OnInit {
-  constructor() {}
+  constructor(private status: StatusService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.status.changeView('rehearsal')
+  }
 }

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core'
 import { ShortcutInput } from 'ng-keyboard-shortcuts'
 import { LineBrokerService } from '../../line-broker.service'
 import { StatusService } from '../../status.service'
+import { ExternalService } from '../../external.service'
 
 @Component({
   selector: 'app-toolbar',
@@ -10,82 +11,90 @@ import { StatusService } from '../../status.service'
 })
 export class ToolbarComponent implements AfterViewInit, OnInit {
   statusContent: string
+  viewContent: string
 
   shortcuts: ShortcutInput[] = []
 
-  constructor(private lineBroker: LineBrokerService, private statusService: StatusService) {}
+  constructor(
+    private lineBroker: LineBrokerService,
+    private statusService: StatusService,
+    private external: ExternalService
+  ) {}
 
   ngAfterViewInit(): void {
-    this.shortcuts.push(
-      // New Script: CTRL + n
-      {
-        key: ['ctrl + n', 'cmd + n'],
-        command: () => {
-          this.newScript()
+    setTimeout(() => {
+      this.shortcuts.push(
+        // New Script: CTRL + n
+        {
+          key: ['ctrl + n', 'cmd + n'],
+          command: () => {
+            this.newScript()
+          },
+          preventDefault: true
         },
-        preventDefault: true
-      },
-      // Open Script: CTRL + o
-      {
-        key: ['ctrl + o', 'cmd + o'],
-        command: () => {
-          this.openScript()
+        // Open Script: CTRL + o
+        {
+          key: ['ctrl + o', 'cmd + o'],
+          command: () => {
+            this.openScript()
+          },
+          preventDefault: true
         },
-        preventDefault: true
-      },
-      // Open Script: CTRL + o
-      {
-        key: ['ctrl + o', 'cmd + o'],
-        command: () => {
-          this.openScript()
+        // Open Script: CTRL + o
+        {
+          key: ['ctrl + o', 'cmd + o'],
+          command: () => {
+            this.openScript()
+          },
+          preventDefault: true
         },
-        preventDefault: true
-      },
-      // Save Script: CTRL + s
-      {
-        key: ['ctrl + s', 'cmd + s'],
-        command: () => {
-          this.saveScript()
+        // Save Script: CTRL + s
+        {
+          key: ['ctrl + s', 'cmd + s'],
+          command: () => {
+            this.saveScript()
+          },
+          preventDefault: true
         },
-        preventDefault: true
-      },
-      // Save As Script: CTRL + SHIFT + s
-      {
-        key: ['ctrl + shift + s', 'cmd + shift + s'],
-        command: () => {
-          this.saveScript(true)
+        // Save As Script: CTRL + SHIFT + s
+        {
+          key: ['ctrl + shift + s', 'cmd + shift + s'],
+          command: () => {
+            this.saveScript(true)
+          },
+          preventDefault: true
         },
-        preventDefault: true
-      },
-      // Edit Meta: CTRL + m
-      {
-        key: ['ctrl + m', 'cmd + m'],
-        command: () => {
-          this.editMeta()
+        // Edit Meta: CTRL + m
+        {
+          key: ['ctrl + m', 'cmd + m'],
+          command: () => {
+            this.editMeta()
+          },
+          preventDefault: true
         },
-        preventDefault: true
-      },
-      // Import Script: CTRL + SHIFT + i
-      {
-        key: ['ctrl + shift + i', 'cmd + shift + i'],
-        command: () => {
-          this.importScript()
+        // Import Script: CTRL + SHIFT + i
+        {
+          key: ['ctrl + shift + i', 'cmd + shift + i'],
+          command: () => {
+            this.importScript()
+          },
+          preventDefault: true
         },
-        preventDefault: true
-      },
-      // Export Script: CTRL + SHIFT + x
-      {
-        key: ['ctrl + shift + x', 'cmd + shift + x'],
-        command: () => {
-          this.exportScript()
-        },
-        preventDefault: true
-      }
-    )
+        // Export Script: CTRL + SHIFT + x
+        {
+          key: ['ctrl + shift + x', 'cmd + shift + x'],
+          command: () => {
+            this.exportScript()
+          },
+          preventDefault: true
+        }
+      )
+    })
   }
   ngOnInit() {
     this.statusService.currentStatus.subscribe(status => (this.statusContent = status))
     this.statusService.changeStatus('ready...')
+    this.statusService.currentView.subscribe(view => (this.viewContent = view))
   }
 
   public async newScript() {
@@ -170,4 +179,14 @@ export class ToolbarComponent implements AfterViewInit, OnInit {
   }
 
   public exportScript() {}
+
+  public async toggleExternal() {
+    await this.external.hiddenStatus().then(async visible => {
+      if (visible) {
+        this.external.hide()
+      } else {
+        this.external.show()
+      }
+    })
+  }
 }

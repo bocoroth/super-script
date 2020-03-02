@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core'
-import { LineBrokerService } from '../../line-broker.service'
-
+import { StatusService } from '../../status.service'
 @Component({
   selector: 'app-performance',
   templateUrl: './performance.component.html',
   styleUrls: ['./performance.component.scss']
 })
 export class PerformanceComponent implements OnInit {
-  constructor(private lineBrokerService: LineBrokerService) {}
+  constructor(private status: StatusService) {}
 
   ngOnInit() {
-    this.lineBrokerService.currentTab = 'performance'
+    this.status.changeView('performance')
   }
 }

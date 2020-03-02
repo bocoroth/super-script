@@ -30,6 +30,10 @@ export class ScriptService {
     this.script.meta = meta
   }
 
+  public getMetaStyles(): string {
+    return this.script.meta.css || ''
+  }
+
   public addLine(line: ScriptLine) {
     const id = this.script.text.length
     line.id = id

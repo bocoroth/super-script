@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain, IpcMessageEvent, Menu, dialog } = require('electron')
+const electron = require('electron')
 const url = require('url')
 const path = require('path')
 const fs = require('fs')
@@ -7,6 +8,7 @@ const SystemFonts = require('system-font-families').default
 const systemFonts = new SystemFonts()
 
 let mainWindow
+let externalWindow
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -24,6 +26,10 @@ function createWindow() {
       protocol: 'file:'
     })
   )
+
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.webContents.send('loadControl')
+  })
 
   mainWindow.maximize()
 
@@ -94,6 +100,38 @@ function createWindow() {
 
   // no menu for Win/Linux
   mainWindow.removeMenu()
+
+  const electronScreen = electron.screen
+  const displays = electronScreen.getAllDisplays()
+  if (typeof displays[1] !== 'undefined') {
+    const ext = displays[1]
+    externalWindow = new BrowserWindow({
+      x: ext.bounds.x,
+      y: ext.bounds.y,
+      width: ext.workArea.width,
+      height: ext.workArea.height,
+      webPreferences: {
+        nodeIntegration: true
+      },
+      backgroundColor: '#000',
+      frame: false
+    })
+
+    externalWindow.webContents.on('did-finish-load', () => {
+      externalWindow.webContents.send('loadExternal')
+    })
+
+    externalWindow.maximize()
+
+    externalWindow.loadURL(
+      url.format({
+        pathname: path.join(__dirname, `/dist/index.html`),
+        protocol: 'file:'
+      })
+    )
+
+    externalWindow.toggleDevTools() // for debugging
+  }
 }
 
 app.on('ready', createWindow)
@@ -106,19 +144,40 @@ app.on('activate', function() {
   if (mainWindow === null) createWindow()
 })
 
+/* MISC IPC EVENTS ************************************************************/
+
 ipcMain.on('hotkeyclose', function() {
   mainWindow.close()
   mainWindow = null
+  if (typeof externalWindow.close === 'function') {
+    externalWindow.close()
+    externalWindow = null
+  }
 })
 
-ipcMain.on('getFonts', (event, arg) => {
+ipcMain.handle('getFonts', (event, arg) => {
   const fonts = systemFonts.getFonts().then(
     res => {
-      mainWindow.webContents.send('getFontsResponse', res)
+      try {
+        mainWindow.webContents.send('getFontsResponse', res)
+      } catch (e) {
+        console.warn('Could not load system fonts: ' + e)
+      }
     },
     err => console.warn('Error loading system fonts')
   )
+  return fonts
 })
+
+ipcMain.on('ping', event => {
+  event.sender.send('pong')
+})
+
+/* FILE PROCESSING ************************************************************/
+
+async function readLoadedFile(filePath) {
+  return fs.promises.readFile(filePath, 'utf-8')
+}
 
 ipcMain.handle('loadFilePath', async () => {
   const result = await dialog.showOpenDialog(mainWindow, {
@@ -189,10 +248,6 @@ ipcMain.handle('getSaveFilePath', async () => {
   }
 })
 
-async function readLoadedFile(filePath) {
-  return fs.promises.readFile(filePath, 'utf-8')
-}
-
 ipcMain.handle('loadFile', async (e, filePath) => {
   if (filePath === 'assets/default.json') {
     // handle os file pathing
@@ -238,6 +293,42 @@ ipcMain.handle('saveFile', async (e, script, filePath = null) => {
   return result
 })
 
-ipcMain.on('ping', event => {
-  event.sender.send('pong')
+/* EXTERNAL DISPLAY PIPE ******************************************************/
+
+ipcMain.on('loadExternalStyles', (e, styles) => {
+  externalWindow.webContents.send('loadStylesResponse', styles)
+  return styles
+})
+
+ipcMain.on('loadExternalLine', (e, line) => {
+  externalWindow.webContents.send('loadLineResponse', line)
+  return line
+})
+
+ipcMain.on('loadExternalClass', (e, newClass) => {
+  externalWindow.webContents.send('loadClassResponse', newClass)
+  return newClass
+})
+
+ipcMain.on('hideExternal', () => {
+  const result = externalWindow.hide()
+  return result
+})
+
+ipcMain.on('showExternal', () => {
+  const result = externalWindow.showInactive()
+  return result
+})
+
+ipcMain.handle('getExternalHiddenStatus', () => {
+  const result = externalWindow.isVisible()
+  return result
+})
+
+ipcMain.on('hideExternalLine', () => {
+  //
+})
+
+ipcMain.on('showExternalLine', () => {
+  //
 })
