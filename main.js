@@ -310,6 +310,31 @@ ipcMain.on('loadExternalClass', (e, newClass) => {
   return newClass
 })
 
+ipcMain.on('setExternalX', (e, newX) => {
+  externalWindow.webContents.send('setExternalXResponse', newX)
+  return newX
+})
+
+ipcMain.on('setExternalY', (e, newY) => {
+  externalWindow.webContents.send('setExternalYResponse', newY)
+  return newY
+})
+
+ipcMain.on('setExternalWidth', (e, newWidth) => {
+  externalWindow.webContents.send('setExternalWidthResponse', newWidth)
+  return newWidth
+})
+
+ipcMain.on('setExternalHeight', (e, newHeight) => {
+  externalWindow.webContents.send('setExternalHeightResponse', newHeight)
+  return newHeight
+})
+
+ipcMain.on('showExternalBorder', (e, border) => {
+  externalWindow.webContents.send('showExternalBorderResponse', border)
+  return border
+})
+
 ipcMain.on('hideExternal', () => {
   const result = externalWindow.hide()
   return result

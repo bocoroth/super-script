@@ -21,7 +21,6 @@ export class EditBoxComponent implements AfterViewInit, OnInit {
   constructor(private fontService: FontService, private lineBroker: LineBrokerService) {}
 
   async ngOnInit() {
-    this.loadFonts()
     this.lineBroker.lineNumber.subscribe(num => (this.lineNumber = num))
     this.lineBroker.durationMS.subscribe(ms => (this.durationMS = ms))
     this.lineBroker.cssClass.subscribe(css => (this.cssClass = css))
@@ -68,6 +67,7 @@ export class EditBoxComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit(): void {
+    //this.loadFonts() // FIX: causing loading issues
     this.shortcuts.push(
       // Save Line: enter (in textarea)
       {

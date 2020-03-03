@@ -30,6 +30,10 @@ export class ScriptService {
     this.script.meta = meta
   }
 
+  public setMetaStyles(styles: string): void {
+    this.script.meta.css = styles
+  }
+
   public getMetaStyles(): string {
     return this.script.meta.css || ''
   }

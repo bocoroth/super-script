@@ -76,4 +76,24 @@ export class ExternalService {
   public showLine(): void {
     this._ipc.send('showExternalLine')
   }
+
+  public setX(newX: number): void {
+    this._ipc.send('setExternalX', newX)
+  }
+
+  public setY(newY: number): void {
+    this._ipc.send('setExternalY', newY)
+  }
+
+  public setWidth(newWidth: number): void {
+    this._ipc.send('setExternalWidth', newWidth)
+  }
+
+  public setHeight(newHeight: number): void {
+    this._ipc.send('setExternalHeight', newHeight)
+  }
+
+  public showBorder(border: boolean): void {
+    this._ipc.send('showExternalBorder', border)
+  }
 }

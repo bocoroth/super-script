@@ -1,8 +1,9 @@
+#ht-external-view-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
 #ht-external-container {
   position: absolute;
-  width: 1200px;
-  height: 300px;
-  left: 400px;
-  top: 700px;
-  border: 1px solid white;
 }

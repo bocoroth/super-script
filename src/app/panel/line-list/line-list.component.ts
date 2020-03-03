@@ -78,7 +78,7 @@ export class LineListComponent implements OnDestroy, OnInit {
         if (this.status.getView() === 'performance') {
           $('#line-table tbody').on('dblclick', 'tr', function() {
             const data = self.dtInstance.row(this).data()
-            self.external.setExternal(data[5], data[4], self.lineBrokerService.getMetaStyles())
+            self.external.setExternal(data[5], data[4])
           })
         }
       })
