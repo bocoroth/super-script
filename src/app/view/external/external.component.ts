@@ -89,5 +89,14 @@ export class ExternalComponent implements OnInit {
         $('#ht-external-container').css('border', 'none')
       }
     })
+
+    this._ipc.on('hideExternalLineResponse', () => {
+      //console.log('got hideExternalLineResponse: ', setHidden)
+      if ($('#ht-external-container').css('visibility') === 'hidden') {
+        $('#ht-external-container').css('visibility', 'visible')
+      } else {
+        $('#ht-external-container').css('visibility', 'hidden')
+      }
+    })
   }
 }

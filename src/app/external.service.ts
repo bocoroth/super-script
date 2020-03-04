@@ -73,10 +73,6 @@ export class ExternalService {
     this._ipc.send('hideExternalLine')
   }
 
-  public showLine(): void {
-    this._ipc.send('showExternalLine')
-  }
-
   public setX(newX: number): void {
     this._ipc.send('setExternalX', newX)
   }

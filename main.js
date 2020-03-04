@@ -351,9 +351,5 @@ ipcMain.handle('getExternalHiddenStatus', () => {
 })
 
 ipcMain.on('hideExternalLine', () => {
-  //
-})
-
-ipcMain.on('showExternalLine', () => {
-  //
+  externalWindow.webContents.send('hideExternalLineResponse')
 })

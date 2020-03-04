@@ -102,6 +102,14 @@ export class ToolbarComponent implements AfterViewInit, OnInit {
           this.prevLine()
         },
         preventDefault: true
+      },
+      // show/hide displayed line
+      {
+        key: ['h', 'tab'],
+        command: () => {
+          this.external.hideLine()
+        },
+        preventDefault: true
       }
     )
   }
