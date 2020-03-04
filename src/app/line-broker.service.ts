@@ -94,6 +94,10 @@ export class LineBrokerService {
     this.changeEntry(rowArray[5])
   }
 
+  public setApplyAllButton(isEnabled: boolean) {
+    $('#btnApplyAll').prop('disabled', !isEnabled)
+  }
+
   /* SCRIPT FUNCTIONS *********************************************************/
   public getScript(): Script {
     return this.scriptService.getScript()
@@ -105,6 +109,10 @@ export class LineBrokerService {
 
   public setScript(script: Script) {
     this.scriptService.setScript(script)
+  }
+
+  public getLine(id: number): ScriptLine {
+    return this.scriptService.getLine(id)
   }
 
   public editLine(line: ScriptLine) {
@@ -133,6 +141,11 @@ export class LineBrokerService {
       if (type === 'row') {
         const data: string[][] = self.dt.rows(indexes).data()
         self.setEditBox(data[0])
+      }
+      if (indexes.length > 1) {
+        self.setApplyAllButton(true)
+      } else {
+        self.setApplyAllButton(false)
       }
     })
 

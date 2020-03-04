@@ -1,11 +1,11 @@
 <ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>
 <div class="row mr-0 mb-2">
-  <div class="col-3">
+  <div class="col-2">
     <button type="button" (click)="deleteLine()" id="btnDeleteLine" class="ml-3 btn-sm btn-danger">
       Delete Line
     </button>
   </div>
-  <div class="col-7 form-inline">
+  <div class="col-9 form-inline">
     <!-- TODO: convert these to real time pickers/spinners a la a/v editors (need to create?) -->
     <label class="col-form-label col-form-label-sm pr-2" for="durationMS">
       Duration (milliseconds)
@@ -30,8 +30,11 @@
       placeholder="example-class1 example-class2"
       value="{{ cssClass }}"
     />
+    <button type="button" (click)="applyClasstoSelected()" id="btnApplyAll" disabled class="ml-3 btn-sm btn-secondary">
+      Apply to Selected
+    </button>
   </div>
-  <div class="col-2 text-right">
+  <div class="col-1 text-right">
     <button type="button" (click)="saveLine()" id="btnSaveLine" class="btn-sm btn-info">Save Line</button>
   </div>
 </div>

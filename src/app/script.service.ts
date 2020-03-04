@@ -38,6 +38,10 @@ export class ScriptService {
     return this.script.meta.css || ''
   }
 
+  public getLine(id: number): ScriptLine {
+    return this.script.text[id]
+  }
+
   public addLine(line: ScriptLine) {
     const id = this.script.text.length
     line.id = id

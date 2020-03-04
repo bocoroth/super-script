@@ -67,7 +67,7 @@ export class EditBoxComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit(): void {
-    //this.loadFonts() // FIX: causing loading issues
+    this.loadFonts() // FIX: causing loading issues?
     this.shortcuts.push(
       // Save Line: enter (in textarea)
       {
@@ -185,5 +185,20 @@ export class EditBoxComponent implements AfterViewInit, OnInit {
     this.lineBroker.deleteLine(parseInt(this.lineNumber))
     this.lineBroker.loadDatatable()
     this.lineBroker.selectDatatableRow(parseInt(this.lineNumber))
+  }
+
+  public applyClasstoSelected() {
+    const dt = this.lineBroker.getDatatableInstance()
+    dt.rows({ selected: true })
+      .data()
+      .each((row: (string | number)[]) => {
+        const id = row[0] as number
+        const line: ScriptLine = this.lineBroker.getLine(id)
+        line.cssClass = this.cssClass
+        this.lineBroker.editLine(line)
+      })
+
+    this.lineBroker.loadDatatable()
+    $('#btnApplyAll').prop('disabled', true)
   }
 }
