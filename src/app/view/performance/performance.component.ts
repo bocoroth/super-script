@@ -18,11 +18,10 @@ export class PerformanceComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.status.changeView('performance')
+    this.settings.loadLocalSettings()
   }
 
   ngAfterViewInit() {
-    this.settings.loadLocalSettings()
-
     const loadedX = parseInt(this.settings.getSetting('externalX'))
     const loadedY = parseInt(this.settings.getSetting('externalY'))
     const loadedWidth = parseInt(this.settings.getSetting('externalWidth'))

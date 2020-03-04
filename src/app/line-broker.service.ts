@@ -182,7 +182,6 @@ export class LineBrokerService {
           }
           const lineArray = [line.id, line.startTime, line.endTime, line.durationMS, line.cssClass, line.text]
           this.dt.row.add(lineArray)
-          this.dt.draw()
           lineCount++
         }
 
@@ -196,9 +195,11 @@ export class LineBrokerService {
   }
 
   public selectDatatableRow(rowID: number) {
-    this.dt.row(`:eq(${rowID})`).select()
-    const rowArray = this.dt.row(`:eq(${rowID})`).data()
-    this.setEditBox(rowArray)
+    if (rowID < this.dt.rows().data().length) {
+      this.dt.row(`:eq(${rowID})`).select()
+      const rowArray = this.dt.row(`:eq(${rowID})`).data()
+      this.setEditBox(rowArray)
+    }
   }
 
   public destroyDatatableInstance() {

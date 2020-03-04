@@ -22,8 +22,13 @@ export class FileService {
   public async loadFilePath(): Promise<string> {
     const filePath: string = await this._ipc.invoke('loadFilePath')
     this.filePath = filePath
-    this.fileDirectory = filePath.substring(0, Math.max(filePath.lastIndexOf('/'), filePath.lastIndexOf('\\')))
-    this.fileName = filePath.substring(1, Math.max(filePath.lastIndexOf('/'), filePath.lastIndexOf('\\')))
+    try {
+      this.fileDirectory = filePath.substring(0, Math.max(filePath.lastIndexOf('/'), filePath.lastIndexOf('\\')))
+      this.fileName = filePath.substring(1, Math.max(filePath.lastIndexOf('/'), filePath.lastIndexOf('\\')))
+    } catch (e) {
+      this.fileDirectory = ''
+      this.fileName = ''
+    }
     return filePath
   }
 

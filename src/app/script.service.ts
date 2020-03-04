@@ -27,11 +27,15 @@ export class ScriptService {
   }
 
   public setMeta(meta: ScriptMeta) {
-    this.script.meta = meta
+    if (this.script) {
+      this.script.meta = meta
+    }
   }
 
   public setMetaStyles(styles: string): void {
-    this.script.meta.css = styles
+    if (this.script) {
+      this.script.meta.css = styles
+    }
   }
 
   public getMetaStyles(): string {

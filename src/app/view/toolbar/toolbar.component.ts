@@ -22,74 +22,88 @@ export class ToolbarComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.shortcuts.push(
-        // New Script: CTRL + n
-        {
-          key: ['ctrl + n', 'cmd + n'],
-          command: () => {
-            this.newScript()
-          },
-          preventDefault: true
+    this.shortcuts.push(
+      // New Script: CTRL + n
+      {
+        key: ['ctrl + n', 'cmd + n'],
+        command: () => {
+          this.newScript()
         },
-        // Open Script: CTRL + o
-        {
-          key: ['ctrl + o', 'cmd + o'],
-          command: () => {
-            this.openScript()
-          },
-          preventDefault: true
+        preventDefault: true
+      },
+      // Open Script: CTRL + o
+      {
+        key: ['ctrl + o', 'cmd + o'],
+        command: () => {
+          this.openScript()
         },
-        // Open Script: CTRL + o
-        {
-          key: ['ctrl + o', 'cmd + o'],
-          command: () => {
-            this.openScript()
-          },
-          preventDefault: true
+        preventDefault: true
+      },
+      // Open Script: CTRL + o
+      {
+        key: ['ctrl + o', 'cmd + o'],
+        command: () => {
+          this.openScript()
         },
-        // Save Script: CTRL + s
-        {
-          key: ['ctrl + s', 'cmd + s'],
-          command: () => {
-            this.saveScript()
-          },
-          preventDefault: true
+        preventDefault: true
+      },
+      // Save Script: CTRL + s
+      {
+        key: ['ctrl + s', 'cmd + s'],
+        command: () => {
+          this.saveScript()
         },
-        // Save As Script: CTRL + SHIFT + s
-        {
-          key: ['ctrl + shift + s', 'cmd + shift + s'],
-          command: () => {
-            this.saveScript(true)
-          },
-          preventDefault: true
+        preventDefault: true
+      },
+      // Save As Script: CTRL + SHIFT + s
+      {
+        key: ['ctrl + shift + s', 'cmd + shift + s'],
+        command: () => {
+          this.saveScript(true)
         },
-        // Edit Meta: CTRL + m
-        {
-          key: ['ctrl + m', 'cmd + m'],
-          command: () => {
-            this.editMeta()
-          },
-          preventDefault: true
+        preventDefault: true
+      },
+      // Edit Meta: CTRL + m
+      {
+        key: ['ctrl + m', 'cmd + m'],
+        command: () => {
+          this.editMeta()
         },
-        // Import Script: CTRL + SHIFT + i
-        {
-          key: ['ctrl + shift + i', 'cmd + shift + i'],
-          command: () => {
-            this.importScript()
-          },
-          preventDefault: true
+        preventDefault: true
+      },
+      // Import Script: CTRL + SHIFT + i
+      {
+        key: ['ctrl + shift + i', 'cmd + shift + i'],
+        command: () => {
+          this.importScript()
         },
-        // Export Script: CTRL + SHIFT + x
-        {
-          key: ['ctrl + shift + x', 'cmd + shift + x'],
-          command: () => {
-            this.exportScript()
-          },
-          preventDefault: true
-        }
-      )
-    })
+        preventDefault: true
+      },
+      // Export Script: CTRL + SHIFT + x
+      {
+        key: ['ctrl + shift + x', 'cmd + shift + x'],
+        command: () => {
+          this.exportScript()
+        },
+        preventDefault: true
+      },
+      // Performance next line
+      {
+        key: ['space', 'down', 'x'],
+        command: () => {
+          this.nextLine()
+        },
+        preventDefault: true
+      },
+      // Performance previous line
+      {
+        key: ['backspace', 'up', 'z'],
+        command: () => {
+          this.prevLine()
+        },
+        preventDefault: true
+      }
+    )
   }
   ngOnInit() {
     this.statusService.currentStatus.subscribe(status => (this.statusContent = status))
@@ -188,5 +202,45 @@ export class ToolbarComponent implements AfterViewInit, OnInit {
         this.external.show()
       }
     })
+  }
+
+  public nextLine() {
+    console.log('next line')
+    if (this.statusService.getView() === 'performance') {
+      let id = this.lineBroker
+        .getDatatableInstance()
+        .rows({ selected: true })
+        .data()[0][0]
+      id++
+      const length = this.lineBroker
+        .getDatatableInstance()
+        .rows()
+        .data().length
+      if (id < length) {
+        const newRow = this.lineBroker
+          .getDatatableInstance()
+          .row(id)
+          .data()
+        this.external.setExternal(newRow[5], newRow[4])
+        this.lineBroker.selectDatatableRow(id)
+      }
+    }
+  }
+
+  public prevLine() {
+    console.log('previous line')
+    if (this.statusService.getView() === 'performance') {
+      let id = this.lineBroker
+        .getDatatableInstance()
+        .rows({ selected: true })
+        .data()[0][0]
+      id = id < 1 ? 0 : id - 1
+      const newRow = this.lineBroker
+        .getDatatableInstance()
+        .row(id)
+        .data()
+      this.external.setExternal(newRow[5], newRow[4])
+      this.lineBroker.selectDatatableRow(id)
+    }
   }
 }

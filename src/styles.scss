@@ -91,3 +91,136 @@ table.dataTable tbody tr.selected.even:hover {
 table.dataTable tbody {
   font-size: 0.66rem;
 }
+
+/* cheating until I can get meta styles to load correctly... */
+.xs {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 24px;
+  line-height: 24px;
+  color: white;
+}
+
+.sm {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 36px;
+  line-height: 36px;
+  color: white;
+}
+
+.default,
+.md {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 48px;
+  line-height: 48px;
+  color: white;
+}
+
+.lg {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 64px;
+  line-height: 64px;
+  color: white;
+}
+
+.xl {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 72px;
+  line-height: 72px;
+  color: white;
+}
+
+@font-face {
+  font-family: 'Glass Antiqua';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Glass Antiqua'), local('GlassAntiqua-Regular');
+}
+
+@keyframes jitter {
+  0%,
+  12%,
+  18.999%,
+  23%,
+  31.999%,
+  37%,
+  44.999%,
+  46%,
+  49.999%,
+  51%,
+  58.999%,
+  61%,
+  68.999%,
+  71%,
+  85.999%,
+  86.999%,
+  100% {
+    margin: 0;
+  }
+  22.99%,
+  32%,
+  45%,
+  45.999%,
+  50%,
+  50.99%,
+  59%,
+  69%,
+  70.999% {
+    margin: -1px 0 0 -1px;
+  }
+  19%,
+  36.999%,
+  60.999%,
+  86% {
+    margin: 2px 0 0 0;
+  }
+  87% {
+    margin: 10px 0 0 4px;
+  }
+}
+
+.silent-movie {
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  animation: jitter 15s linear infinite;
+  font-size: 64px;
+  line-height: 64px;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: 'Glass Antiqua', cursive;
+  background-image: url('assets/silent.gif');
+  border: 62px solid transparent; /* chrome needs this to display the border correctly */
+  border-image: url('assets/border.png') round;
+  border-image-slice: calc(62 / 241 * 100%) calc(62 / 360 * 100%);
+  border-image-width: 62px;
+}

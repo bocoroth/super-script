@@ -1,5 +1,6 @@
-import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core'
+import { AfterViewInit, Component, OnDestroy, ViewChild, OnInit } from '@angular/core'
 import { DataTableDirective } from 'angular-datatables'
+import { ShortcutInput } from 'ng-keyboard-shortcuts'
 import { HttpClient } from '@angular/common/http'
 import { Subject } from 'rxjs'
 import { Script } from '../../script.interface'
@@ -15,13 +16,15 @@ import 'rxjs/add/operator/map'
   templateUrl: './line-list.component.html',
   styleUrls: ['./line-list.component.scss']
 })
-export class LineListComponent implements OnDestroy, OnInit {
+export class LineListComponent implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild(DataTableDirective, { static: false })
   private datatableElement: DataTableDirective
   dtOptions: any = {}
   lines: ScriptLine[] = []
   dtTrigger: Subject<any> = new Subject()
   dtInstance: any = null // required to be 'any' to work with angular-datatables
+
+  shortcuts: ShortcutInput[] = []
 
   lineNumber: string
   durationMS: string
@@ -37,6 +40,8 @@ export class LineListComponent implements OnDestroy, OnInit {
     private external: ExternalService
   ) {}
 
+  ngAfterViewInit() {}
+
   ngOnInit() {
     const self = this
     this.lineBrokerService.lineNumber.subscribe(num => (this.lineNumber = num))
@@ -46,14 +51,18 @@ export class LineListComponent implements OnDestroy, OnInit {
     this.lineBrokerService.setFilePath(self.filePath)
 
     let scroll = '60vh'
+    let select = 'os'
+    let toggleable = true
     if (this.status.getView() === 'performance') {
       scroll = '80vh'
+      select = 'single'
+      toggleable = false
     }
 
     this.dtOptions = {
       paging: false,
       ordering: false,
-      select: 'os',
+      select: { style: select, toggleable: toggleable },
       scrollY: scroll,
       info: false,
       columnDefs: [{ width: '100%', targets: 5 }] // lines column max width

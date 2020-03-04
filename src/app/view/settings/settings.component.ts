@@ -19,11 +19,10 @@ export class SettingsComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.status.changeView('settings')
+    this.settings.loadLocalSettings()
   }
 
   ngAfterViewInit() {
-    this.settings.loadLocalSettings()
-
     // EXTERNAL DISPLAY
     const loadedX = parseInt(this.settings.getSetting('externalX'))
     const loadedY = parseInt(this.settings.getSetting('externalY'))

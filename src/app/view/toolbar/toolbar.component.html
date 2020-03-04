@@ -1,83 +1,41 @@
 <ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>
 <div class="row mr-0 mb-2">
   <div id="hypertitles-toolbar" class="col-6">
-    <button
-      *ngIf="viewContent !== 'performance'"
-      type="button"
-      (click)="newScript()"
-      id="toolbar-new"
-      title="New Script"
-    >
+    <button type="button" (click)="newScript()" id="toolbar-new" title="New Script">
       <i class="fa fa-sm fa-file-o"></i>
     </button>
     <button type="button" (click)="openScript()" id="toolbar-open" title="Open Script...">
       <i class="fa fa-sm fa-folder-open-o"></i>
     </button>
-    <button
-      *ngIf="viewContent !== 'performance'"
-      type="button"
-      (click)="saveScript()"
-      id="toolbar-save"
-      title="Save Script"
-    >
+    <button type="button" (click)="saveScript()" id="toolbar-save" title="Save Script">
       <i class="fa fa-sm fa-save"></i>
     </button>
-    <button
-      *ngIf="viewContent !== 'performance'"
-      type="button"
-      (click)="saveScript(true)"
-      id="toolbar-save-as"
-      title="Save Script As..."
-    >
+    <button type="button" (click)="saveScript(true)" id="toolbar-save-as" title="Save Script As...">
       <i class="fa fa-sm fa-save"></i>
       <i class="fa fa-sm fa-pencil-square-o" style="margin-left:-14px"></i>
     </button>
 
     <span class="toolbar-separator">&#8203;</span>
 
-    <button *ngIf="viewContent !== 'performance'" type="button" id="toolbar-export" disabled title="Export Script...">
+    <button type="button" id="toolbar-export" disabled title="Export Script...">
       <i class="fa fa-sm fa-sign-out"></i>
     </button>
-    <button
-      *ngIf="viewContent !== 'performance'"
-      type="button"
-      (click)="importScript()"
-      id="toolbar-import"
-      title="Import Script..."
-    >
+    <button type="button" (click)="importScript()" id="toolbar-import" title="Import Script...">
       <i class="fa fa-sm fa-sign-in"></i>
     </button>
 
-    <span *ngIf="viewContent !== 'performance'" class="toolbar-separator">&#8203;</span>
+    <span class="toolbar-separator">&#8203;</span>
 
-    <button
-      *ngIf="viewContent !== 'performance'"
-      type="button"
-      disabled
-      id="toolbar-edit-meta"
-      title="Edit Script Metadata..."
-    >
+    <button type="button" disabled id="toolbar-edit-meta" title="Edit Script Metadata...">
       <i class="fa fa-sm fa-list-alt"></i>
     </button>
     <button type="button" id="toolbar-comments" disabled title="Show/hide commented lines">
       <i class="fa fa-sm fa-commenting-o"></i>
     </button>
-    <button
-      *ngIf="viewContent === 'performance'"
-      (click)="toggleExternal()"
-      type="button"
-      id="toolbar-external"
-      title="Show/hide external display panel"
-    >
+    <button (click)="toggleExternal()" type="button" id="toolbar-external" title="Show/hide external display panel">
       <i class="fa fa-sm fa-television"></i>
     </button>
-    <button
-      *ngIf="viewContent === 'performance'"
-      type="button"
-      id="toolbar-external-line"
-      disabled
-      title="Show/hide external displayed line"
-    >
+    <button type="button" id="toolbar-external-line" disabled title="Show/hide external displayed line">
       <i class="fa fa-sm fa-code"></i>
     </button>
   </div>

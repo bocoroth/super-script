@@ -2,14 +2,22 @@
 <div id="ht-control-panel" *ngIf="isExternal === false">
   <app-toolbar></app-toolbar>
   <ngb-tabset id="ht-tabs">
-    <ngb-tab id="editor">
+    <ngb-tab id="settings">
+      <ng-template ngbTabTitle>
+        <span class="tab-title"> <fa name="gear" size="2x" inverse="true"></fa> <span>Settings</span> </span>
+      </ng-template>
+      <ng-template ngbTabContent>
+        <app-settings></app-settings>
+      </ng-template>
+    </ngb-tab>
+    <!--<ngb-tab id="editor">
       <ng-template ngbTabTitle>
         <span class="tab-title"> <fa name="edit" size="2x" inverse="true"></fa> <span>Editor</span> </span>
       </ng-template>
       <ng-template ngbTabContent>
         <app-editor></app-editor>
       </ng-template>
-    </ngb-tab>
+    </ngb-tab>-->
     <!--<ngb-tab id="rehearsal">
       <ng-template ngbTabTitle>
         <span class="tab-title"> <fa name="book" size="2x"></fa> <span>Rehearsal</span> </span>
@@ -24,14 +32,6 @@
       </ng-template>
       <ng-template ngbTabContent>
         <app-performance></app-performance>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab id="settings">
-      <ng-template ngbTabTitle>
-        <span class="tab-title"> <fa name="gear" size="2x" inverse="true"></fa> <span>Settings</span> </span>
-      </ng-template>
-      <ng-template ngbTabContent>
-        <app-settings></app-settings>
       </ng-template>
     </ngb-tab>
   </ngb-tabset>
