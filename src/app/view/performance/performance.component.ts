@@ -3,6 +3,8 @@ import { StatusService } from '../../status.service'
 import { SettingsService } from '../../settings.service'
 import { ExternalService } from '../../external.service'
 import { ScriptService } from '../../script.service'
+import { IpcService } from '../../ipc.service'
+
 @Component({
   selector: 'app-performance',
   templateUrl: './performance.component.html',
@@ -13,7 +15,8 @@ export class PerformanceComponent implements AfterViewInit, OnInit {
     private status: StatusService,
     private settings: SettingsService,
     private external: ExternalService,
-    private script: ScriptService
+    private script: ScriptService,
+    private readonly _ipc: IpcService
   ) {}
 
   ngOnInit() {
@@ -22,6 +25,8 @@ export class PerformanceComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
+    this._ipc.send('loadPerformance')
+
     const loadedX = parseInt(this.settings.getSetting('externalX'))
     const loadedY = parseInt(this.settings.getSetting('externalY'))
     const loadedWidth = parseInt(this.settings.getSetting('externalWidth'))

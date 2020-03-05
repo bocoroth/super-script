@@ -17,6 +17,7 @@ import { EditorComponent } from './view/editor/editor.component'
 import { ExternalComponent } from './view/external/external.component'
 import { LineListComponent } from './panel/line-list/line-list.component'
 import { PerformanceComponent } from './view/performance/performance.component'
+import { PerformanceHotkeysComponent } from './view/performance-hotkeys/performance-hotkeys.component'
 import { RehearsalComponent } from './view/rehearsal/rehearsal.component'
 import { SettingsComponent } from './view/settings/settings.component'
 import { ToolbarComponent } from './view/toolbar/toolbar.component'
@@ -42,7 +43,8 @@ import { SettingsService } from './settings.service'
     RehearsalComponent,
     SettingsComponent,
     ToolbarComponent,
-    ViewComponent
+    ViewComponent,
+    PerformanceHotkeysComponent
   ],
   imports: [
     AngularEditorModule,

@@ -33,7 +33,7 @@ function createWindow() {
 
   mainWindow.maximize()
 
-  // mainWindow.toggleDevTools() // for debugging
+  mainWindow.toggleDevTools() // for debugging
 
   mainWindow.on('closed', function() {
     mainWindow = null
@@ -352,4 +352,12 @@ ipcMain.handle('getExternalHiddenStatus', () => {
 
 ipcMain.on('hideExternalLine', () => {
   externalWindow.webContents.send('hideExternalLineResponse')
+})
+
+ipcMain.on('loadPerformance', () => {
+  mainWindow.webContents.send('loadPerformanceResponse')
+})
+
+ipcMain.on('unloadPerformance', () => {
+  mainWindow.webContents.send('unloadPerformanceResponse')
 })

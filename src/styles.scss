@@ -94,6 +94,8 @@ table.dataTable tbody {
 
 /* cheating until I can get meta styles to load correctly... */
 .xs {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-content: center;
   align-items: center;
@@ -103,9 +105,12 @@ table.dataTable tbody {
   font-size: 24px;
   line-height: 24px;
   color: white;
+  font-family: 'Amaranth', sans-serif;
 }
 
 .sm {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-content: center;
   align-items: center;
@@ -115,10 +120,13 @@ table.dataTable tbody {
   font-size: 36px;
   line-height: 36px;
   color: white;
+  font-family: 'Amaranth', sans-serif;
 }
 
 .default,
 .md {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-content: center;
   align-items: center;
@@ -128,9 +136,12 @@ table.dataTable tbody {
   font-size: 48px;
   line-height: 48px;
   color: white;
+  font-family: 'Amaranth', sans-serif;
 }
 
 .lg {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-content: center;
   align-items: center;
@@ -140,9 +151,12 @@ table.dataTable tbody {
   font-size: 64px;
   line-height: 64px;
   color: white;
+  font-family: 'Amaranth', sans-serif;
 }
 
 .xl {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-content: center;
   align-items: center;
@@ -152,6 +166,13 @@ table.dataTable tbody {
   font-size: 72px;
   line-height: 72px;
   color: white;
+  font-family: 'Amaranth', sans-serif;
+}
+
+.text-jp {
+  font-family: 'Noto Sans JP' sans-serif;
+  font-weight: 700;
+  font-size: 64px;
 }
 
 @font-face {
@@ -159,6 +180,55 @@ table.dataTable tbody {
   font-style: normal;
   font-weight: 400;
   src: local('Glass Antiqua'), local('GlassAntiqua-Regular');
+}
+@font-face {
+  font-family: 'Amaranth';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Amaranth Italic'), local('Amaranth-Italic');
+}
+@font-face {
+  font-family: 'Amaranth';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Amaranth Bold Italic'), local('Amaranth-BoldItalic');
+}
+@font-face {
+  font-family: 'Amaranth';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Amaranth Regular'), local('Amaranth-Regular');
+}
+@font-face {
+  font-family: 'Amaranth';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Amaranth Bold'), local('Amaranth-Bold');
+}
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Noto Sans Japanese Regular'), local('NotoSansJapanese-Regular');
+}
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Noto Sans Japanese Medium'), local('NotoSansJapanese-Medium');
+}
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Noto Sans Japanese Bold'), local('NotoSansJapanese-Bold');
 }
 
 @keyframes jitter {

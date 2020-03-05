@@ -86,30 +86,6 @@ export class ToolbarComponent implements AfterViewInit, OnInit {
           this.exportScript()
         },
         preventDefault: true
-      },
-      // Performance next line
-      {
-        key: ['space', 'down', 'x'],
-        command: () => {
-          this.nextLine()
-        },
-        preventDefault: true
-      },
-      // Performance previous line
-      {
-        key: ['backspace', 'up', 'z'],
-        command: () => {
-          this.prevLine()
-        },
-        preventDefault: true
-      },
-      // show/hide displayed line
-      {
-        key: ['h', 'tab'],
-        command: () => {
-          this.external.hideLine()
-        },
-        preventDefault: true
       }
     )
   }
@@ -210,45 +186,5 @@ export class ToolbarComponent implements AfterViewInit, OnInit {
         this.external.show()
       }
     })
-  }
-
-  public nextLine() {
-    console.log('next line')
-    if (this.statusService.getView() === 'performance') {
-      let id = this.lineBroker
-        .getDatatableInstance()
-        .rows({ selected: true })
-        .data()[0][0]
-      id++
-      const length = this.lineBroker
-        .getDatatableInstance()
-        .rows()
-        .data().length
-      if (id < length) {
-        const newRow = this.lineBroker
-          .getDatatableInstance()
-          .row(id)
-          .data()
-        this.external.setExternal(newRow[5], newRow[4])
-        this.lineBroker.selectDatatableRow(id)
-      }
-    }
-  }
-
-  public prevLine() {
-    console.log('previous line')
-    if (this.statusService.getView() === 'performance') {
-      let id = this.lineBroker
-        .getDatatableInstance()
-        .rows({ selected: true })
-        .data()[0][0]
-      id = id < 1 ? 0 : id - 1
-      const newRow = this.lineBroker
-        .getDatatableInstance()
-        .row(id)
-        .data()
-      this.external.setExternal(newRow[5], newRow[4])
-      this.lineBroker.selectDatatableRow(id)
-    }
   }
 }

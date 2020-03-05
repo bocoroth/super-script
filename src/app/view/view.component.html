@@ -1,4 +1,5 @@
 <ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>
+<app-performance-hotkeys></app-performance-hotkeys>
 <div id="ht-control-panel" *ngIf="isExternal === false">
   <app-toolbar></app-toolbar>
   <ngb-tabset id="ht-tabs">
@@ -10,14 +11,14 @@
         <app-settings></app-settings>
       </ng-template>
     </ngb-tab>
-    <!--<ngb-tab id="editor">
+    <ngb-tab id="editor">
       <ng-template ngbTabTitle>
         <span class="tab-title"> <fa name="edit" size="2x" inverse="true"></fa> <span>Editor</span> </span>
       </ng-template>
       <ng-template ngbTabContent>
         <app-editor></app-editor>
       </ng-template>
-    </ngb-tab>-->
+    </ngb-tab>
     <!--<ngb-tab id="rehearsal">
       <ng-template ngbTabTitle>
         <span class="tab-title"> <fa name="book" size="2x"></fa> <span>Rehearsal</span> </span>
