@@ -80,7 +80,7 @@ export class EditBoxComponent implements AfterViewInit, OnInit {
             this.saveLine()
           }
         },
-        allowIn: [AllowIn.Textarea],
+        allowIn: [AllowIn.Textarea, AllowIn.Input],
         preventDefault: false
       },
       // Delete Line: delete (on selected datatable line[s])

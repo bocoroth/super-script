@@ -33,7 +33,7 @@ function createWindow() {
 
   mainWindow.maximize()
 
-  mainWindow.toggleDevTools() // for debugging
+  //mainWindow.toggleDevTools() // for debugging
 
   mainWindow.on('closed', function() {
     mainWindow = null

@@ -91,7 +91,8 @@ export class LineBrokerService {
     $('#durationMS').val(rowArray[3])
     this.changeCssClass(rowArray[4])
     $('#cssClass').val(rowArray[4])
-    this.changeEntry(rowArray[5])
+    const line: ScriptLine = this.getLine(parseInt(rowArray[0]))
+    this.changeEntry(line.text)
   }
 
   public setApplyAllButton(isEnabled: boolean) {
@@ -180,7 +181,10 @@ export class LineBrokerService {
           if (typeof line.text === 'undefined') {
             line.text = ''
           }
-          const lineArray = [line.id, line.startTime, line.endTime, line.durationMS, line.cssClass, line.text]
+          let displayText = line.text.replace('<br>', ' / ')
+          displayText = `<div>${displayText}</div>`
+          displayText = $(displayText).text()
+          const lineArray = [line.id, line.startTime, line.endTime, line.durationMS, line.cssClass, displayText]
           this.dt.row.add(lineArray)
           lineCount++
         }

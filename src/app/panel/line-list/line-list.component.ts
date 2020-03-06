@@ -87,7 +87,8 @@ export class LineListComponent implements AfterViewInit, OnDestroy, OnInit {
         if (this.status.getView() === 'performance') {
           $('#line-table tbody').on('dblclick', 'tr', function() {
             const data = self.dtInstance.row(this).data()
-            self.external.setExternal(data[5], data[4])
+            const line: ScriptLine = self.lineBrokerService.getLine(data[0])
+            self.external.setExternal(line.text, line.cssClass)
           })
         }
       })

@@ -93,11 +93,10 @@ table.dataTable tbody {
 }
 
 /* cheating until I can get meta styles to load correctly... */
-.xs {
+.xxs {
   width: 100%;
   height: 100%;
   display: flex;
-  align-content: center;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -108,11 +107,10 @@ table.dataTable tbody {
   font-family: 'Amaranth', sans-serif;
 }
 
-.sm {
+.xs {
   width: 100%;
   height: 100%;
   display: flex;
-  align-content: center;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -123,12 +121,10 @@ table.dataTable tbody {
   font-family: 'Amaranth', sans-serif;
 }
 
-.default,
-.md {
+.sm {
   width: 100%;
   height: 100%;
   display: flex;
-  align-content: center;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -139,11 +135,11 @@ table.dataTable tbody {
   font-family: 'Amaranth', sans-serif;
 }
 
-.lg {
+.default,
+.md {
   width: 100%;
   height: 100%;
   display: flex;
-  align-content: center;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -154,11 +150,10 @@ table.dataTable tbody {
   font-family: 'Amaranth', sans-serif;
 }
 
-.xl {
+.lg {
   width: 100%;
   height: 100%;
   display: flex;
-  align-content: center;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -169,12 +164,103 @@ table.dataTable tbody {
   font-family: 'Amaranth', sans-serif;
 }
 
-.text-jp {
-  font-family: 'Noto Sans JP' sans-serif;
-  font-weight: 700;
-  font-size: 64px;
+.xl {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 84px;
+  line-height: 84px;
+  color: white;
+  font-family: 'Amaranth', sans-serif;
 }
 
+.xxl {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 96px;
+  line-height: 96px;
+  color: white;
+  font-family: 'Amaranth', sans-serif;
+}
+
+.left {
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+.right {
+  align-items: flex-end !important;
+  justify-content: flex-end !important;
+}
+
+.text-jp-lg {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: 96px;
+}
+
+.text-jp-sm {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: 56px;
+}
+
+.text-jp {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: 72px;
+}
+
+.ps-logo {
+  font-family: 'Fontleroy Brown', serif;
+  font-size: 100px !important;
+  margin: 30px 0 -30px 0;
+}
+
+.present {
+  font-size: 48px;
+  line-height: 48px;
+  color: white;
+  font-family: 'Amaranth', sans-serif;
+}
+
+.show-logo {
+  font-family: 'Shiny Eyes', serif;
+  font-size: 150px !important;
+  margin-bottom: -30px;
+}
+
+.sub-title {
+  font-size: 48px;
+  font-family: 'Amaranth', sans-serif;
+}
+
+.flex-break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+@font-face {
+  font-family: 'Shiny Eyes';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Shiny Eyes'), local('ShinyEyes-Regular');
+}
+@font-face {
+  font-family: 'Fontleroy Brown';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Fontleroy Brown'), local('FontleroyBrown-Regular');
+}
 @font-face {
   font-family: 'Glass Antiqua';
   font-style: normal;

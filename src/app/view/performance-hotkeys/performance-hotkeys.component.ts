@@ -3,6 +3,7 @@ import { ShortcutInput } from 'ng-keyboard-shortcuts'
 import { ExternalService } from '../../external.service'
 import { LineBrokerService } from '../../line-broker.service'
 import { IpcService } from '../../ipc.service'
+import { ScriptLine } from '../../script-line.interface'
 
 @Component({
   selector: 'app-performance-hotkeys',
@@ -73,7 +74,8 @@ export class PerformanceHotkeysComponent implements AfterViewInit, OnInit {
         .getDatatableInstance()
         .row(id)
         .data()
-      this.external.setExternal(newRow[5], newRow[4])
+      const line: ScriptLine = this.lineBroker.getLine(newRow[0])
+      this.external.setExternal(line.text, line.cssClass)
       this.lineBroker.selectDatatableRow(id)
     }
   }
@@ -88,7 +90,8 @@ export class PerformanceHotkeysComponent implements AfterViewInit, OnInit {
       .getDatatableInstance()
       .row(id)
       .data()
-    this.external.setExternal(newRow[5], newRow[4])
+    const line: ScriptLine = this.lineBroker.getLine(newRow[0])
+    this.external.setExternal(line.text, line.cssClass)
     this.lineBroker.selectDatatableRow(id)
   }
 }
