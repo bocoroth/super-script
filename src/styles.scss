@@ -77,19 +77,33 @@ table.dataTable tbody tr.even {
   background-color: rgba(0, 0, 0, 0.2);
 }
 table.dataTable tbody tr.selected,
-table.dataTable tbody tr.selected.even {
-  background-color: rgba(23, 162, 184, 0.75);
+table.dataTable tbody tr.selected.even,
+table.dataTable tbody tr.selected.odd {
+  background-color: rgba(23, 162, 184, 0.75) !important;
 }
 table.dataTable tbody tr:hover,
 table.dataTable tbody tr.even:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.3) !important;
 }
 table.dataTable tbody tr.selected:hover,
-table.dataTable tbody tr.selected.even:hover {
-  background-color: rgba(23, 162, 184, 1);
+table.dataTable tbody tr.selected.even:hover,
+table.dataTable tbody tr.selected.odd:hover {
+  background-color: rgba(23, 162, 184, 1) !important;
 }
 table.dataTable tbody {
   font-size: 0.66rem;
+}
+
+table.dataTable tbody td:not(:last-child) {
+  white-space: nowrap;
+  max-width: 125px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div.dataTables_paginate,
+div.dataTables_length {
+  display: none;
 }
 
 /* cheating until I can get meta styles to load correctly... */

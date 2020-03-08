@@ -201,6 +201,17 @@ export class LineBrokerService {
   public selectDatatableRow(rowID: number) {
     if (rowID < this.dt.rows().data().length) {
       this.dt.row(`:eq(${rowID})`).select()
+
+      let scrollPos = 0
+      if ($('tr.selected').prev().length > 0) {
+        scrollPos = $('tr.selected')
+          .prev()
+          .position().top
+      } else {
+        scrollPos = $('tr.selected').position().top
+      }
+      $('.dataTables_scrollBody').scrollTop(scrollPos)
+
       const rowArray = this.dt.row(`:eq(${rowID})`).data()
       this.setEditBox(rowArray)
     }
