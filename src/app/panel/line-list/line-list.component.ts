@@ -17,7 +17,7 @@ import 'rxjs/add/operator/map'
   styleUrls: ['./line-list.component.scss']
 })
 export class LineListComponent implements AfterViewInit, OnDestroy, OnInit {
-  @ViewChild(DataTableDirective, { static: false })
+  @ViewChild(DataTableDirective)
   private datatableElement: DataTableDirective
   dtOptions: any = {}
   lines: ScriptLine[] = []
