@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { LineListComponent } from './line-list.component'
 
@@ -6,7 +6,7 @@ describe('LineListComponent', () => {
   let component: LineListComponent
   let fixture: ComponentFixture<LineListComponent>
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LineListComponent]
     }).compileComponents()

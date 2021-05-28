@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PerformanceHotkeysComponent } from './performance-hotkeys.component';
 
@@ -6,7 +6,7 @@ describe('PerformanceHotkeysComponent', () => {
   let component: PerformanceHotkeysComponent;
   let fixture: ComponentFixture<PerformanceHotkeysComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PerformanceHotkeysComponent ]
     })
