@@ -1,4 +1,7 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
+
+// @ts-ignore
+import path from 'path'
 
 export default defineConfig({
   // prevent vite from obscuring rust errors
@@ -18,5 +21,15 @@ export default defineConfig({
     minify: !process.env.TAURI_DEBUG ? 'esbuild' : false,
     // produce sourcemaps for debug builds
     sourcemap: !!process.env.TAURI_DEBUG,
+  },
+  resolve: {
+    alias: {
+      '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
+      '~bootstrap-dark': path.resolve(__dirname, 'node_modules/bootstrap-dark'),
+    }
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom'
   },
 })

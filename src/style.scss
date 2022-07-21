@@ -1,0 +1,8 @@
+/* Main Sass bundle ***********************************************************/
+
+// dependency imports
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-dark/src/bootstrap-dark";
+
+// app imports
+@import "./scss/common";

@@ -1,27 +1,17 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import { setupCounter } from './counter'
 import { invoke } from '@tauri-apps/api'
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+// styles
+import './style.scss'
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+// dependency scripts
+// @ts-ignore
+import * as bootstrap from 'bootstrap'
+
+// app scripts
+import { App } from './ts/App'
+
+// main app invocation
+new App()
 
 // now we can call our Command!
 // Right-click the application background and open the developer tools.

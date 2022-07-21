@@ -1,21 +1,36 @@
 {
   "name": "hypertitles",
+  "version": "0.1.0",
+  "description": "Display HTML-friendly subtitles or supertitles during a live performance",
+  "author": "Matt Lisiak",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bocoroth/hypertitles.git"
+  },
+  "license": "MIT",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "test": "vitest"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^1.0.4",
+    "@types/bootstrap": "^5.1.13",
     "@types/node": "^18.0.6",
-    "typescript": "^4.6.4",
-    "vite": "^3.0.0"
+    "jsdom": "^20.0.0",
+    "sass": "^1.53.0",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.0",
+    "vitest": "^0.18.1"
   },
   "dependencies": {
-    "@tauri-apps/api": "^1.0.2"
+    "@popperjs/core": "^2.11.5",
+    "@tauri-apps/api": "^1.0.2",
+    "bootstrap": "^5.2.0",
+    "bootstrap-dark": "^1.0.3",
+    "material-icons": "^1.11.5"
   }
 }
