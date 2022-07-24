@@ -1,14 +1,12 @@
+ import { readTextFile } from "@tauri-apps/api/fs";
+ import { appTemplate } from './App.template';
+
 export class App {
-  private default = `
-    <h1>Hypertitles Test</h1>
-    <p>This is a test.</p>
-    <button class="btn btn-primary">Test Button</button>
-  `
   private test = false
 
   constructor(test = false) {
     if (!test) {
-      document.querySelector<HTMLDivElement>('#app')!.innerHTML = this.default
+      this.reset(false)
       console.log('App loaded')
     }
     else {
@@ -16,9 +14,11 @@ export class App {
     }
   }
 
-  public reset() {
-    document.querySelector<HTMLDivElement>('#app')!.innerHTML = this.default
-    console.log('App reset')
+  public async reset(log = true) {
+      document.querySelector<HTMLDivElement>('#app')!.innerHTML = appTemplate
+      if (log){
+        console.log('App reset')
+      }
   }
 
   public setContent(content: string): string {
@@ -27,5 +27,9 @@ export class App {
       console.log('App content updated:', content)
     }
     return content
+  }
+
+  public static async readContents(file: string): Promise<string> {
+    return readTextFile(file)
   }
 }

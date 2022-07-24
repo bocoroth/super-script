@@ -1,8 +1,12 @@
 /* Main Sass bundle ***********************************************************/
 
-// dependency imports
+/* dependency imports ****************/
 @import "~bootstrap/scss/bootstrap";
 @import "~bootstrap-dark/src/bootstrap-dark";
 
-// app imports
-@import "./scss/common";
+$material-icons-font-path: '~material-icons/iconfont/';
+@import "~material-icons/iconfont/material-icons";
+@import "~material-icons/css/material-icons";
+
+/* app imports ***********************/
+@import "./App";

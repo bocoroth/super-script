@@ -1,6 +1,6 @@
 {
   "name": "hypertitles",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Display HTML-friendly subtitles or supertitles during a live performance",
   "author": "Matt Lisiak",
   "repository": {
@@ -19,6 +19,9 @@
   "devDependencies": {
     "@tauri-apps/cli": "^1.0.4",
     "@types/bootstrap": "^5.1.13",
+    "@types/datatables.net": "^1.10.23",
+    "@types/datatables.net-select": "^1.2.7",
+    "@types/jquery": "^3.5.14",
     "@types/node": "^18.0.6",
     "jsdom": "^20.0.0",
     "sass": "^1.53.0",
@@ -31,6 +34,14 @@
     "@tauri-apps/api": "^1.0.2",
     "bootstrap": "^5.2.0",
     "bootstrap-dark": "^1.0.3",
-    "material-icons": "^1.11.5"
+    "datatables.net": "^1.12.1",
+    "datatables.net-dt": "^1.12.1",
+    "datatables.net-select": "^1.4.0",
+    "datatables.net-select-dt": "^1.4.0",
+    "dayjs": "^1.11.4",
+    "font-list": "^1.4.5",
+    "hotkeys-js": "^3.9.4",
+    "material-icons": "^1.11.5",
+    "tinymce": "^6.1.0"
   }
 }

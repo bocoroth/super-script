@@ -8,11 +8,17 @@
   },
   "package": {
     "productName": "hypertitles",
-    "version": "0.1.0"
+    "version": "1.0.0"
   },
   "tauri": {
     "allowlist": {
-      "all": true
+      "all": true,
+      "fs": {
+        "readFile": true,
+        "scope": [
+          "*"
+        ]
+      }
     },
     "bundle": {
       "active": true,
@@ -29,7 +35,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "com.hypertitles.dev",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -57,8 +63,9 @@
       {
         "fullscreen": false,
         "height": 600,
+        "maximized": true,
         "resizable": true,
-        "title": "hypertitles",
+        "title": "Hypertitles 1.0.0",
         "width": 800
       }
     ]

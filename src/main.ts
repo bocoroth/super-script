@@ -4,14 +4,25 @@ import { invoke } from '@tauri-apps/api'
 import './style.scss'
 
 // dependency scripts
-// @ts-ignore
 import * as bootstrap from 'bootstrap'
 
 // app scripts
-import { App } from './ts/App'
+import { App } from './App'
 
 // main app invocation
 new App()
+
+const triggerTabList = [].slice.call(document.querySelectorAll('#myTab a'))
+triggerTabList.forEach(function (triggerEl: HTMLElement) {
+  const tabTrigger = new bootstrap.Tab(triggerEl)
+
+  triggerEl.addEventListener('click', function (event: Event) {
+    event.preventDefault()
+    tabTrigger.show()
+  })
+})
+
+/* IPC Functions **************************************************************/
 
 // now we can call our Command!
 // Right-click the application background and open the developer tools.
