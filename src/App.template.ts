@@ -1,11 +1,7 @@
-// Angular syntax highlighting if your IDE supports it.
-//
-// Packages
-// Atom: language-angular-inline
-// VSCode: angular2-inline
+const html = (str: TemplateStringsArray) => { return str.raw.join() }
 
-const app = {
-template: `
+export const appTemplate = html`
+
 <ul class="nav nav-tabs" id="appTabs" role="tablist">
 
   <li class="nav-item" role="presentation">
@@ -46,8 +42,6 @@ template: `
 
 </ul>
 
-
-
 <div class="tab-content" id="appTabsContent">
 
   <div class="tab-pane fade show active" id="settings" role="tabpanel"
@@ -66,7 +60,6 @@ template: `
   aria-labelledby="performance-tab">
   </div>
 
-</div>`
-}
+</div>
 
-export const appTemplate = app.template
+`

@@ -20,7 +20,7 @@ export class App {
     }
   }
 
-  public async reset(log = true) {
+  public reset(log = true) {
       document.querySelector<HTMLDivElement>('#app')!.innerHTML = appTemplate
 
       // Load views
@@ -42,7 +42,7 @@ export class App {
     return content
   }
 
-  public static async readContents(file: string): Promise<string> {
+  public static readContents(file: string): Promise<string> {
     return readTextFile(file)
   }
 }

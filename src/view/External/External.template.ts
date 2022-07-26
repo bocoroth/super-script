@@ -1,13 +1,7 @@
-// Angular syntax highlighting if your IDE supports it.
-//
-// Packages
-// Atom: language-angular-inline
-// VSCode: angular2-inline
+const html = (str: TemplateStringsArray) => { return str.raw.join() }
 
-const external = {
-template: `
+export const externalTemplate = html`
+
 <p>External</p>
-`
-}
 
-export const externalTemplate = external.template
+`

@@ -1,13 +1,8 @@
-// Angular syntax highlighting if your IDE supports it.
-//
-// Packages
-// Atom: language-angular-inline
-// VSCode: angular2-inline
+const html = (str: TemplateStringsArray) => { return str.raw.join() }
 
-const editor = {
-template: `
+export const editorTemplate = html`
+
 <h1>Editor</h1>
-`
-}
+<div id="editbox"></div>
 
-export const editorTemplate = editor.template
+`

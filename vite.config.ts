@@ -26,7 +26,8 @@ export default defineConfig({
     alias: {
       '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
       '~bootstrap-dark': path.resolve(__dirname, 'node_modules/bootstrap-dark'),
-      '~material-icons': path.resolve(__dirname, 'node_modules/material-icons')
+      '~material-icons': path.resolve(__dirname, 'node_modules/material-icons'),
+      '~tinymce': path.resolve(__dirname, 'node_modules/tinymce')
     }
   },
   test: {
