@@ -1,5 +1,11 @@
  import { readTextFile } from "@tauri-apps/api/fs";
+
  import { appTemplate } from './App.template';
+
+ import { Editor } from './view/Editor/Editor'
+ import { Performance } from './view/Performance/Performance'
+ import { Rehearsal } from './view/Rehearsal/Rehearsal'
+ import { Settings } from './view/Settings/Settings'
 
 export class App {
   private test = false
@@ -16,7 +22,14 @@ export class App {
 
   public async reset(log = true) {
       document.querySelector<HTMLDivElement>('#app')!.innerHTML = appTemplate
-      if (log){
+
+      // Load views
+      new Settings().load('#settings')
+      new Editor().load('#editor')
+      new Rehearsal().load('#rehearsal')
+      new Performance().load('#performance')
+
+      if (log) {
         console.log('App reset')
       }
   }

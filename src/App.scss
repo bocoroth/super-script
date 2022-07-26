@@ -9,15 +9,35 @@ ul.nav-tabs {
       margin-left: 8px;
     }
 
+    &:only-child {
+      span.close {
+        display: none; // hide close button for single tab
+      }
+    }
+
     button.nav-link {
+      color: #aaa;
       padding: 4px 7px;
       vertical-align: middle;
 
-      .mi {
+      &.active {
+        color: #fff;
+      }
+
+      span.mi {
         font-size: 22px;
         display: inline-block;
         margin-top: -3px;
         vertical-align: middle;
+      }
+
+      span.close {
+        text-decoration: none;
+        color: #888;
+
+        &:hover {
+          color: #fff;
+        }
       }
     }
   }

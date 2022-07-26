@@ -12,7 +12,8 @@ template: `
     <button class="nav-link active" id="settings-tab" data-bs-toggle="tab"
     data-bs-target="#settings" type="button" role="tab" aria-controls="settings"
     aria-selected="true">
-      <span class="mi mi-settings"></span> Settings
+      <span class="mi mi-settings"></span> Settings&nbsp;&nbsp;
+      <span id="settings-close" class="close">×</span>
     </button>
   </li>
 
@@ -20,7 +21,8 @@ template: `
     <button class="nav-link" id="editor-tab" data-bs-toggle="tab"
     data-bs-target="#editor" type="button" role="tab" aria-controls="editor"
     aria-selected="false">
-      <span class="mi mi-edit-note"></span> Editor
+      <span class="mi mi-edit-note"></span> Editor&nbsp;&nbsp;
+      <span id="editor-close" class="close">×</span>
     </button>
   </li>
 
@@ -28,7 +30,8 @@ template: `
     <button class="nav-link" id="rehearsal-tab" data-bs-toggle="tab"
     data-bs-target="#rehearsal" type="button" role="tab"
     aria-controls="rehearsal" aria-selected="false">
-      <span class="mi mi-menu-book"></span> Rehearsal
+      <span class="mi mi-menu-book"></span> Rehearsal&nbsp;&nbsp;
+      <span id="rehearsal-close" class="close">×</span>
     </button>
   </li>
 
@@ -36,7 +39,8 @@ template: `
     <button class="nav-link" id="performance-tab" data-bs-toggle="tab"
     data-bs-target="#performance" type="button" role="tab"
     aria-controls="performance" aria-selected="false">
-      <span class="mi mi-theater-comedy"></span> Performance
+      <span class="mi mi-theater-comedy"></span> Performance&nbsp;&nbsp;
+      <span id="performance-close" class="close">×</span>
     </button>
   </li>
 
@@ -48,22 +52,18 @@ template: `
 
   <div class="tab-pane fade show active" id="settings" role="tabpanel"
   aria-labelledby="settings-tab">
-    <h1>Settings</h1>
   </div>
 
   <div class="tab-pane fade" id="editor" role="tabpanel"
   aria-labelledby="editor-tab">
-    <h1>Editor</h1>
   </div>
 
   <div class="tab-pane fade" id="rehearsal" role="tabpanel"
   aria-labelledby="rehearsal-tab">
-    <h1>Rehearsal</h1>
   </div>
 
   <div class="tab-pane fade" id="performance" role="tabpanel"
   aria-labelledby="performance-tab">
-    <h1>Performance</h1>
   </div>
 
 </div>`

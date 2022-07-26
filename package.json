@@ -14,7 +14,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri": "tauri",
-    "test": "vitest"
+    "test": "vitest run --reporter dot",
+    "test-verbose": "vitest run --reporter verbose",
+    "coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^1.0.4",
@@ -23,6 +25,7 @@
     "@types/datatables.net-select": "^1.2.7",
     "@types/jquery": "^3.5.14",
     "@types/node": "^18.0.6",
+    "c8": "^7.12.0",
     "jsdom": "^20.0.0",
     "sass": "^1.53.0",
     "typescript": "^4.7.4",

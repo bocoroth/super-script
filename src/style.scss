@@ -10,3 +10,16 @@ $material-icons-font-path: '~material-icons/iconfont/';
 
 /* app imports ***********************/
 @import "./App";
+
+// components
+@import "./component/DisplayBox/DisplayBox";
+@import "./component/EditBox/EditBox";
+@import "./component/LineList/LineList";
+@import "./component/Toolbar/Toolbar";
+
+// views
+@import "./view/Editor/Editor";
+@import "./view/External/External";
+@import "./view/Performance/Performance";
+@import "./view/Rehearsal/Rehearsal";
+@import "./view/Settings/Settings";
