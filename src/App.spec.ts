@@ -45,12 +45,8 @@ describe('Testing main App', () => {
   it('should log a debug message correctly', () => {
     app = new App(true)
     const test = App.debugLog('test')
-    const now = new Date()
-      .toISOString()
-      .replaceAll('T', ' ')
-      .replaceAll('Z', ' UTC')
-    const message = `[${now}] test`
 
-    expect(test).toBe(message)
+    expect(test).toMatch(/^\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} UTC\] test$/)
+    expect(test).toHaveLength(34)
   })
 })
