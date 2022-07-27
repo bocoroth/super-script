@@ -1,5 +1,8 @@
 import { invoke } from '@tauri-apps/api'
 
+// Turn Debug log on or off
+const DEBUGGING_ENABLED = true
+
 // styles
 import './style.scss'
 
@@ -10,7 +13,7 @@ import * as bootstrap from 'bootstrap'
 import { App } from './App'
 
 // main app invocation
-new App()
+new App(DEBUGGING_ENABLED)
 
 const triggerTabList = [].slice.call(document.querySelectorAll('#myTab a'))
 triggerTabList.forEach(function (triggerEl: HTMLElement) {

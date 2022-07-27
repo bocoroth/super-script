@@ -1,4 +1,4 @@
- import { readTextFile } from "@tauri-apps/api/fs";
+ // import { readTextFile } from "@tauri-apps/api/fs";
 
  import { appTemplate } from './App.template';
 
@@ -8,19 +8,16 @@
  import { Settings } from './view/Settings/Settings'
 
 export class App {
-  private test = false
+  private static debugMode = false
 
-  constructor(test = false) {
-    if (!test) {
-      this.reset(false)
-      console.log('App loaded')
-    }
-    else {
-      this.test = true
-    }
+  constructor(debug = false) {
+      App.debugMode = debug
+      this.reset()
+
+      App.debugLog('App loaded')
   }
 
-  public reset(log = true) {
+  public reset() {
       document.querySelector<HTMLDivElement>('#app')!.innerHTML = appTemplate
 
       // Load views
@@ -29,20 +26,31 @@ export class App {
       new Rehearsal().load('#rehearsal')
       new Performance().load('#performance')
 
-      if (log) {
-        console.log('App reset')
-      }
+      App.debugLog('App reset')
   }
 
   public setContent(content: string): string {
-    if (!this.test) {
       document.querySelector<HTMLDivElement>('#app')!.innerHTML = content
-      console.log('App content updated:', content)
-    }
+      App.debugLog('App content updated:', content)
     return content
   }
 
-  public static readContents(file: string): Promise<string> {
-    return readTextFile(file)
+  // public static readContents(file: string): Promise<string> {
+  //   return readTextFile(file)
+  // }
+
+  public static debugLog(...messages: any): string {
+    const now = new Date()
+      .toISOString()
+      .replaceAll('T', ' ')
+      .replaceAll('Z', ' UTC')
+
+    const log = [`[${now}]`, ...messages].join(' ')
+    
+    if (App.debugMode) {
+      console.debug(log)
+    }
+
+    return log
   }
 }
