@@ -11,27 +11,27 @@ export class App {
   private static debugMode = false
 
   constructor(debug = false) {
-      App.debugMode = debug
-      this.reset()
+    App.debugMode = debug
+    this.reset()
 
-      App.debugLog('App loaded')
+    App.debugLog('App loaded')
   }
 
   public reset() {
-      document.querySelector<HTMLDivElement>('#app')!.innerHTML = appTemplate
+    document.querySelector<HTMLDivElement>('#app')!.innerHTML = appTemplate
 
-      // Load views
-      new Settings().load('#settings')
-      new Editor().load('#editor')
-      new Rehearsal().load('#rehearsal')
-      new Performance().load('#performance')
+    // Load views
+    new Settings().load('#settings')
+    new Editor().load('#editor')
+    new Rehearsal().load('#rehearsal')
+    new Performance().load('#performance')
 
-      App.debugLog('App reset')
+    App.debugLog('App reset')
   }
 
   public setContent(content: string): string {
-      document.querySelector<HTMLDivElement>('#app')!.innerHTML = content
-      App.debugLog('App content updated:', content)
+    document.querySelector<HTMLDivElement>('#app')!.innerHTML = content
+    App.debugLog('App content updated:', content)
     return content
   }
 
@@ -46,7 +46,7 @@ export class App {
       .replaceAll('Z', ' UTC')
 
     const log = [`[${now}]`, ...messages].join(' ')
-    
+
     if (App.debugMode) {
       console.debug(log)
     }

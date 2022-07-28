@@ -1,0 +1,17 @@
+{
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "jquery": true
+  },
+  "root": true,
+  "extends": [
+    "eslint:recommended",
+    "standard"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {}
+}
