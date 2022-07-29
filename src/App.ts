@@ -42,8 +42,8 @@ export class App {
   public static debugLog (...messages: any): string {
     const now = new Date()
       .toISOString()
-      .replaceAll('T', ' ')
-      .replaceAll('Z', ' UTC')
+      .replace('T', ' ')
+      .replace('Z', ' UTC')
 
     const log = [`[${now}]`, ...messages].join(' ')
 
