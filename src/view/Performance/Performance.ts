@@ -1,9 +1,9 @@
 import { performanceTemplate } from './Performance.template'
 
 export class Performance {
-    constructor() {}
+  // constructor () {}
 
-    public load(selector: string) {
-      document.querySelector<HTMLDivElement>(selector)!.innerHTML = performanceTemplate
-    }
+  public load (selector: string) {
+    document.querySelector<HTMLDivElement>(selector)!.innerHTML = performanceTemplate
+  }
 }

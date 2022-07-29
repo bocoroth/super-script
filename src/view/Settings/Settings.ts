@@ -1,16 +1,14 @@
-import { settingsTemplate } from './Settings.template';
+import { settingsTemplate } from './Settings.template'
 
 export class Settings {
-    private selector: string
+  private selector: string
 
-    constructor() {
-      this.selector = "#settings"
-    }
+  constructor () {
+    this.selector = '#settings'
+  }
 
-    public load(selector: string) {
-      this.selector = selector
-      document.querySelector<HTMLDivElement>(selector)!.innerHTML = settingsTemplate
-    }
-
-    
+  public load (selector: string) {
+    this.selector = selector
+    document.querySelector<HTMLDivElement>(this.selector)!.innerHTML = settingsTemplate
+  }
 }

@@ -1,8 +1,5 @@
 import { invoke } from '@tauri-apps/api'
 
-// Turn Debug log on or off
-const DEBUGGING_ENABLED = true
-
 // styles
 import './style.scss'
 
@@ -11,6 +8,9 @@ import * as bootstrap from 'bootstrap'
 
 // app scripts
 import { App } from './App'
+
+// Turn Debug log on or off
+const DEBUGGING_ENABLED = true
 
 // main app invocation
 new App(DEBUGGING_ENABLED)

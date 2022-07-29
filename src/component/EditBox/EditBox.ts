@@ -1,4 +1,4 @@
-import { editBoxTemplate } from './EditBox.template';
+import { editBoxTemplate } from './EditBox.template'
 
 // import tinymce from 'tinymce/tinymce';
 // import 'tinymce/themes/silver/theme';
@@ -6,13 +6,13 @@ import { editBoxTemplate } from './EditBox.template';
 // import 'tinymce/models/dom/model';
 
 export class EditBox {
-    constructor() {}
+  // constructor () {}
 
-    public load(selector: string) {
-      document.querySelector<HTMLDivElement>(selector)!.innerHTML = editBoxTemplate
+  public load (selector: string) {
+    document.querySelector<HTMLDivElement>(selector)!.innerHTML = editBoxTemplate
 
-      // tinymce.init({
-      //   selector: 'textarea#tinymce'
-      // })
-    }
+    // tinymce.init({
+    //   selector: 'textarea#tinymce'
+    // })
+  }
 }

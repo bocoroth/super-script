@@ -1,9 +1,9 @@
-import { rehearsalTemplate } from './Rehearsal.template';
+import { rehearsalTemplate } from './Rehearsal.template'
 
 export class Rehearsal {
-    constructor() {}
+  // constructor () {}
 
-    public load(selector: string) {
-      document.querySelector<HTMLDivElement>(selector)!.innerHTML = rehearsalTemplate
-    }
+  public load (selector: string) {
+    document.querySelector<HTMLDivElement>(selector)!.innerHTML = rehearsalTemplate
+  }
 }

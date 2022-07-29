@@ -1,3 +1,3 @@
 export class External {
-    constructor() {}
+  // constructor() {}
 }

@@ -1,23 +1,23 @@
- // import { readTextFile } from "@tauri-apps/api/fs";
+// import { readTextFile } from "@tauri-apps/api/fs";
 
- import { appTemplate } from './App.template';
+import { appTemplate } from './App.template'
 
- import { Editor } from './view/Editor/Editor'
- import { Performance } from './view/Performance/Performance'
- import { Rehearsal } from './view/Rehearsal/Rehearsal'
- import { Settings } from './view/Settings/Settings'
+import { Editor } from './view/Editor/Editor'
+import { Performance } from './view/Performance/Performance'
+import { Rehearsal } from './view/Rehearsal/Rehearsal'
+import { Settings } from './view/Settings/Settings'
 
 export class App {
   private static debugMode = false
 
-  constructor(debug = false) {
+  constructor (debug = false) {
     App.debugMode = debug
     this.reset()
 
     App.debugLog('App loaded')
   }
 
-  public reset() {
+  public reset () {
     document.querySelector<HTMLDivElement>('#app')!.innerHTML = appTemplate
 
     // Load views
@@ -29,7 +29,7 @@ export class App {
     App.debugLog('App reset')
   }
 
-  public setContent(content: string): string {
+  public setContent (content: string): string {
     document.querySelector<HTMLDivElement>('#app')!.innerHTML = content
     App.debugLog('App content updated:', content)
     return content
@@ -39,7 +39,7 @@ export class App {
   //   return readTextFile(file)
   // }
 
-  public static debugLog(...messages: any): string {
+  public static debugLog (...messages: any): string {
     const now = new Date()
       .toISOString()
       .replaceAll('T', ' ')
