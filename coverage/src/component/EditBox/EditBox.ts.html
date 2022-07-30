@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/18</span>
+                <span class='fraction'>31/31</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/18</span>
+                <span class='fraction'>31/31</span>
             </div>
         
             
@@ -81,7 +81,20 @@
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -92,30 +105,56 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { editBoxTemplate } from './EditBox.template';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { App } from '../../App'
+import { DOMComponent } from '../../interfaces/DOMComponent.interface'
+import { editBoxTemplate } from './EditBox.template'
 &nbsp;
-// import tinymce from 'tinymce/tinymce';
-// import 'tinymce/themes/silver/theme';
-// import 'tinymce/icons/default/icons';
-// import 'tinymce/models/dom/model';
+// import { TinyMCE } from 'tinymce'
+// import 'tinymce/themes/silver/theme'
+// import 'tinymce/icons/default/icons'
+// import 'tinymce/models/dom/model'
 &nbsp;
-export class EditBox {
-    constructor() {}
+// declare const tinymce: TinyMCE
 &nbsp;
-    public load(selector: string) {
-      document.querySelector&lt;HTMLDivElement&gt;(selector)!.innerHTML = editBoxTemplate
+export class EditBox implements DOMComponent {
+  selector: string
+  readonly className = 'editbox-component'
 &nbsp;
-      // tinymce.init({
-      //   selector: 'textarea#tinymce'
-      // })
-    }
+  constructor (selector = '#editbox') {
+    this.selector = selector
+  }
+&nbsp;
+  public load () {
+    const editBoxElement = document.querySelector&lt;HTMLDivElement&gt;(this.selector)
+    editBoxElement!.innerHTML = editBoxTemplate
+    editBoxElement!.className = this.className
+&nbsp;
+    // tinymce.init({
+    //   selector: 'textarea#tinymce'
+    // })
+&nbsp;
+    App.debugLog('EditBox loaded.')
+  }
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -124,7 +163,7 @@ export class EditBox {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-07-27T01:53:36.018Z
+                at 2022-07-30T16:56:12.427Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

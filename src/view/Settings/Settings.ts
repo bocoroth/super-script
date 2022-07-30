@@ -1,14 +1,19 @@
+import { App } from '../../App'
+import { DOMComponent } from '../../interfaces/DOMComponent.interface'
 import { settingsTemplate } from './Settings.template'
 
-export class Settings {
-  private selector: string
+export class Settings implements DOMComponent {
+  selector: string
+  readonly className = 'settings-component'
 
-  constructor () {
-    this.selector = '#settings'
+  constructor (selector = '#settings') {
+    this.selector = selector
   }
 
-  public load (selector: string) {
-    this.selector = selector
-    document.querySelector<HTMLDivElement>(this.selector)!.innerHTML = settingsTemplate
+  public load () {
+    const settingsElement = document.querySelector<HTMLDivElement>(this.selector)
+    settingsElement!.innerHTML = settingsTemplate
+    settingsElement!.className = this.className
+    App.debugLog('Settings loaded.')
   }
 }

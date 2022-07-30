@@ -1,6 +1,6 @@
 // Hotkeys unit tests
 import { beforeEach, describe, expect, it } from 'vitest'
-import { Hotkeys } from './Hotkeys'
+import { Hotkeys } from './Hotkeys.module'
 
 describe('Testing Hotkeys', () => {
   let hotkeys: Hotkeys

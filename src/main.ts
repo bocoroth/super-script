@@ -10,7 +10,7 @@ import * as bootstrap from 'bootstrap'
 import { App } from './App'
 
 // Turn Debug log on or off
-const DEBUGGING_ENABLED = true
+const DEBUGGING_ENABLED = false
 
 // main app invocation
 new App(DEBUGGING_ENABLED)
