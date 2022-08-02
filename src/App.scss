@@ -1,5 +1,9 @@
 /* App styles *****************************************************************/
 
+body {
+  background-color: #111;
+}
+
 // Tabs
 ul.nav-tabs {
   li.nav-item {
@@ -15,7 +19,7 @@ ul.nav-tabs {
       }
     }
 
-    button.nav-link {
+    a.nav-link {
       color: #aaa;
       padding: 4px 7px;
       vertical-align: middle;

@@ -13,7 +13,7 @@ export class Toolbar implements DOMComponent {
   public load () {
     const toolbarElement = document.querySelector<HTMLDivElement>(this.selector)
     toolbarElement!.innerHTML = toolbarTemplate
-    toolbarElement!.className = this.className
+    toolbarElement!.classList.add(this.className)
     App.debugLog('Toolbar loaded.')
   }
 }

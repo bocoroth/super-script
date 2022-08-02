@@ -13,7 +13,7 @@ export class LineList implements DOMComponent {
   public load () {
     const lineListElement = document.querySelector<HTMLDivElement>(this.selector)
     lineListElement!.innerHTML = lineListTemplate
-    lineListElement!.className = this.className
+    lineListElement!.classList.add(this.className)
     App.debugLog('LineList loaded.')
   }
 }

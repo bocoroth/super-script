@@ -13,7 +13,7 @@ export class DisplayBox implements DOMComponent {
   public load () {
     const displayBoxElement = document.querySelector<HTMLDivElement>(this.selector)
     displayBoxElement!.innerHTML = displayBoxTemplate
-    displayBoxElement!.className = this.className
+    displayBoxElement!.classList.add(this.className)
     App.debugLog('DisplayBox loaded.')
   }
 }

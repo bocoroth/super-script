@@ -1,4 +1,26 @@
 /* EditBox styles *************************************************************/
+@import '~tinymce/skins/ui/tinymce-5-dark/skin.min.css';
+@import '~tinymce/skins/ui/tinymce-5-dark/content.min.css';
+@import '~tinymce/skins/content/tinymce-5-dark/content.min.css';
+
 .editbox-component {
-  //
+  .tox .tox-toolbar, .tox .tox-toolbar__overflow, .tox .tox-toolbar__primary {
+    background: #333333 !important;
+  }
+
+  .tox .tox-tbtn {
+    color: #aaa;
+  }
+
+  .tox .tox-tbtn svg {
+    fill: #aaa;
+  }
+
+  .tox .tox-edit-area__iframe {
+    background-color: #999;
+  }
+
+  .tox .tox-statusbar {
+    background-color: #333333;
+  }
 }

@@ -13,7 +13,7 @@ export class External implements DOMComponent {
   public load () {
     const externalElement = document.querySelector<HTMLDivElement>(this.selector)
     externalElement!.innerHTML = externalTemplate
-    externalElement!.className = this.className
+    externalElement!.classList.add(this.className)
     App.debugLog('External loaded.')
   }
 }

@@ -40,7 +40,7 @@
     "stylelint-config-standard": "^26.0.0",
     "typescript": "^4.7.4",
     "vite": "^3.0.0",
-    "vitest": "^0.18.1"
+    "vitest": "^0.20.2"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.5",
@@ -52,7 +52,6 @@
     "datatables.net-select": "^1.4.0",
     "datatables.net-select-dt": "^1.4.0",
     "dayjs": "^1.11.4",
-    "font-list": "^1.4.5",
     "hotkeys-js": "^3.9.4",
     "material-icons": "^1.11.5",
     "tinymce": "^6.1.0"

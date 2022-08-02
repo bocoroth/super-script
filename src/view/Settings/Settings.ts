@@ -13,7 +13,7 @@ export class Settings implements DOMComponent {
   public load () {
     const settingsElement = document.querySelector<HTMLDivElement>(this.selector)
     settingsElement!.innerHTML = settingsTemplate
-    settingsElement!.className = this.className
+    settingsElement!.classList.add(this.className)
     App.debugLog('Settings loaded.')
   }
 }

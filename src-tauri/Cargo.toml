@@ -1,13 +1,13 @@
 [package]
-name = "app"
-version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
-default-run = "app"
+name = "hypertitles"
+version = "1.0.0"
+description = "Display HTML-friendly subtitles or supertitles during a live performance"
+authors = ["Matt Lisiak"]
+license = "MIT"
+repository = "https://github.com/bocoroth/hypertitles"
+default-run = "hypertitles"
 edition = "2021"
-rust-version = "1.57"
+rust-version = "1.62"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -15,9 +15,10 @@ rust-version = "1.57"
 tauri-build = { version = "1.0.4", features = [] }
 
 [dependencies]
+fontdb = "0.9.1"
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.0.4", features = ["api-all"] }
+tauri = { version = "1.0.5", features = ["api-all"] }
 
 [features]
 # by default Tauri runs in production mode

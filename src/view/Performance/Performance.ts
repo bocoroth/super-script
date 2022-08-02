@@ -13,7 +13,7 @@ export class Performance implements DOMComponent {
   public load () {
     const performanceElement = document.querySelector<HTMLDivElement>(this.selector)
     performanceElement!.innerHTML = performanceTemplate
-    performanceElement!.className = this.className
+    performanceElement!.classList.add(this.className)
     App.debugLog('Performance loaded.')
   }
 }
