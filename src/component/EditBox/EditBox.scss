@@ -4,23 +4,32 @@
 @import '~tinymce/skins/content/tinymce-5-dark/content.min.css';
 
 .editbox-component {
+  height: 17vh;
+  padding: 0 7px 7px;
+
   .tox .tox-toolbar, .tox .tox-toolbar__overflow, .tox .tox-toolbar__primary {
-    background: #333333 !important;
+    background: #222 !important;
   }
 
-  .tox .tox-tbtn {
-    color: #aaa;
-  }
+  .tox {
+    &.tox-tinymce {
+      border: 1px solid #222;
+    }
 
-  .tox .tox-tbtn svg {
-    fill: #aaa;
-  }
+    .tox-tbtn {
+      color: #aaa;
 
-  .tox .tox-edit-area__iframe {
-    background-color: #999;
-  }
+      svg {
+        fill: #aaa;
+      }
+    }
 
-  .tox .tox-statusbar {
-    background-color: #333333;
+    .tox-statusbar {
+      background-color: #222;
+    }
+
+    .tox-edit-area__iframe {
+      border: 1px solid #888;
+    }
   }
 }

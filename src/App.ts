@@ -21,10 +21,10 @@ export class App {
     document.querySelector<HTMLDivElement>('#app')!.innerHTML = appTemplate
 
     // Load views
-    new Settings('#settings').load()
-    new Editor('#editor').load()
-    new Rehearsal('#rehearsal').load()
-    new Performance('#performance').load()
+    new Settings('#settings').init()
+    new Editor('#editor').init()
+    new Rehearsal('#rehearsal').init()
+    new Performance('#performance').init()
 
     App.debugLog('App reset')
   }

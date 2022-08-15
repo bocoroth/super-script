@@ -18,7 +18,7 @@ describe('Testing Toolbar', () => {
   })
 
   it('should load', () => {
-    toolbar.load()
+    toolbar.init()
     const domValue = document.querySelector<HTMLDivElement>('#toolbar')
 
     expect(domValue).toBeTruthy()

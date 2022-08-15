@@ -18,7 +18,7 @@ describe('Testing DisplayBox', () => {
   })
 
   it('should load', () => {
-    displayBox.load()
+    displayBox.init()
     const domValue = document.querySelector<HTMLDivElement>('#displaybox')
 
     expect(domValue).toBeTruthy()

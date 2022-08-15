@@ -18,7 +18,7 @@ describe('Testing Rehearsal', () => {
   })
 
   it('should load', () => {
-    rehearsal.load()
+    rehearsal.init()
     const domValue = document.querySelector<HTMLDivElement>('#rehearsal')
 
     expect(domValue).toBeTruthy()

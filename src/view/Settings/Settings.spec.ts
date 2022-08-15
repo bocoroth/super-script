@@ -18,7 +18,7 @@ describe('Testing Settings', () => {
   })
 
   it('should load', () => {
-    settings.load()
+    settings.init()
     const domValue = document.querySelector<HTMLDivElement>('#settings')
 
     expect(domValue).toBeTruthy()

@@ -1,5 +1,5 @@
 import { App } from '../../App'
-import { DOMComponent } from '../../interfaces/DOMComponent.interface'
+import { DOMComponent } from '../../interface/DOMComponent.interface'
 import { rehearsalTemplate } from './Rehearsal.template'
 
 export class Rehearsal implements DOMComponent {
@@ -10,7 +10,7 @@ export class Rehearsal implements DOMComponent {
     this.selector = selector
   }
 
-  public load () {
+  public init () {
     const rehearsalElement = document.querySelector<HTMLDivElement>(this.selector)
     rehearsalElement!.innerHTML = rehearsalTemplate
     rehearsalElement!.classList.add(this.className)

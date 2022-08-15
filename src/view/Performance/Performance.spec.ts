@@ -18,7 +18,7 @@ describe('Testing Performance', () => {
   })
 
   it('should load', () => {
-    performance.load()
+    performance.init()
     const domValue = document.querySelector<HTMLDivElement>('#performance')
 
     expect(domValue).toBeTruthy()

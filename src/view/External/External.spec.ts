@@ -18,7 +18,7 @@ describe('Testing External', () => {
   })
 
   it('should load', () => {
-    external.load()
+    external.init()
     const domValue = document.querySelector<HTMLDivElement>('#external')
 
     expect(domValue).toBeTruthy()

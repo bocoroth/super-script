@@ -18,7 +18,7 @@ describe('Testing LineList', () => {
   })
 
   it('should load', () => {
-    lineList.load()
+    lineList.init()
     const domValue = document.querySelector<HTMLDivElement>('#linelist')
 
     expect(domValue).toBeTruthy()

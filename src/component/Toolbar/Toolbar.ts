@@ -1,5 +1,5 @@
 import { App } from '../../App'
-import { DOMComponent } from '../../interfaces/DOMComponent.interface'
+import { DOMComponent } from '../../interface/DOMComponent.interface'
 import { toolbarTemplate } from './Toolbar.template'
 
 export class Toolbar implements DOMComponent {
@@ -10,7 +10,7 @@ export class Toolbar implements DOMComponent {
     this.selector = selector
   }
 
-  public load () {
+  public init () {
     const toolbarElement = document.querySelector<HTMLDivElement>(this.selector)
     toolbarElement!.innerHTML = toolbarTemplate
     toolbarElement!.classList.add(this.className)

@@ -1,11 +1,12 @@
 import { invoke } from '@tauri-apps/api'
 import { App } from '../../App'
 
-import { DOMComponent } from '../../interfaces/DOMComponent.interface'
-import { FontFamily } from '../../interfaces/FontFamily.interface'
+import { DOMComponent } from '../../interface/DOMComponent.interface'
+import { FontFamily } from '../../interface/FontFamily.interface'
 
 import { editBoxTemplate } from './EditBox.template'
 
+import TinyMCE from 'tinymce'
 import * as tinymce from 'tinymce'
 
 import 'tinymce/themes/silver/theme'
@@ -24,7 +25,7 @@ export class EditBox implements DOMComponent {
     this.selector = selector
   }
 
-  public async load () {
+  public async init () {
     const editBoxElement = document.querySelector<HTMLDivElement>(this.selector)
     editBoxElement!.innerHTML = editBoxTemplate
     editBoxElement!.classList.add(this.className)
@@ -91,6 +92,10 @@ export class EditBox implements DOMComponent {
         font_family_formats: fonts,
         font_size_formats: '6pt 8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt 64pt 72pt',
         menubar: false,
+        init_instance_callback: (editor: any) => {
+          editor.getBody().style.backgroundColor = '#444'
+          editor.getBody().style.color = '#fff'
+        },
         plugins: ['code', 'image', 'media'],
         selector: 'textarea#tinymce',
         skin: false,

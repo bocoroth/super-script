@@ -1,5 +1,5 @@
 import { App } from '../../App'
-import { DOMComponent } from '../../interfaces/DOMComponent.interface'
+import { DOMComponent } from '../../interface/DOMComponent.interface'
 import { externalTemplate } from './External.template'
 
 export class External implements DOMComponent {
@@ -10,7 +10,7 @@ export class External implements DOMComponent {
     this.selector = selector
   }
 
-  public load () {
+  public init () {
     const externalElement = document.querySelector<HTMLDivElement>(this.selector)
     externalElement!.innerHTML = externalTemplate
     externalElement!.classList.add(this.className)

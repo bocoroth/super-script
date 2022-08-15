@@ -1,5 +1,5 @@
 import { App } from '../../App'
-import { DOMComponent } from '../../interfaces/DOMComponent.interface'
+import { DOMComponent } from '../../interface/DOMComponent.interface'
 import { displayBoxTemplate } from './DisplayBox.template'
 
 export class DisplayBox implements DOMComponent {
@@ -10,7 +10,7 @@ export class DisplayBox implements DOMComponent {
     this.selector = selector
   }
 
-  public load () {
+  public init () {
     const displayBoxElement = document.querySelector<HTMLDivElement>(this.selector)
     displayBoxElement!.innerHTML = displayBoxTemplate
     displayBoxElement!.classList.add(this.className)

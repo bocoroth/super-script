@@ -2,7 +2,10 @@
 
 /* dependency imports ****************/
 @import "~bootstrap/scss/bootstrap";
-@import "~bootstrap-dark/src/bootstrap-dark";
+@import "~bootstrap-dark-5/dist/css/bootstrap-unlit";
+
+@import "~datatables.net-dt/css/jquery.dataTables";
+@import "~datatables.net-select-dt/css/select.dataTables";
 
 $material-icons-font-path: '~material-icons/iconfont/';
 @import "~material-icons/iconfont/material-icons";

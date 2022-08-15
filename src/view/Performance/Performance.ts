@@ -1,5 +1,5 @@
 import { App } from '../../App'
-import { DOMComponent } from '../../interfaces/DOMComponent.interface'
+import { DOMComponent } from '../../interface/DOMComponent.interface'
 import { performanceTemplate } from './Performance.template'
 
 export class Performance implements DOMComponent {
@@ -10,7 +10,7 @@ export class Performance implements DOMComponent {
     this.selector = selector
   }
 
-  public load () {
+  public init () {
     const performanceElement = document.querySelector<HTMLDivElement>(this.selector)
     performanceElement!.innerHTML = performanceTemplate
     performanceElement!.classList.add(this.className)

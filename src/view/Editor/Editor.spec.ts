@@ -18,7 +18,7 @@ describe('Testing Editor', () => {
   })
 
   it('should load', () => {
-    editor.load()
+    editor.init()
     const domValue = document.querySelector<HTMLDivElement>('#editor')
 
     expect(domValue).toBeTruthy()

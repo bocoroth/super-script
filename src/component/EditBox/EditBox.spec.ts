@@ -18,7 +18,7 @@ describe('Testing editBox', () => {
   })
 
   it('should load', () => {
-    editBox.load()
+    editBox.init()
     const domValue = document.querySelector<HTMLDivElement>('#editbox')
 
     expect(domValue).toBeTruthy()

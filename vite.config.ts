@@ -25,7 +25,9 @@ export default defineConfig({
   resolve: {
     alias: {
       '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
-      '~bootstrap-dark': path.resolve(__dirname, 'node_modules/bootstrap-dark'),
+      '~bootstrap-dark-5': path.resolve(__dirname, 'node_modules/bootstrap-dark-5'),
+      '~datatables.net-dt': path.resolve(__dirname, 'node_modules/datatables.net-dt'),
+      '~datatables.net-select-dt': path.resolve(__dirname, 'node_modules/datatables.net-select-dt'),
       '~material-icons': path.resolve(__dirname, 'node_modules/material-icons'),
       '~tinymce': path.resolve(__dirname, 'node_modules/tinymce')
     }
