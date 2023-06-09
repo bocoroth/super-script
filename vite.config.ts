@@ -1,40 +1,33 @@
-import { defineConfig } from 'vitest/config'
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { fileURLToPath } from 'url'
 
-// @ts-ignore
-import path from 'path'
-
+// https://vitejs.dev/config/
 export default defineConfig({
+  plugins: [vue()],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
+
+  // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   // prevent vite from obscuring rust errors
   clearScreen: false,
-  // Tauri expects a fixed port, fail if that port is not available
+  // tauri expects a fixed port, fail if that port is not available
   server: {
+    port: 1420,
     strictPort: true
   },
-  // to make use of `TAURI_PLATFORM`, `TAURI_ARCH`, `TAURI_FAMILY`,
-  // `TAURI_PLATFORM_VERSION`, `TAURI_PLATFORM_TYPE` and `TAURI_DEBUG`
-  // env variables
+  // to make use of `TAURI_DEBUG` and other env variables
+  // https://tauri.studio/v1/api/config#buildconfig.beforedevcommand
   envPrefix: ['VITE_', 'TAURI_'],
   build: {
     // Tauri supports es2021
-    target: ['es2021', 'chrome100', 'safari13'],
+    target: process.env.TAURI_PLATFORM === 'windows' ? 'chrome105' : 'safari13',
     // don't minify for debug builds
     minify: !process.env.TAURI_DEBUG ? 'esbuild' : false,
     // produce sourcemaps for debug builds
     sourcemap: !!process.env.TAURI_DEBUG
-  },
-  resolve: {
-    alias: {
-      '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
-      '~bootstrap-dark-5': path.resolve(__dirname, 'node_modules/bootstrap-dark-5'),
-      '~datatables.net-dt': path.resolve(__dirname, 'node_modules/datatables.net-dt'),
-      '~datatables.net-select-dt': path.resolve(__dirname, 'node_modules/datatables.net-select-dt'),
-      '~material-icons': path.resolve(__dirname, 'node_modules/material-icons'),
-      '~tinymce': path.resolve(__dirname, 'node_modules/tinymce')
-    }
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: [path.resolve(__dirname, 'vitest.setup.ts')]
   }
 })

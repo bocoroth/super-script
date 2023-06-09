@@ -1,10 +1,10 @@
 {
-  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "build": {
-    "beforeBuildCommand": "npm run build",
     "beforeDevCommand": "npm run dev",
-    "devPath": "http://localhost:5173",
-    "distDir": "../dist"
+    "beforeBuildCommand": "npm run build",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist",
+    "withGlobalTauri": false
   },
   "package": {
     "productName": "hypertitles",
@@ -12,7 +12,7 @@
   },
   "tauri": {
     "allowlist": {
-      "all": true,
+      "all": false,
       "fs": {
         "readFile": true,
         "scope": [
@@ -35,8 +35,8 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.hypertitles.dev",
-      "longDescription": "",
+      "identifier": "com.hypertitles",
+      "longDescription": "Hypertitles - display HTML-friendly subtitles or supertitles during a live performance",
       "macOS": {
         "entitlements": null,
         "exceptionDomain": "",
@@ -45,7 +45,7 @@
         "signingIdentity": null
       },
       "resources": [],
-      "shortDescription": "",
+      "shortDescription": "Display HTML-friendly subtitles or supertitles during a live performance",
       "targets": "all",
       "windows": {
         "certificateThumbprint": null,

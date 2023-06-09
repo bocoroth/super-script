@@ -3,13 +3,6 @@
     windows_subsystem = "windows"
 )]
 
-fn main() {
-    tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![get_system_fonts])
-        .run(tauri::generate_context!())
-        .expect("error while running tauri application");
-}
-
 #[tauri::command]
 fn get_system_fonts() -> String {
     let mut db = fontdb::Database::new();
@@ -18,4 +11,11 @@ fn get_system_fonts() -> String {
     let faces = db.faces().clone();
 
     return format!("{:?}", faces);
+}
+
+fn main() {
+  tauri::Builder::default()
+      .invoke_handler(tauri::generate_handler![get_system_fonts])
+      .run(tauri::generate_context!())
+      .expect("error while running tauri application");
 }
