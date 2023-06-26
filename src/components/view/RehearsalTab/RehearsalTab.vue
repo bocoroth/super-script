@@ -1,19 +1,17 @@
 <template>
-  <h1>{{ rehearsalTitle }}</h1>
+  <h1>{{ $t('rehearsalTab.title') }}</h1>
 </template>
 
 <script lang="ts">
   // The Rehersal tab will run through the script but does not use the external display.
   export default {
-    name: 'Rehearsal',
+    name: 'RehearsalTab',
     data() {
-      return {
-        rehearsalTitle: 'Rehearsal'
-      }
+      return {}
     }
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

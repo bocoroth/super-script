@@ -1,16 +1,14 @@
 <template>
-  <h1>{{ settingsTitle }}</h1>
+  <h1>{{ $t('settingsTab.title') }}</h1>
 </template>
 
 <script lang="ts">
 import {Util} from '../../util/Util'
 
 export default {
-  name: 'Settings',
+  name: 'SettingsTab',
   data() {
-    return {
-      settingsTitle: 'Settings'
-    }
+    return {}
   },
   mounted() {
     Util.debugLog('Settings view mounted.')
@@ -18,6 +16,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

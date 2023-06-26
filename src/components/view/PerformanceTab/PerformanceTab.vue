@@ -1,19 +1,17 @@
 <template>
-  <h1>{{ performanceTitle }}</h1>
+  <h1>{{ $t('performanceTab.title') }}</h1>
 </template>
 
 <script lang="ts">
 // The Performance tab will run through the script using the external display.
   export default {
-    name: 'Performance',
+    name: 'PerformanceTab',
     data() {
-      return {
-        performanceTitle: 'Performance'
-      }
+      return {}
     }
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

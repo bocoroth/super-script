@@ -1,0 +1,14 @@
+{
+  "editorTab": {
+    "title": "Editor"
+  },
+  "performanceTab": {
+    "title": "Presentación"
+  },
+  "rehearsalTab": {
+    "title": "Ensayo"
+  },
+  "settingsTab": {
+    "title": "Ajustes"
+  }
+}
