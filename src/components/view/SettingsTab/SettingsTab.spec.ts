@@ -1,7 +1,17 @@
+import { mount } from '@vue/test-utils'
 import { test, expect, describe } from 'vitest'
+import SettingsTab from './SettingsTab.vue'
 
-describe('view/SettingsTab tests.', () => {
-  test('sanity check', () => {
-    expect(true).toBe(true)
+describe('Running view/SettingsTab tests...', () => {
+  test('Component mounts properly', async () => {
+    const wrapper = mount(SettingsTab, {
+      global: {
+        mocks: {
+          // mock for vue-i18n
+          $t: (msg: any) => msg
+        }
+      }
+    })
+    expect(wrapper).toBeTruthy()
   })
 })

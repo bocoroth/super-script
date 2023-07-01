@@ -8,9 +8,7 @@ import SettingsTab from '@/components/view/SettingsTab/SettingsTab.vue'
 import EditorTab from '@/components/view/EditorTab/EditorTab.vue'
 import RehearsalTab from '@/components/view/RehearsalTab/RehearsalTab.vue'
 import PerformanceTab from '@/components/view/PerformanceTab/PerformanceTab.vue'
-
-// set to true to enable debug logger
-export const debugMode = true
+import { Util } from './components/Util'
 
 export default {
   name: 'App',
@@ -20,7 +18,10 @@ export default {
     RehearsalTab,
     PerformanceTab
   },
-  methods: {
+  methods: {},
+  beforeMount() {
+    // set to true to enable debug logger
+    Util.setDebugMode(true)
   }
 }
 </script>
@@ -28,20 +29,52 @@ export default {
 <template>
   <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <button class="nav-link active" id="nav-settings-tab" data-bs-toggle="tab" data-bs-target="#nav-settings"
-      type="button" role="tab" aria-controls="nav-settings" aria-selected="true">
+      <button
+        class="nav-link active"
+        id="nav-settings-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#nav-settings"
+        type="button"
+        role="tab"
+        aria-controls="nav-settings"
+        aria-selected="true"
+      >
         {{ $t('settingsTab.title') }}
       </button>
-      <button class="nav-link" id="nav-editor-tab" data-bs-toggle="tab" data-bs-target="#nav-editor" type="button"
-      role="tab" aria-controls="nav-editor" aria-selected="false">
+      <button
+        class="nav-link"
+        id="nav-editor-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#nav-editor"
+        type="button"
+        role="tab"
+        aria-controls="nav-editor"
+        aria-selected="false"
+      >
         {{ $t('editorTab.title') }}
       </button>
-      <button class="nav-link" id="nav-rehearsal-tab" data-bs-toggle="tab" data-bs-target="#nav-rehearsal" type="button"
-      role="tab" aria-controls="nav-rehearsal" aria-selected="false">
+      <button
+        class="nav-link"
+        id="nav-rehearsal-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#nav-rehearsal"
+        type="button"
+        role="tab"
+        aria-controls="nav-rehearsal"
+        aria-selected="false"
+      >
         {{ $t('rehearsalTab.title') }}
       </button>
-      <button class="nav-link" id="nav-performance-tab" data-bs-toggle="tab" data-bs-target="#nav-performance"
-      type="button" role="tab" aria-controls="nav-performance" aria-selected="false">
+      <button
+        class="nav-link"
+        id="nav-performance-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#nav-performance"
+        type="button"
+        role="tab"
+        aria-controls="nav-performance"
+        aria-selected="false"
+      >
         {{ $t('performanceTab.title') }}
       </button>
     </div>
@@ -108,6 +141,7 @@ nav {
     }
   }
 }
+
 // TinyMCE
 .tox .tox-tbtn {
   transform: scale(0.75) !important;
@@ -116,7 +150,7 @@ nav {
   margin: 0 !important;
 }
 .tox .tox-tbtn--bespoke .tox-tbtn__select-label {
-    width: unset !important;
+  width: unset !important;
 }
 .tox-statusbar__branding {
   display: none;

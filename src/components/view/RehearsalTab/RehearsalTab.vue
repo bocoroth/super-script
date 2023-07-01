@@ -3,15 +3,13 @@
 </template>
 
 <script lang="ts">
-  // The Rehersal tab will run through the script but does not use the external display.
-  export default {
-    name: 'RehearsalTab',
-    data() {
-      return {}
-    }
+// The Rehersal tab will run through the script but does not use the external display.
+export default {
+  name: 'RehearsalTab',
+  data() {
+    return {}
   }
+}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

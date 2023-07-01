@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import {Util} from '../../util/Util'
+import { Util } from '../../Util'
 
 export default {
   name: 'SettingsTab',
@@ -16,6 +16,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
