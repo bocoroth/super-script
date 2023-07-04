@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { test, expect, describe } from 'vitest'
 import EditBox from './EditBox.vue'
 
-describe('Running view/EditBox tests...', () => {
+describe('Running module/EditBox tests...', () => {
   test('Component mounts properly', async () => {
     const wrapper = mount(EditBox, {
       global: {

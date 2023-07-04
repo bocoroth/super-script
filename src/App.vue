@@ -1,6 +1,5 @@
 <script lang="ts">
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap-dark-5/dist/css/bootstrap-unlit.min.css'
 
 import 'bootstrap/js/dist/tab'
 
@@ -97,47 +96,21 @@ export default {
 
 <style lang="scss">
 body {
-  background-color: #111;
+  background-color: #222;
 }
 
 // Tabs
-nav {
+nav,
+.nav {
+  --bs-nav-link-color: #555;
+  background-color: var(--bs-body-bg);
   .nav-tabs {
     margin: 4px 0 0;
 
     .nav-link {
-      border: 1px solid #444;
-      color: #aaa;
       padding: 0 7px;
       margin-left: 10px;
       vertical-align: middle;
-
-      &.active {
-        border-bottom: 1px solid #222;
-        color: #fff;
-      }
-
-      &:only-child {
-        span.close {
-          display: none; // hide close button for single tab
-        }
-      }
-
-      span.mi {
-        font-size: 22px;
-        display: inline-block;
-        margin-top: -3px;
-        vertical-align: middle;
-      }
-
-      span.close {
-        text-decoration: none;
-        color: #888;
-
-        &:hover {
-          color: #fff;
-        }
-      }
     }
   }
 }

@@ -18,6 +18,9 @@
         "scope": [
           "*"
         ]
+      },
+      "window": {
+        "create": true
       }
     },
     "bundle": {
@@ -66,6 +69,7 @@
         "maximized": true,
         "resizable": true,
         "title": "Hypertitles 1.0.0",
+        "theme": "Dark",
         "width": 800
       }
     ]
