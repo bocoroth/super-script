@@ -1,7 +1,10 @@
 <script lang="ts">
 // The Editor tab is used for editing the current script.
+
 import EditBox from '@/components/modules/EditBox/EditBox.vue'
 import LineList from '@/components/modules/LineList/LineList.vue'
+import { Util } from '../../Util'
+
 export default {
   name: 'EditorTab',
   components: {
@@ -10,6 +13,9 @@ export default {
   },
   data() {
     return {}
+  },
+  mounted() {
+    Util.debugLog('Editor view mounted.')
   }
 }
 </script>

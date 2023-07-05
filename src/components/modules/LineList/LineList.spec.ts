@@ -14,4 +14,24 @@ describe('Running module/LineList tests...', () => {
     })
     expect(wrapper).toBeTruthy()
   })
+
+  test('Component exports data properly', async () => {
+    const wrapper = mount(LineList, {
+      global: {
+        mocks: {
+          // mock for vue-i18n
+          $t: (msg: any) => msg
+        }
+      }
+    })
+
+    expect(LineList.name).toBe('LineList')
+    expect(LineList.data).toBeTypeOf('function')
+    expect(LineList.data()).toBeTruthy()
+
+    expect(wrapper.vm.$data.dtColumns).toBeTruthy()
+    expect(wrapper.vm.$data.dtColumns).toBeTypeOf('object')
+    expect(wrapper.vm.$data.dtColumns[0]).toBeTypeOf('object')
+    expect(wrapper.vm.$data.dtColumns[0]).toBeTypeOf('object')
+  })
 })

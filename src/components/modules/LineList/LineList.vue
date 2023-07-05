@@ -1,9 +1,12 @@
 <script lang="ts">
+// The LineList module displays the datatable containing the current script.
+
 import DataTable from 'datatables.net-vue3'
 import DataTablesCore from 'datatables.net-bs5'
 import Responsive from 'datatables.net-responsive-bs5'
 import Scroller from 'datatables.net-scroller-bs5'
 import Select from 'datatables.net-select-bs5'
+import { Util } from '../../Util'
 
 DataTable.use(DataTablesCore)
 DataTable.use(Responsive)
@@ -56,313 +59,10 @@ export default {
         dom: "<'row'<'col-sm-12 col-md-6 gotoLine'><'col-sm-12 col-md-6'f>>" + "<'row'<'dttable col-sm-12'tr>>",
         paging: false,
         responsive: true,
-        scrollY: '70vh'
+        scrollY: '70vh',
+        select: 'single'
       },
       dtData: [
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
-        {
-          id: 1,
-          startTime: '00:00:00.000',
-          endTime: '00:00:05.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a test line.'
-        },
-        {
-          id: 2,
-          startTime: '00:00:05.000',
-          endTime: '00:00:10.000',
-          durationMS: 5000,
-          cssClass: 'default',
-          text: 'This is a second test line.'
-        },
         {
           id: 1,
           startTime: '00:00:00.000',
@@ -391,43 +91,48 @@ export default {
     }
   },
   mounted() {
-    // Add Go To Line input field and buttons to datatable top area
+    // Add Go To Line input field and buttons to datatable top area DOM
+    const gotoLineLabel = document.createElement('label')
+    gotoLineLabel.id = 'gotoLineLabel'
+    gotoLineLabel.textContent = 'Go To Line:'
+    /* c8 ignore next */
+    document.querySelector('.gotoLine')?.appendChild(gotoLineLabel)
 
-    const gotoLineLabel = document.querySelector('.gotoLine')?.appendChild(document.createElement('label'))
-    if (gotoLineLabel) {
-      gotoLineLabel.id = 'gotoLineLabel'
-      gotoLineLabel.innerHTML = 'Go to line:'
-    }
-    const gotoLineInput = document.querySelector('.gotoLine')?.appendChild(document.createElement('input'))
-    if (gotoLineInput) {
-      gotoLineInput.id = 'gotoLineInput'
-      gotoLineInput.setAttribute('type', 'text')
-      gotoLineInput.setAttribute('style', 'width: 75px; margin-left: 10px;')
-    }
-    const gotoLineView = document.querySelector('.gotoLine')?.appendChild(document.createElement('button'))
-    if (gotoLineView) {
-      gotoLineView.id = 'gotoLineView'
-      gotoLineView.className = 'btn btn-sm btn-info'
-      gotoLineView.innerHTML = 'View'
-      gotoLineView.setAttribute('type', 'button')
-      gotoLineView.setAttribute('style', 'margin-left: 20px; margin-top: -5px;')
-    }
-    const gotoLineCue = document.querySelector('.gotoLine')?.appendChild(document.createElement('button'))
-    if (gotoLineCue) {
-      gotoLineCue.id = 'gotoLineCue'
-      gotoLineCue.className = 'btn btn-sm btn-warning'
-      gotoLineCue.innerHTML = 'Cue'
-      gotoLineCue.setAttribute('type', 'button')
-      gotoLineCue.setAttribute('style', 'margin-left: 20px; margin-top: -5px;')
-    }
-    const gotoLineGo = document.querySelector('.gotoLine')?.appendChild(document.createElement('button'))
-    if (gotoLineGo) {
-      gotoLineGo.id = 'gotoLineGo'
-      gotoLineGo.className = 'btn btn-sm btn-danger'
-      gotoLineGo.innerHTML = 'GO'
-      gotoLineGo.setAttribute('type', 'button')
-      gotoLineGo.setAttribute('style', 'margin-left: 20px; margin-top: -5px;')
-    }
+    const gotoLineInput = document.createElement('input')
+    gotoLineInput.id = 'gotoLineInput'
+    gotoLineInput.setAttribute('type', 'text')
+    gotoLineInput.setAttribute('style', 'width: 75px; margin-left: 10px;')
+    /* c8 ignore next */
+    document.querySelector('.gotoLine')?.appendChild(gotoLineInput)
+
+    const gotoLineView = document.createElement('button')
+    gotoLineView.id = 'gotoLineView'
+    gotoLineView.className = 'btn btn-sm btn-info'
+    gotoLineView.innerHTML = 'View'
+    gotoLineView.setAttribute('type', 'button')
+    gotoLineView.setAttribute('style', 'margin-left: 20px; margin-top: -5px;')
+    /* c8 ignore next */
+    document.querySelector('.gotoLine')?.appendChild(gotoLineView)
+
+    const gotoLineCue = document.createElement('button')
+    gotoLineCue.id = 'gotoLineCue'
+    gotoLineCue.className = 'btn btn-sm btn-warning'
+    gotoLineCue.innerHTML = 'Cue'
+    gotoLineCue.setAttribute('type', 'button')
+    gotoLineCue.setAttribute('style', 'margin-left: 20px; margin-top: -5px;')
+    /* c8 ignore next */
+    document.querySelector('.gotoLine')?.appendChild(gotoLineCue)
+
+    const gotoLineGo = document.createElement('button')
+    gotoLineGo.id = 'gotoLineGo'
+    gotoLineGo.className = 'btn btn-sm btn-danger'
+    gotoLineGo.innerHTML = 'GO'
+    gotoLineGo.setAttribute('type', 'button')
+    gotoLineGo.setAttribute('style', 'margin-left: 20px; margin-top: -5px;')
+    /* c8 ignore next */
+    document.querySelector('.gotoLine')?.appendChild(gotoLineGo)
+
+    Util.debugLog('LineList module mounted.')
   }
 }
 </script>

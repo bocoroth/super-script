@@ -21,6 +21,9 @@ export default {
   beforeMount() {
     // set to true to enable debug logger
     Util.setDebugMode(true)
+  },
+  mounted() {
+    Util.debugLog('App mounted.')
   }
 }
 </script>
@@ -113,19 +116,5 @@ nav,
       vertical-align: middle;
     }
   }
-}
-
-// TinyMCE
-.tox .tox-tbtn {
-  transform: scale(0.75) !important;
-  height: unset !important;
-  width: unset !important;
-  margin: 0 !important;
-}
-.tox .tox-tbtn--bespoke .tox-tbtn__select-label {
-  width: unset !important;
-}
-.tox-statusbar__branding {
-  display: none;
 }
 </style>

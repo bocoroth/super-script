@@ -3,6 +3,8 @@
 </template>
 
 <script lang="ts">
+// The Settings tab controls user settings.
+
 import { Util } from '../../Util'
 
 export default {
