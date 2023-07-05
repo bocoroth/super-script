@@ -27,11 +27,12 @@ describe('Running module/LineList tests...', () => {
 
     expect(LineList.name).toBe('LineList')
     expect(LineList.data).toBeTypeOf('function')
-    expect(LineList.data()).toBeTruthy()
 
     expect(wrapper.vm.$data.dtColumns).toBeTruthy()
     expect(wrapper.vm.$data.dtColumns).toBeTypeOf('object')
     expect(wrapper.vm.$data.dtColumns[0]).toBeTypeOf('object')
-    expect(wrapper.vm.$data.dtColumns[0]).toBeTypeOf('object')
+
+    expect(wrapper.vm.$data.dtOptions).toBeTruthy()
+    expect(wrapper.vm.$data.dtOptions).toBeTypeOf('object')
   })
 })
