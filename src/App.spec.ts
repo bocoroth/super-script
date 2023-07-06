@@ -18,6 +18,8 @@ describe('Running App tests...', () => {
       }
     })
     expect(wrapper).toBeTruthy()
+
+    wrapper.unmount()
   })
 
   test('App loads contents', async () => {
@@ -33,5 +35,7 @@ describe('Running App tests...', () => {
     expect(wrapper.getComponent(PerformanceTab))
     expect(wrapper.getComponent(RehearsalTab))
     expect(wrapper.getComponent(SettingsTab))
+
+    wrapper.unmount()
   })
 })

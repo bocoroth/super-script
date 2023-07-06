@@ -15,7 +15,7 @@ export default {
 </script>
 
 <template>
-  <h1>{{ $t('performanceTab.title') }}</h1>
+  <h1>{{ $t('App.performance') }}</h1>
 </template>
 
 <style lang="scss" scoped></style>

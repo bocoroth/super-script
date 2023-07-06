@@ -41,7 +41,7 @@ export default {
         aria-controls="nav-settings"
         aria-selected="true"
       >
-        {{ $t('settingsTab.title') }}
+        {{ $t('App.settings') }}
       </button>
       <button
         class="nav-link"
@@ -53,7 +53,7 @@ export default {
         aria-controls="nav-editor"
         aria-selected="false"
       >
-        {{ $t('editorTab.title') }}
+        {{ $t('App.editor') }}
       </button>
       <button
         class="nav-link"
@@ -65,7 +65,7 @@ export default {
         aria-controls="nav-rehearsal"
         aria-selected="false"
       >
-        {{ $t('rehearsalTab.title') }}
+        {{ $t('App.rehearsal') }}
       </button>
       <button
         class="nav-link"
@@ -77,7 +77,7 @@ export default {
         aria-controls="nav-performance"
         aria-selected="false"
       >
-        {{ $t('performanceTab.title') }}
+        {{ $t('App.performance') }}
       </button>
     </div>
   </nav>

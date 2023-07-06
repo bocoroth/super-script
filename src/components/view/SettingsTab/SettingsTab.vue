@@ -1,7 +1,3 @@
-<template>
-  <h1>{{ $t('settingsTab.title') }}</h1>
-</template>
-
 <script lang="ts">
 // The Settings tab controls user settings.
 
@@ -17,5 +13,9 @@ export default {
   }
 }
 </script>
+
+<template>
+  <h1>{{ $t('App.settings') }}</h1>
+</template>
 
 <style lang="scss" scoped></style>

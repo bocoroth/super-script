@@ -1,14 +1,21 @@
 {
-  "editorTab": {
-    "title": "Editor"
+  "App": {
+    "editor": "Editor",
+    "performance": "Performance",
+    "rehearsal": "Rehearsal",
+    "settings": "Settings"
   },
-  "performanceTab": {
-    "title": "Performance"
-  },
-  "rehearsalTab": {
-    "title": "Rehearsal"
-  },
-  "settingsTab": {
-    "title": "Settings"
+  "LineList": {
+    "search": "Search",
+    "gotoline": "Go To Line",
+    "view": "View",
+    "cue": "Cue",
+    "go": "GO",
+    "number": "#",
+    "start": "Start",
+    "end": "End",
+    "length": "Length\u202f(ms)",
+    "class": "Class",
+    "line": "Line"
   }
 }

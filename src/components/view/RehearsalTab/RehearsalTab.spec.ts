@@ -13,5 +13,7 @@ describe('Running view/RehearsalTab tests...', () => {
       }
     })
     expect(wrapper).toBeTruthy()
+
+    wrapper.unmount()
   })
 })

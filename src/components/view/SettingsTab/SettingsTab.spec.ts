@@ -13,5 +13,7 @@ describe('Running view/SettingsTab tests...', () => {
       }
     })
     expect(wrapper).toBeTruthy()
+
+    wrapper.unmount()
   })
 })

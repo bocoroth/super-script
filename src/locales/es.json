@@ -1,14 +1,21 @@
 {
-  "editorTab": {
-    "title": "Editor"
+  "App": {
+    "editor": "Editor",
+    "performance": "Presentación",
+    "rehearsal": "Ensayo",
+    "settings": "Ajustes"
   },
-  "performanceTab": {
-    "title": "Presentación"
-  },
-  "rehearsalTab": {
-    "title": "Ensayo"
-  },
-  "settingsTab": {
-    "title": "Ajustes"
+  "LineList": {
+    "search": "Buscar",
+    "gotoline": "Ir a la línea",
+    "view": "Ver",
+    "cue": "Señal",
+    "go": "Ir",
+    "number": "№",
+    "start": "Inicio",
+    "end": "Fin",
+    "length": "Período\u202f(ms)",
+    "class": "Clase",
+    "line": "Línea"
   }
 }

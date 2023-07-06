@@ -15,6 +15,8 @@ describe('Running view/EditorTab tests...', () => {
       }
     })
     expect(wrapper).toBeTruthy()
+
+    wrapper.unmount()
   })
 
   test('Component loads contents', async () => {
@@ -28,5 +30,7 @@ describe('Running view/EditorTab tests...', () => {
     })
     expect(wrapper.getComponent(EditBox))
     expect(wrapper.getComponent(LineList))
+
+    wrapper.unmount()
   })
 })

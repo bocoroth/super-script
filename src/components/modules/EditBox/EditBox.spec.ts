@@ -13,6 +13,8 @@ describe('Running module/EditBox tests...', () => {
       }
     })
     expect(wrapper).toBeTruthy()
+
+    wrapper.unmount()
   })
 
   test('TinyMCE loads properly', async () => {
@@ -26,5 +28,7 @@ describe('Running module/EditBox tests...', () => {
     })
     const tinyMCE = wrapper.find('.tox-tinymce')
     expect(tinyMCE).toBeTruthy()
+
+    wrapper.unmount()
   })
 })

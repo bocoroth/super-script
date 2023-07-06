@@ -13,6 +13,8 @@ describe('Running module/LineList tests...', () => {
       }
     })
     expect(wrapper).toBeTruthy()
+
+    wrapper.unmount()
   })
 
   test('Component exports data properly', async () => {
@@ -34,5 +36,13 @@ describe('Running module/LineList tests...', () => {
 
     expect(wrapper.vm.$data.dtOptions).toBeTruthy()
     expect(wrapper.vm.$data.dtOptions).toBeTypeOf('object')
+
+    const gotoLine = wrapper.find('.gotoLine')
+    const gotoLineContainer = wrapper.find('#gotoLineContainer')
+    expect(gotoLine).toBeTruthy()
+    expect(gotoLineContainer).toBeTruthy()
+    expect(gotoLine.element.children).toContain(gotoLineContainer.element)
+
+    wrapper.unmount()
   })
 })

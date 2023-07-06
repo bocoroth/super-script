@@ -2,12 +2,14 @@
 // The LineList module displays the datatable containing the current script.
 
 import DataTable from 'datatables.net-vue3'
+import DataTablesLib from 'datatables.net'
 import DataTablesCore from 'datatables.net-bs5'
 import Responsive from 'datatables.net-responsive-bs5'
 import Scroller from 'datatables.net-scroller-bs5'
 import Select from 'datatables.net-select-bs5'
 import { Util } from '../../Util'
 
+DataTable.use(DataTablesLib)
 DataTable.use(DataTablesCore)
 DataTable.use(Responsive)
 DataTable.use(Scroller)
@@ -22,41 +24,40 @@ export default {
         {
           data: 'id',
           name: 'id',
-          width: '2vw',
           responsivePriority: 2
         },
         {
           data: 'startTime',
           name: 'startTime',
-          width: '4vw',
           responsivePriority: 5
         },
         {
           data: 'endTime',
           name: 'endTime',
-          width: '4vw',
           responsivePriority: 6
         },
         {
           data: 'durationMS',
           name: 'durationMS',
-          width: '5vw',
           responsivePriority: 4
         },
         {
           data: 'cssClass',
           name: 'cssClass',
-          width: '10vw',
           responsivePriority: 3
         },
         {
           data: 'text',
           name: 'text',
+          width: '100%',
           responsivePriority: 1
         }
       ],
       dtOptions: {
         dom: "<'row'<'col-sm-12 col-md-6 gotoLine'><'col-sm-12 col-md-6'f>>" + "<'row'<'dttable col-sm-12'tr>>",
+        language: {
+          search: this.$t('LineList.search')
+        },
         paging: false,
         responsive: true,
         scrollY: '70vh',
@@ -91,46 +92,14 @@ export default {
     }
   },
   mounted() {
-    // Add Go To Line input field and buttons to datatable top area DOM
-    const gotoLineLabel = document.createElement('label')
-    gotoLineLabel.id = 'gotoLineLabel'
-    gotoLineLabel.textContent = 'Go To Line:'
-    /* c8 ignore next */
-    document.querySelector('.gotoLine')?.appendChild(gotoLineLabel)
-
-    const gotoLineInput = document.createElement('input')
-    gotoLineInput.id = 'gotoLineInput'
-    gotoLineInput.setAttribute('type', 'text')
-    gotoLineInput.setAttribute('style', 'width: 75px; margin-left: 10px;')
-    /* c8 ignore next */
-    document.querySelector('.gotoLine')?.appendChild(gotoLineInput)
-
-    const gotoLineView = document.createElement('button')
-    gotoLineView.id = 'gotoLineView'
-    gotoLineView.className = 'btn btn-sm btn-info'
-    gotoLineView.innerHTML = 'View'
-    gotoLineView.setAttribute('type', 'button')
-    gotoLineView.setAttribute('style', 'margin-left: 20px; margin-top: -5px;')
-    /* c8 ignore next */
-    document.querySelector('.gotoLine')?.appendChild(gotoLineView)
-
-    const gotoLineCue = document.createElement('button')
-    gotoLineCue.id = 'gotoLineCue'
-    gotoLineCue.className = 'btn btn-sm btn-warning'
-    gotoLineCue.innerHTML = 'Cue'
-    gotoLineCue.setAttribute('type', 'button')
-    gotoLineCue.setAttribute('style', 'margin-left: 20px; margin-top: -5px;')
-    /* c8 ignore next */
-    document.querySelector('.gotoLine')?.appendChild(gotoLineCue)
-
-    const gotoLineGo = document.createElement('button')
-    gotoLineGo.id = 'gotoLineGo'
-    gotoLineGo.className = 'btn btn-sm btn-danger'
-    gotoLineGo.innerHTML = 'GO'
-    gotoLineGo.setAttribute('type', 'button')
-    gotoLineGo.setAttribute('style', 'margin-left: 20px; margin-top: -5px;')
-    /* c8 ignore next */
-    document.querySelector('.gotoLine')?.appendChild(gotoLineGo)
+    // Add Go To Line input field and buttons to DataTable top area DOM
+    const gotoLine = document.getElementById('gotoLineContainer')
+    /* c8 ignore start */
+    if (gotoLine) {
+      document.querySelector('.gotoLine')?.append(gotoLine)
+      gotoLine.removeAttribute('style')
+    }
+    /* c8 ignore stop */
 
     Util.debugLog('LineList module mounted.')
   }
@@ -138,18 +107,33 @@ export default {
 </script>
 
 <template>
-  <dataTable ref="table" :columns="dtColumns" :data="dtData" :options="dtOptions" class="table table-striped">
+  <dataTable
+    id="linelist"
+    ref="table"
+    :columns="dtColumns"
+    :data="dtData"
+    :options="dtOptions"
+    class="table table-striped"
+  >
     <thead>
       <tr>
-        <th>#</th>
-        <th>Start</th>
-        <th>End</th>
-        <th>Length&nbsp;(ms)</th>
-        <th>Class</th>
-        <th>Line</th>
+        <th>{{ $t('LineList.number') }}</th>
+        <th>{{ $t('LineList.start') }}</th>
+        <th>{{ $t('LineList.end') }}</th>
+        <th>{{ $t('LineList.length') }}</th>
+        <th>{{ $t('LineList.class') }}</th>
+        <th>{{ $t('LineList.line') }}</th>
       </tr>
     </thead>
   </dataTable>
+
+  <div id="gotoLineContainer" style="display: none">
+    <label id="gotoLineLabel">{{ $t('LineList.gotoline') }}</label>
+    <input id="gotoLineInput" type="text" />
+    <button id="gotoLineView" class="btn btn-sm btn-info">{{ $t('LineList.view') }}</button>
+    <button id="gotoLineCue" class="btn btn-sm btn-warning">{{ $t('LineList.cue') }}</button>
+    <button id="gotoLineGo" class="btn btn-sm btn-danger">{{ $t('LineList.go') }}</button>
+  </div>
 </template>
 
 <style lang="scss">
@@ -170,6 +154,17 @@ export default {
   }
 }
 
+#gotoLineContainer {
+  #gotoLineInput {
+    width: 75px;
+    margin-left: 10px;
+  }
+  .btn {
+    margin-left: 20px;
+    margin-top: -5px;
+  }
+}
+
 div.datatable {
   margin-top: 6px;
 }
@@ -182,6 +177,7 @@ table.dataTable {
   thead > tr > th {
     background-color: #222f3e;
     box-shadow: none;
+    font-size: 12px;
   }
 }
 </style>
