@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { test, expect, describe } from 'vitest'
-import LineList from './LineList.vue'
+import LineList from '../components/modules/LineList.vue'
 
 describe('Running module/LineList tests...', () => {
   test('Component mounts properly', async () => {
@@ -37,11 +37,32 @@ describe('Running module/LineList tests...', () => {
     expect(wrapper.vm.$data.dtOptions).toBeTruthy()
     expect(wrapper.vm.$data.dtOptions).toBeTypeOf('object')
 
-    const gotoLine = wrapper.find('.gotoLine')
-    const gotoLineContainer = wrapper.find('#gotoLineContainer')
+    const gotoLine = wrapper.find('.goto-line')
+    const gotoLineContainer = wrapper.find('.goto-line-container')
     expect(gotoLine).toBeTruthy()
     expect(gotoLineContainer).toBeTruthy()
     expect(gotoLine.element.children).toContain(gotoLineContainer.element)
+
+    wrapper.unmount()
+  })
+
+  test('Add Go To Line block to DOM', async () => {
+    const wrapper = mount(LineList, {
+      global: {
+        mocks: {
+          // mock for vue-i18n
+          $t: (msg: any) => msg
+        }
+      }
+    })
+
+    const gotoLine = wrapper.find('.goto-line')
+
+    const testGotoNull = wrapper.vm.addGoToBlock(null)
+    expect(testGotoNull).toBe(false)
+
+    const testGoto = wrapper.vm.addGoToBlock(gotoLine.element)
+    expect(testGoto).toBe(true)
 
     wrapper.unmount()
   })

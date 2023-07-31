@@ -1,10 +1,12 @@
 import { mount } from '@vue/test-utils'
 import { test, expect, describe } from 'vitest'
-import EditBox from './EditBox.vue'
+import EditorTab from '../components/views/EditorTab.vue'
+import EditBox from '../components/modules/EditBox.vue'
+import LineList from '../components/modules/LineList.vue'
 
-describe('Running module/EditBox tests...', () => {
+describe('Running view/EditorTab tests...', () => {
   test('Component mounts properly', async () => {
-    const wrapper = mount(EditBox, {
+    const wrapper = mount(EditorTab, {
       global: {
         mocks: {
           // mock for vue-i18n
@@ -17,8 +19,8 @@ describe('Running module/EditBox tests...', () => {
     wrapper.unmount()
   })
 
-  test('TinyMCE loads properly', async () => {
-    const wrapper = mount(EditBox, {
+  test('Component loads contents', async () => {
+    const wrapper = mount(EditorTab, {
       global: {
         mocks: {
           // mock for vue-i18n
@@ -26,8 +28,8 @@ describe('Running module/EditBox tests...', () => {
         }
       }
     })
-    const tinyMCE = wrapper.find('.tox-tinymce')
-    expect(tinyMCE).toBeTruthy()
+    expect(wrapper.getComponent(EditBox))
+    expect(wrapper.getComponent(LineList))
 
     wrapper.unmount()
   })

@@ -1,30 +1,51 @@
-<script lang="ts">
+<script setup lang="ts">
 import 'bootstrap/dist/css/bootstrap.min.css'
-
 import 'bootstrap/js/dist/tab'
 
-import SettingsTab from '@/components/view/SettingsTab/SettingsTab.vue'
-import EditorTab from '@/components/view/EditorTab/EditorTab.vue'
-import RehearsalTab from '@/components/view/RehearsalTab/RehearsalTab.vue'
-import PerformanceTab from '@/components/view/PerformanceTab/PerformanceTab.vue'
+import SettingsTab from '@/components/views/SettingsTab.vue'
+import EditorTab from '@/components/views/EditorTab.vue'
+import PerformanceTab from '@/components/views/PerformanceTab.vue'
 import { Util } from './components/Util'
 
-export default {
-  name: 'App',
-  components: {
-    SettingsTab,
-    EditorTab,
-    RehearsalTab,
-    PerformanceTab
-  },
-  methods: {},
-  beforeMount() {
-    // set to true to enable debug logger
-    Util.setDebugMode(true)
-  },
-  mounted() {
-    Util.debugLog('App mounted.')
+import { onBeforeMount, onMounted, ref } from 'vue'
+
+const editorTab = ref({} as any)
+const performanceTab = ref({} as any)
+let editorDT: any // Editor tab DataTables API reference
+let performanceDT: any // Performance tab DataTables API reference
+
+onBeforeMount(() => {
+  // set to true to enable debug logger
+  Util.setDebugMode(true)
+})
+
+onMounted(() => {
+  editorDT = editorTab.value.editorLineList.dt
+  performanceDT = performanceTab.value.performanceLineList.dt
+
+  document.addEventListener('shown.bs.tab', handleShownTab)
+
+  Util.debugLog('App mounted.')
+})
+
+const handleShownTab = (event: Event) => {
+  if ((event.target as HTMLElement).id === 'nav-editor-tab') {
+    reloadEditor()
   }
+
+  if ((event.target as HTMLElement).id === 'nav-performance-tab') {
+    reloadPerformance()
+  }
+}
+
+const reloadEditor = () => {
+  // fix issue with table header not resizing properly on initial load
+  editorDT.draw()
+}
+
+const reloadPerformance = () => {
+  // fix issue with table header not resizing properly on initial load
+  performanceDT.draw()
 }
 </script>
 
@@ -57,18 +78,6 @@ export default {
       </button>
       <button
         class="nav-link"
-        id="nav-rehearsal-tab"
-        data-bs-toggle="tab"
-        data-bs-target="#nav-rehearsal"
-        type="button"
-        role="tab"
-        aria-controls="nav-rehearsal"
-        aria-selected="false"
-      >
-        {{ $t('App.rehearsal') }}
-      </button>
-      <button
-        class="nav-link"
         id="nav-performance-tab"
         data-bs-toggle="tab"
         data-bs-target="#nav-performance"
@@ -83,16 +92,13 @@ export default {
   </nav>
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane show active" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
-      <settingsTab></settingsTab>
+      <settings-tab></settings-tab>
     </div>
     <div class="tab-pane" id="nav-editor" role="tabpanel" aria-labelledby="nav-editor-tab">
-      <editorTab></editorTab>
-    </div>
-    <div class="tab-pane" id="nav-rehearsal" role="tabpanel" aria-labelledby="nav-rehearsal-tab">
-      <rehearsalTab></rehearsalTab>
+      <editor-tab ref="editorTab"></editor-tab>
     </div>
     <div class="tab-pane" id="nav-performance" role="tabpanel" aria-labelledby="nav-performance-tab">
-      <performanceTab></performanceTab>
+      <performance-tab ref="performanceTab"></performance-tab>
     </div>
   </div>
 </template>

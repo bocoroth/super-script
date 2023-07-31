@@ -1,21 +1,14 @@
-<script lang="ts">
+<script setup lang="ts">
 // The EditBox module displays the TinyMCE editor.
 
 import Editor from '@tinymce/tinymce-vue'
-import { Util } from '../../Util'
+import { onMounted } from 'vue'
 
-export default {
-  name: 'EditBox',
-  components: {
-    Editor
-  },
-  data() {
-    return {}
-  },
-  mounted() {
-    Util.debugLog('EditBox module mounted.')
-  }
-}
+import { Util } from '../Util'
+
+onMounted(() => {
+  Util.debugLog('EditBox module mounted.')
+})
 </script>
 
 <template>

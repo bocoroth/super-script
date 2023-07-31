@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { test, expect, describe } from 'vitest'
-import SettingsTab from './SettingsTab.vue'
+import LineListButtons from '../components/modules/LineListButtons.vue'
 
-describe('Running view/SettingsTab tests...', () => {
+describe('Running module/LinePreview tests...', () => {
   test('Component mounts properly', async () => {
-    const wrapper = mount(SettingsTab, {
+    const wrapper = mount(LineListButtons, {
       global: {
         mocks: {
           // mock for vue-i18n

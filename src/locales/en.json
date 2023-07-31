@@ -2,7 +2,6 @@
   "App": {
     "editor": "Editor",
     "performance": "Performance",
-    "rehearsal": "Rehearsal",
     "settings": "Settings"
   },
   "LineList": {

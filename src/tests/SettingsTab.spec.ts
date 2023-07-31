@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { test, expect, describe } from 'vitest'
-import RehearsalTab from './RehearsalTab.vue'
+import SettingsTab from '../components/views/SettingsTab.vue'
 
-describe('Running view/RehearsalTab tests...', () => {
+describe('Running view/SettingsTab tests...', () => {
   test('Component mounts properly', async () => {
-    const wrapper = mount(RehearsalTab, {
+    const wrapper = mount(SettingsTab, {
       global: {
         mocks: {
           // mock for vue-i18n

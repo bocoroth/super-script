@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils'
 import { test, expect, describe } from 'vitest'
 
-import App from './App.vue'
-import EditorTab from './components/view/EditorTab/EditorTab.vue'
-import PerformanceTab from './components/view/PerformanceTab/PerformanceTab.vue'
-import RehearsalTab from './components/view/RehearsalTab/RehearsalTab.vue'
-import SettingsTab from './components/view/SettingsTab/SettingsTab.vue'
+import App from '../App.vue'
+import EditorTab from '../components/views/EditorTab.vue'
+import PerformanceTab from '../components/views/PerformanceTab.vue'
+import RehearsalTab from '../components/views/RehearsalTab.vue'
+import SettingsTab from '../components/views/SettingsTab.vue'
 
 describe('Running App tests...', () => {
   test('App mounts properly', async () => {

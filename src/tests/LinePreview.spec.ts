@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { test, expect, describe } from 'vitest'
-import PerformanceTab from './PerformanceTab.vue'
+import LinePreview from '../components/modules/LinePreview.vue'
 
-describe('Running view/PerformanceTab tests...', () => {
+describe('Running module/LinePreview tests...', () => {
   test('Component mounts properly', async () => {
-    const wrapper = mount(PerformanceTab, {
+    const wrapper = mount(LinePreview, {
       global: {
         mocks: {
           // mock for vue-i18n
