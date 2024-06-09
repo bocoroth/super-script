@@ -5,22 +5,16 @@ import EditBox from '@/components/modules/EditBox.vue'
 import LineList from '@/components/modules/LineList.vue'
 import { Util } from '../Util'
 
-import { onMounted, ref } from 'vue'
-
-const editorLineList: any = ref({})
+import { onMounted } from 'vue'
 
 onMounted(() => {
   Util.debugLog('Editor view mounted.')
-})
-
-defineExpose({
-  editorLineList
 })
 </script>
 
 <template>
   <edit-box></edit-box>
-  <line-list :isEditorMode="true" ref="editorLineList"></line-list>
+  <line-list ref="editorLineList"></line-list>
 </template>
 
 <style lang="scss" scoped></style>

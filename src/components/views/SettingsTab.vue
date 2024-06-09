@@ -10,7 +10,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <h1>{{ $t('App.settings') }}</h1>
+  <!-- <h1>{{ $t('App.settings') }}</h1> -->
+  <h1>Settings</h1>
 </template>
 
 <style lang="scss" scoped></style>

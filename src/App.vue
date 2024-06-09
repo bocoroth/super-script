@@ -7,12 +7,7 @@ import EditorTab from '@/components/views/EditorTab.vue'
 import PerformanceTab from '@/components/views/PerformanceTab.vue'
 import { Util } from './components/Util'
 
-import { onBeforeMount, onMounted, ref } from 'vue'
-
-const editorTab = ref({} as any)
-const performanceTab = ref({} as any)
-let editorDT: any // Editor tab DataTables API reference
-let performanceDT: any // Performance tab DataTables API reference
+import { onBeforeMount, onMounted } from 'vue'
 
 onBeforeMount(() => {
   // set to true to enable debug logger
@@ -20,33 +15,8 @@ onBeforeMount(() => {
 })
 
 onMounted(() => {
-  editorDT = editorTab.value.editorLineList.dt
-  performanceDT = performanceTab.value.performanceLineList.dt
-
-  document.addEventListener('shown.bs.tab', handleShownTab)
-
   Util.debugLog('App mounted.')
 })
-
-const handleShownTab = (event: Event) => {
-  if ((event.target as HTMLElement).id === 'nav-editor-tab') {
-    reloadEditor()
-  }
-
-  if ((event.target as HTMLElement).id === 'nav-performance-tab') {
-    reloadPerformance()
-  }
-}
-
-const reloadEditor = () => {
-  // fix issue with table header not resizing properly on initial load
-  editorDT.draw()
-}
-
-const reloadPerformance = () => {
-  // fix issue with table header not resizing properly on initial load
-  performanceDT.draw()
-}
 </script>
 
 <template>
@@ -62,7 +32,8 @@ const reloadPerformance = () => {
         aria-controls="nav-settings"
         aria-selected="true"
       >
-        {{ $t('App.settings') }}
+        <!-- {{ $t('App.settings') }} -->
+        Settings
       </button>
       <button
         class="nav-link"
@@ -74,7 +45,8 @@ const reloadPerformance = () => {
         aria-controls="nav-editor"
         aria-selected="false"
       >
-        {{ $t('App.editor') }}
+        <!-- {{ $t('App.editor') }} -->
+        Editor
       </button>
       <button
         class="nav-link"
@@ -86,7 +58,8 @@ const reloadPerformance = () => {
         aria-controls="nav-performance"
         aria-selected="false"
       >
-        {{ $t('App.performance') }}
+        <!-- {{ $t('App.performance') }} -->
+        Performance
       </button>
     </div>
   </nav>

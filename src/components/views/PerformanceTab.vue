@@ -4,21 +4,15 @@
 import { Util } from '../Util'
 import LineList from '@/components/modules/LineList.vue'
 
-import { onMounted, ref } from 'vue'
-
-const performanceLineList: any = ref({})
+import { onMounted } from 'vue'
 
 onMounted(() => {
   Util.debugLog('Performance view mounted.')
 })
-
-defineExpose({
-  performanceLineList
-})
 </script>
 
 <template>
-  <line-list :isEditorMode="false" ref="performanceLineList"></line-list>
+  <line-list ref="performanceLineList"></line-list>
 </template>
 
 <style lang="scss" scoped></style>

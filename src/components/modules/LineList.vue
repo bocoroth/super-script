@@ -9,10 +9,7 @@ import Scroller from 'datatables.net-scroller-bs5'
 import Select from 'datatables.net-select-bs5'
 
 import { ref, onMounted } from 'vue'
-import { mount } from 'mount-vue-component'
-import { useI18n } from 'vue-i18n'
-
-import LineListButtons from '@/components/modules/LineListButtons.vue'
+// import { useI18n } from 'vue-i18n'
 
 import { Util } from '../Util'
 
@@ -22,50 +19,18 @@ DataTable.use(Responsive)
 DataTable.use(Scroller)
 DataTable.use(Select)
 
-const { t } = useI18n({})
-
 const dt = ref({})
 const table = ref()
 // const data = ref([])
 
-const props = defineProps({
-  isEditorMode: {
-    type: Boolean,
-    required: false,
-    default: false
-  }
-})
-
-defineExpose({ dt })
+// defineExpose({ dt })
 
 onMounted(() => {
   // Add Go To Line input field and buttons to DataTable top area DOM
-  const gotoLine: HTMLElement[] = Array.from(document.querySelectorAll<HTMLElement>('.goto-line'))
-  for (const goto of gotoLine) {
-    addGoToBlock(goto)
-  }
-
   dt.value = table.value.dt
 
   Util.debugLog('LineList module mounted.')
 })
-
-const addGoToBlock = (gotoLine: HTMLElement): boolean => {
-  if (gotoLine !== null) {
-    // append goto button block
-
-    const component = mount(LineListButtons, { props: { isEditorMode: props.isEditorMode } })
-
-    if (gotoLine.childElementCount < 1) {
-      gotoLine.append(component.el)
-      component.el.children[0].removeAttribute('style')
-    }
-
-    return true
-  }
-  console.error('Could not mount Go To Line block into DataTable DOM.')
-  return false
-}
 
 const dtColumns = [
   {
@@ -104,7 +69,8 @@ const dtColumns = [
 const dtOptions = {
   dom: "<'row'<'col-sm-12 col-md-6 goto-line'><'col-sm-12 col-md-6'f>>" + "<'row'<'dttable col-sm-12'tr>>",
   language: {
-    search: t('LineList.search')
+    // search: t('LineList.search')
+    search: 'Search'
   },
   paging: false,
   responsive: true,
@@ -152,12 +118,18 @@ const dtTestData = [
   >
     <thead>
       <tr>
-        <th>{{ $t('LineList.number') }}</th>
+        <!--<th>{{ $t('LineList.number') }}</th>
         <th>{{ $t('LineList.start') }}</th>
         <th>{{ $t('LineList.end') }}</th>
         <th>{{ $t('LineList.length') }}</th>
         <th>{{ $t('LineList.class') }}</th>
-        <th>{{ $t('LineList.line') }}</th>
+        <th>{{ $t('LineList.line') }}</th>-->
+        <th>#</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Length&#x202f;(ms)</th>
+        <th>Class</th>
+        <th>Line</th>
       </tr>
     </thead>
   </dataTable>

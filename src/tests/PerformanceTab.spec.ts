@@ -5,12 +5,12 @@ import PerformanceTab from '../components/views/PerformanceTab.vue'
 describe('Running view/PerformanceTab tests...', () => {
   test('Component mounts properly', async () => {
     const wrapper = mount(PerformanceTab, {
-      global: {
-        mocks: {
-          // mock for vue-i18n
-          $t: (msg: any) => msg
-        }
-      }
+      // global: {
+      //   mocks: {
+      //     // mock for vue-i18n
+      //     $t: (msg: any) => msg
+      //   }
+      // }
     })
     expect(wrapper).toBeTruthy()
 

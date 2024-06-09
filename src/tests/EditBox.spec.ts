@@ -5,12 +5,12 @@ import EditBox from '../components/modules/EditBox.vue'
 describe('Running module/EditBox tests...', () => {
   test('Component mounts properly', async () => {
     const wrapper = mount(EditBox, {
-      global: {
-        mocks: {
-          // mock for vue-i18n
-          $t: (msg: any) => msg
-        }
-      }
+      // global: {
+      //   mocks: {
+      //     // mock for vue-i18n
+      //     $t: (msg: any) => msg
+      //   }
+      // }
     })
     expect(wrapper).toBeTruthy()
 
@@ -19,12 +19,12 @@ describe('Running module/EditBox tests...', () => {
 
   test('TinyMCE loads properly', async () => {
     const wrapper = mount(EditBox, {
-      global: {
-        mocks: {
-          // mock for vue-i18n
-          $t: (msg: any) => msg
-        }
-      }
+      // global: {
+      //   mocks: {
+      //     // mock for vue-i18n
+      //     $t: (msg: any) => msg
+      //   }
+      // }
     })
     const tinyMCE = wrapper.find('.tox-tinymce')
     expect(tinyMCE).toBeTruthy()

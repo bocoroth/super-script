@@ -7,12 +7,12 @@ import LineList from '../components/modules/LineList.vue'
 describe('Running view/EditorTab tests...', () => {
   test('Component mounts properly', async () => {
     const wrapper = mount(EditorTab, {
-      global: {
-        mocks: {
-          // mock for vue-i18n
-          $t: (msg: any) => msg
-        }
-      }
+      // global: {
+      //   mocks: {
+      //     // mock for vue-i18n
+      //     $t: (msg: any) => msg
+      //   }
+      // }
     })
     expect(wrapper).toBeTruthy()
 
@@ -21,12 +21,12 @@ describe('Running view/EditorTab tests...', () => {
 
   test('Component loads contents', async () => {
     const wrapper = mount(EditorTab, {
-      global: {
-        mocks: {
-          // mock for vue-i18n
-          $t: (msg: any) => msg
-        }
-      }
+      // global: {
+      //   mocks: {
+      //     // mock for vue-i18n
+      //     $t: (msg: any) => msg
+      //   }
+      // }
     })
     expect(wrapper.getComponent(EditBox))
     expect(wrapper.getComponent(LineList))
